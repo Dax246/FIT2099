@@ -92,6 +92,10 @@ local.properties
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/
+.idea/modules.xml
+.idea/project.iml
+.idea/vcs.xml
+.idea/workspace.xml
 project.iml
 
 # Generated files
