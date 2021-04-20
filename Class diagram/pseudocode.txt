@@ -33,6 +33,8 @@ class steg:
 	playmove():
 		if location == fruitLocation:
 			Action EatItem(Item toBeEaten):
+				returns successfullyEaten
+			If sucessfullyEaten:
 				locations.items.remove(Item fruit) or location.bush.items.remove(Item Fruit)
 		else:
 			goToLocation(fruitLocation)
@@ -43,7 +45,15 @@ class Player extends Actor:
 			steg food level += 20
 			Player.items.remove(fruit)
 
+class brach:
+	Action GoToMate():
+		//look for actor of same type and opposite gender
+		//return next move to get there
+	//If you're already there
+	Action breed():
+		Create egg
 
+class
 
 
 
@@ -60,6 +70,11 @@ public abstract tile:
 		case fruit:
 	}
 	print method for either dirt, tree, bush
+
+player:
+	Action feedDino(Dino, itemToFeed)
+		if itemToFeed = mealkit:
+			Dino food level = max
 
 
 
