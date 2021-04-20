@@ -1,0 +1,78 @@
+Gamemap:
+	updateItems(Location);  //update Ground, Bush, Tree
+
+Bush, Tree:
+	tick(); //chance for fruit to grow, and a chance to fall
+	=> update Location.items.add(Fruit fruit)
+
+
+
+class Location:
+	protected Ground ground;
+	Ground("d");
+	addItems(Item)
+	removeItems(Item)
+
+abstract Ground(Char "d", "b", "t"):
+	displayChar="d";
+
+class fruit:
+	rotteness
+
+
+public class goToDestination implements behav:
+	public Action getAction(Actor, GameMap):
+		//AI to move towards food source
+
+public class eatFruit extends Action:
+	//if next to food, eat it by going to location,
+	//removing food item, increasing food level
+
+		
+class steg:
+	playmove():
+		if location == fruitLocation:
+			Action EatItem(Item toBeEaten):
+				locations.items.remove(Item fruit) or location.bush.items.remove(Item Fruit)
+		else:
+			goToLocation(fruitLocation)
+		
+class Player extends Actor:
+	Action FeedDinos():
+		if location next to steg location:
+			steg food level += 20
+			Player.items.remove(fruit)
+
+
+
+
+
+player:
+	private arrayList<items>
+	tile.search_fruit()
+
+
+public abstract tile:
+	public searchFruit
+	{
+		case dirt:
+		case bush:
+		case fruit:
+	}
+	print method for either dirt, tree, bush
+
+
+
+dirt extends tile:
+	search_fruit()
+
+bush extends tile
+
+tree extends tile
+	private arrayList
+
+interface Dinosaur:
+	public eat_fruit();
+
+public class steg extends actor implements dino:
+	
