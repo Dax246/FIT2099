@@ -78,6 +78,72 @@ player:
 
 
 
+class steg:
+	Action playAction():
+		calls eatfruitbehaviour:
+			if fruit at location:
+				change hunger level
+				return Action eatfruitaction
+			else:
+				for each item:
+					if dist(item) < dist(min_item)
+						min_item = item
+				move towards min_item
+
+
+class item:
+	this.location = location
+	getDist(source):
+		return distance from source to location
+
+
+
+World:
+	for each player:
+		execute Actor.playAction()
+
+
+
+Util:
+	NextToGroundType(Location) -> Dict{ "d": 0, "v": 1}
+	NextToItem(Location) -> Dict{}
+	NearestGround(Ground dirt):
+	NearestItem(Item fruit)
+	NearestDino(Dino dino)
+	isAdj(map, location):
+
+
+Dino:
+	nextToBreedableDino(location):
+		this.gender != 
+
+Util.
+	
+
+ 
+Location.setGround(new Ground("b"))
+
+Action BuyFromVendingMachine(Item itemToBuy):
+	VendingMachine
+
+class Ground:
+	vendingMachineLocations
+	Fr
+
+
+class VendingMachine:
+	this.location = location
+	getPrice(Item item):
+		If item = fruit:
+			return 30
+		etc.
+
+	
+class Player:
+	public buyFromVendingMachine(Vending machine):
+		VendingMachine
+
+
 dirt extends tile:
 	search_fruit()
 
