@@ -43,10 +43,14 @@ public class Stegosaur extends Actor {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+//		if food level < 90
 		Action wander = behaviour.getAction(this, map);
 		if (wander != null)
 			return wander;
-		
+//		else if next to mate
+//		Action = mate
+
+//		return Action
 		return new DoNothingAction();
 	}
 
