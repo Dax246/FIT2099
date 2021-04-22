@@ -105,20 +105,52 @@ World:
 
 
 Util:
-	NextToGroundType(Location) -> Dict{ "d": 0, "v": 1}
-	NextToItem(Location) -> Dict{}
-	NearestGround(Ground dirt):
-	NearestItem(Item fruit)
-	NearestDino(Dino dino)
-	isAdj(map, location):
+- NextToGroundType(Location) -> Dict{ "d": 0, "v": 1}
+- isAdj(map, location) -> 
+- LocationToMove(source, destination) -> Action
+- ListClosestItems(location, map, itemType) => list(locations):
+-- order of traversal BFS:
+--- add to list if location.items has itemType
+- getFruit(ground) -> {dirt: [fruits], bush: [fruits], tree: [fruits]}
+- getAdjacentActors(location) -> list[actors]
+
+
+
+playTurns(actions, lastAction, map, display):
+	locationOfAllo = map.loc_of(this)
+	currentLocationCorpses = location.items(Corpse)
+	if currentLocationCorpses contains corpse:
+		eatCorpseAction
+	else:
+		moveCorpseBehav.getAction(locationOfAllo, map)
+
 
 
 Dino:
 	nextToBreedableDino(location):
 		this.gender != 
 
-Util.
+		MENU
+menu.Showmenu()->
+Action <--------
+
+Dinosaur.foodIncrement(Int amount)
+Dinosaur.foodDecrement(Int amount)
+
+
+
+Action pickFruitAction(Ground ground, player):
+	public execute(ground, player):
+		ground.removeItem(Item)  //60% chance
+		player.items.add(item)
 	
+
+Util.nearestFruitInTree(map, location):
+	BFS out:
+		if location.ground="t" and 
+
+groundInterface: copyItems
+
 
  
 Location.setGround(new Ground("b"))
