@@ -46,6 +46,7 @@ public class Stegosaur extends Actor {
 //		if food level < 90
 		//
 		Action wander = behaviour.getAction(this, map);
+
 		if (wander != null)
 			return wander;
 //		else if next to mate
