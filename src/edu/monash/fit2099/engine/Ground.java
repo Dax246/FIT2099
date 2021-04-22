@@ -50,6 +50,12 @@ public abstract class Ground implements GroundInterface, Capable, Printable {
 	 * @param location The location of the Ground 
 	 */
 	public void tick(Location location) {
+		//if displayChar == dirt
+			//
+			//
+
+		//elif displayChar == tree
+			//
 	}
 	
 	/**
