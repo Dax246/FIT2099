@@ -3,8 +3,8 @@ package game.groundPackage;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
-import game.CarnivoreMealKit;
 import game.EcoPoints;
+import game.Flora;
 import game.Fruit;
 import game.behaviour_action.PickFruitAction;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Tree extends CarnivoreMealKit.Flora {
+public class Tree extends Flora {
 	private int age = 0;
 	protected List<Fruit> grownFruits = new ArrayList<>();
 

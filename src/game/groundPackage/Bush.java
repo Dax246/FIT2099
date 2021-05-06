@@ -3,13 +3,13 @@ package game.groundPackage;
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
-import game.CarnivoreMealKit;
+import game.Flora;
 import game.Fruit;
 import game.behaviour_action.PickFruitAction;
 
 import java.util.Random;
 
-public class Bush extends CarnivoreMealKit.Flora {
+public class Bush extends Flora {
 
     public Bush() {
         super('b');
