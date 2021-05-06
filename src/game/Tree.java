@@ -2,12 +2,13 @@ package game;
 
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
+import game.dinosaurs.Flora;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Tree extends Ground {
+public class Tree extends Flora {
 	private int age = 0;
 	protected List<Fruit> grownFruits = new ArrayList<>();
 
@@ -49,8 +50,8 @@ public class Tree extends Ground {
 	}
 
 	@Override
-	public int numberOfFruit(Ground ground) {
-		return grownFruits.size();
+	public int numberOfFruit() {
+		return getGrownFruits().size();
 	}
 
 	private void dropFruit(Location location){

@@ -12,8 +12,4 @@ public class Floor extends Ground {
 		super('_');
 	}
 
-	@Override
-	public int numberOfFruit(Ground ground) {
-		return 0;
-	}
 }

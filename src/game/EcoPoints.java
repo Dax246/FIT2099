@@ -3,15 +3,15 @@ package game;
 public  class EcoPoints {
     static int ecoPoints = 0;
 
-    static int getEcoPoints() {
+    public static int getEcoPoints() {
         return ecoPoints;
     }
 
-    static void increaseEcoPoints(int increaseAmount) {
+    public static void increaseEcoPoints(int increaseAmount) {
         ecoPoints += increaseAmount;
     }
 
-    static void decreaseEcoPoints(int decreaseAmount) {
+    public static void decreaseEcoPoints(int decreaseAmount) {
         ecoPoints -= decreaseAmount;
     }
 }

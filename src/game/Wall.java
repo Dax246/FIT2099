@@ -9,10 +9,7 @@ public class Wall extends Ground {
 		super('#');
 	}
 
-	@Override
-	public int numberOfFruit(Ground ground) {
-		return 0;
-	}
+
 
 	@Override
 	public boolean canActorEnter(Actor actor) {

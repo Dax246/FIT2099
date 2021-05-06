@@ -16,16 +16,10 @@ public class Dirt extends Ground {
 		super('.');
 	}
 
-	@Override
-	public int numberOfFruit(Ground ground) {
-		return 0;
-	}
 
 	@Override
 	public void tick(Location location) {
 		super.tick(location);
-
-
 
 
 		NumberRange xRange = location.map().getXRange();
@@ -71,7 +65,7 @@ public class Dirt extends Ground {
 			}
 		}
 		Random random = new Random();
-		int bushChance = random.nextInt(100);
+		int bushChance = random.nextInt(1000);
 		if (!tree_check) {
 			if (bush_counter >= 2 && bushChance <= 10) {
 				location.setGround(new Bush());

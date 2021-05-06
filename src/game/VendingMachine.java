@@ -11,11 +11,6 @@ public class VendingMachine extends Ground {
         return goodsPrice;
     }
 
-    @Override
-    public int numberOfFruit(Ground ground) {
-        return 0;
-    }
-
     private void setupVendingMachine(){
         goodsPrice = getGoodsPrice();
         goodsPrice.put("fruit", 30);
