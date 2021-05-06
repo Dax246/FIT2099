@@ -1,9 +1,11 @@
-package game;
+package game.groundPackage;
 
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
+import game.groundPackage.Bush;
+import game.groundPackage.Tree;
 
 import java.util.Random;
 

@@ -1,8 +1,8 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
+import game.CarnivoreMealKit;
 import game.EcoPoints;
-import game.dinosaurs.Flora;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ public class PickFruitAction extends Action {
         for (Exit exit : exits ){
             Ground groundAtExit = exit.getDestination().getGround();
             // Fruit at exit
-            if (groundAtExit instanceof Flora){
-                if (((Flora) groundAtExit).numberOfFruit() >0){
-                    actor.addItemToInventory(((Flora) groundAtExit).getFruit());
+            if (groundAtExit instanceof CarnivoreMealKit.Flora){
+                if (((CarnivoreMealKit.Flora) groundAtExit).numberOfFruit() >0){
+                    actor.addItemToInventory(((CarnivoreMealKit.Flora) groundAtExit).getFruit());
                     EcoPoints.increaseEcoPoints(10);
                 }
             }

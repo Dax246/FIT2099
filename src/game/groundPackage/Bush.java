@@ -1,16 +1,15 @@
-package game;
+package game.groundPackage;
 
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
-import game.dinosaurs.Flora;
+import game.CarnivoreMealKit;
+import game.Fruit;
+import game.behaviour_action.PickFruitAction;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class Bush extends Flora {
+public class Bush extends CarnivoreMealKit.Flora {
 
     public Bush() {
         super('b');
@@ -35,7 +34,9 @@ public class Bush extends Flora {
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         Actions actions = new Actions();
-
+        if (getGrownFruits().size() > 0){
+            actions.add(new PickFruitAction());
+        }
         return actions;
     }
 

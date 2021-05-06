@@ -9,6 +9,10 @@ import edu.monash.fit2099.engine.FancyGroundFactory;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.World;
 import game.dinosaurs.*;
+import game.groundPackage.Dirt;
+import game.groundPackage.Floor;
+import game.groundPackage.Tree;
+import game.groundPackage.Wall;
 
 /**
  * The main class for the Jurassic World game.

@@ -9,6 +9,4 @@ import edu.monash.fit2099.engine.Ground;
 
 public interface GroundInterface {
 
-
-
 }
