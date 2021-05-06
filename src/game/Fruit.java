@@ -7,4 +7,5 @@ public class Fruit extends Item {
     public Fruit() {
         super("fruit", 'a', true);
     }
+
 }
