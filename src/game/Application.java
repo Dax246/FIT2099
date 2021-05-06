@@ -22,7 +22,7 @@ public class Application {
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
 		
 		List<String> map = Arrays.asList(
-		"................................................................................",
+		"_...............................................................................",
 		"................................................................................",
 		".....#######....................................................................",
 		".....#_____#....................................................................",
@@ -46,7 +46,7 @@ public class Application {
 		"........................................................................++.++...",
 		".........................................................................++++...",
 		"..........................................................................++....",
-		"................................................................................");
+		"..............................................................................._");
 		GameMap gameMap = new GameMap(groundFactory, map );
 		world.addGameMap(gameMap);
 		
@@ -56,8 +56,13 @@ public class Application {
 		// Place a pair of stegosaurs in the middle of the map
 		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur"));
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur"));
-		
-			
+
+//		System.out.println(gameMap.at(79,24).getGround().getDisplayChar());
+//		System.out.println(gameMap.getXRange().max());
+//		System.out.println(gameMap.getXRange().min());
+//		System.out.println(gameMap.getYRange().max());
+//		System.out.println(gameMap.at(79, 24).getGround().getDisplayChar());
+		Util.locateItems(gameMap.at(0, 0), "Fruit");
 		world.run();
 	}
 }
