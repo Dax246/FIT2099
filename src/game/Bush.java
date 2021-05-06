@@ -34,13 +34,14 @@ public class Bush extends Ground {
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         Actions actions = new Actions();
+
         return actions;
     }
 
-    public int numberOfFruit(){
+    @Override
+    public int numberOfFruit(Ground ground) {
         return grownFruits.size();
     }
-
 
     private boolean addFruit(Location location){
         //TODO: Decide whether to put in a parent class as bush and tree both use this

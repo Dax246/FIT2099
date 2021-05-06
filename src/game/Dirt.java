@@ -17,8 +17,15 @@ public class Dirt extends Ground {
 	}
 
 	@Override
+	public int numberOfFruit(Ground ground) {
+		return 0;
+	}
+
+	@Override
 	public void tick(Location location) {
 		super.tick(location);
+
+
 
 
 		NumberRange xRange = location.map().getXRange();

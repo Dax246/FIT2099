@@ -48,7 +48,8 @@ public class Tree extends Ground {
 		return isValid;
 	}
 
-	public int numberOfFruit(){
+	@Override
+	public int numberOfFruit(Ground ground) {
 		return grownFruits.size();
 	}
 
