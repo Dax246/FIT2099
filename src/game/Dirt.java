@@ -3,6 +3,8 @@ package game;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.NumberRange;
+
 import java.util.Random;
 
 /**
@@ -16,46 +18,60 @@ public class Dirt extends Ground {
 
 	@Override
 	public void tick(Location location) {
-		//FIXME: Add check to see if on the edge of gameMap
+
+		NumberRange xRange = location.map().getXRange();
+		NumberRange yRange = location.map().getYRange();
+
 		int bush_counter = 0;
 		boolean tree_check = false;
 		int x_coord = location.x();
 		int y_coord = location.y();
 		GameMap gameMap = location.map();
 
-		if (gameMap.at(x_coord+1, y_coord).getGround() instanceof Bush){
-			bush_counter ++;
+		if (xRange.max() >= x_coord+1) {
+			if (gameMap.at(x_coord + 1, y_coord).getGround() instanceof Bush) {
+				bush_counter++;
+			}
+			if (gameMap.at(x_coord + 1, y_coord).getGround() instanceof Tree) {
+				tree_check = true;
+			}
 		}
-		if (gameMap.at(x_coord+1, y_coord).getGround() instanceof Tree){
-			bush_counter ++;
+		if (xRange.min() <= x_coord - 1) {
+			if (gameMap.at(x_coord - 1, y_coord).getGround() instanceof Bush) {
+				bush_counter++;
+			}
+			if (gameMap.at(x_coord - 1, y_coord).getGround() instanceof Tree) {
+				tree_check = true;
+			}
 		}
-		if (gameMap.at(x_coord-1, y_coord).getGround() instanceof Bush){
-			bush_counter ++;
+		if (yRange.max() >= y_coord+1) {
+			if (gameMap.at(x_coord, y_coord + 1).getGround() instanceof Bush) {
+				bush_counter++;
+			}
+			if (gameMap.at(x_coord, y_coord + 1).getGround() instanceof Tree) {
+				tree_check = true;
+			}
 		}
-		if (gameMap.at(x_coord-1, y_coord).getGround() instanceof Tree){
-			bush_counter ++;
-		}
-		if (gameMap.at(x_coord, y_coord+1).getGround() instanceof Bush){
-			bush_counter ++;
-		}
-		if (gameMap.at(x_coord, y_coord+1).getGround() instanceof Tree){
-			bush_counter ++;
-		}
-		if (gameMap.at(x_coord, y_coord-1).getGround() instanceof Bush){
-			bush_counter ++;
+		if (yRange.min() <= y_coord-1) {
+			if (gameMap.at(x_coord, y_coord - 1).getGround() instanceof Bush) {
+				bush_counter++;
+			}
+			if (gameMap.at(x_coord, y_coord - 1).getGround() instanceof Tree) {
+				tree_check = true;
+			}
 		}
 		Random random = new Random();
 		int bushChance = random.nextInt(100);
-		if (bush_counter >= 2 && 0 <= bushChance && bushChance <= 10){
-			// change to bush
+		if (!tree_check) {
+			if (bush_counter >= 2 && bushChance <= 10) {
+				location.setGround(new Bush());
+			}
+			if (bush_counter < 2 && bushChance == 0) {
+				location.setGround(new Bush());
+			}
 		}
-		if (bush_counter < 2 && bushChance == 0){
-			// change to bush
-		}
 
 
-
-		location
 	}
 
 	//tick(Location):
