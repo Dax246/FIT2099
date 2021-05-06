@@ -34,7 +34,7 @@ public class Dirt extends Ground {
 		int y_coord = location.y();
 		GameMap gameMap = location.map();
 
-		if (xRange.max() >= x_coord+1) {
+		if (xRange.contains(x_coord+1)) {
 			if (gameMap.at(x_coord + 1, y_coord).getGround() instanceof Bush) {
 				bush_counter++;
 			}
@@ -42,7 +42,7 @@ public class Dirt extends Ground {
 				tree_check = true;
 			}
 		}
-		if (xRange.min() <= x_coord - 1) {
+		if (xRange.contains(x_coord-1)) {
 			if (gameMap.at(x_coord - 1, y_coord).getGround() instanceof Bush) {
 				bush_counter++;
 			}
@@ -50,7 +50,7 @@ public class Dirt extends Ground {
 				tree_check = true;
 			}
 		}
-		if (yRange.max() >= y_coord+1) {
+		if (xRange.contains(y_coord+1)) {
 			if (gameMap.at(x_coord, y_coord + 1).getGround() instanceof Bush) {
 				bush_counter++;
 			}
@@ -58,7 +58,7 @@ public class Dirt extends Ground {
 				tree_check = true;
 			}
 		}
-		if (yRange.min() <= y_coord-1) {
+		if (xRange.contains(y_coord-11)) {
 			if (gameMap.at(x_coord, y_coord - 1).getGround() instanceof Bush) {
 				bush_counter++;
 			}
