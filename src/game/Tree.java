@@ -48,6 +48,10 @@ public class Tree extends Ground {
 		return isValid;
 	}
 
+	public int numberOfFruit(){
+		return grownFruits.size();
+	}
+
 	private void dropFruit(Location location){
 		Fruit fruit = grownFruits.get(0);
 		grownFruits.remove(0);
