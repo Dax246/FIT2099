@@ -1,5 +1,4 @@
-package game;
-
+package game.dinosaurs;
 
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actions;
@@ -7,12 +6,15 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
+import game.AttackAction;
+import game.Behaviour;
+import game.behaviour_action.WanderBehaviour;
 
 /**
  * A herbivorous dinosaur.
  *
  */
-public class Stegosaur extends Actor {
+public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour;
 
@@ -23,7 +25,7 @@ public class Stegosaur extends Actor {
 	 * @param name the name of this Stegosaur
 	 */
 	public Stegosaur(String name) {
-		super(name, 'd', 100);
+		super(name, 's', 100);
 		
 		behaviour = new WanderBehaviour();
 	}
