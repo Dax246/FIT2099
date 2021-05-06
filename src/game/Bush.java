@@ -1,5 +1,7 @@
 package game;
 
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 
@@ -8,11 +10,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Bush extends Ground {
-    protected List<Fruit> grownFruits = new ArrayList<>();
+    private List<Fruit> grownFruits = new ArrayList<>();
 
     public Bush() {
         super('b');
     }
+
+
 
     @Override
     public void tick(Location location){
@@ -27,8 +31,19 @@ public class Bush extends Ground {
 
     }
 
+    @Override
+    public Actions allowableActions(Actor actor, Location location, String direction){
+        Actions actions = new Actions();
+        return actions;
+    }
+
+    public int numberOfFruit(){
+        return grownFruits.size();
+    }
+
+
     private boolean addFruit(Location location){
-        //FIXME: Decide whether to put in a parent class as bush and tree both use this
+        //TODO: Decide whether to put in a parent class as bush and tree both use this
         boolean isValid = false;
         if (location.getGround() instanceof Bush){
             ((Bush) location.getGround()).grownFruits.add(new Fruit());
