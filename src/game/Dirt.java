@@ -18,6 +18,8 @@ public class Dirt extends Ground {
 
 	@Override
 	public void tick(Location location) {
+		super.tick(location);
+
 
 		NumberRange xRange = location.map().getXRange();
 		NumberRange yRange = location.map().getYRange();
