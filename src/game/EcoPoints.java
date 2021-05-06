@@ -1,17 +1,17 @@
 package game;
 
-public class EcoPoints {
-    private int ecoPoints = 0;
+public  class EcoPoints {
+    static int ecoPoints = 0;
 
-    public int getEcoPoints() {
+    static int getEcoPoints() {
         return ecoPoints;
     }
 
-    public void increaseEcoPoints(int increaseAmount) {
+    static void increaseEcoPoints(int increaseAmount) {
         ecoPoints += increaseAmount;
     }
 
-    public void decreaseEcoPoints(int decreaseAmount) {
+    static void decreaseEcoPoints(int decreaseAmount) {
         ecoPoints -= decreaseAmount;
     }
 }

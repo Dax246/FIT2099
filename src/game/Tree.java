@@ -31,6 +31,7 @@ public class Tree extends Ground {
 		if (fruitChance <= 50){
 			boolean addedFruitValidly = addFruit(location);
 			assert addedFruitValidly : "Tree can only add fruit to a tree";
+			EcoPoints.increaseEcoPoints(1);
 		}
 
 		if (fruitChance <= 5){

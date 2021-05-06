@@ -24,6 +24,7 @@ public class Dirt extends Ground {
 		NumberRange xRange = location.map().getXRange();
 		NumberRange yRange = location.map().getYRange();
 
+		//TODO: Use capabilities and make it lose capability to make a bush if next to tree
 		int bush_counter = 0;
 		boolean tree_check = false;
 		int x_coord = location.x();
