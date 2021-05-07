@@ -19,11 +19,10 @@ import java.util.Random;
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour;
-	private int age;
 
 	/** 
 	 * Constructor.
-	 * All Stegosaurs are represented by a 'd' and have 100 hit points.
+	 * All Stegosaurs are represented by an 's' and have 100 hit points.
 	 * 
 	 * @param name the name of this Stegosaur
 	 */

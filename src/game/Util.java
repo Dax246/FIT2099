@@ -2,7 +2,9 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.dinosaurs.Egg;
+import game.groundPackage.Bush;
 import game.groundPackage.Flora;
+import game.groundPackage.Tree;
 
 import java.util.*;
 
@@ -39,12 +41,13 @@ public class Util {
             else {
                 boolean foundFruitInTreeOrBush = false;
                 if (objectName == "fruit"
-                        && (Character.toString(currentLocation.getGround().getDisplayChar()) == "b" ||
-                        Character.toString(currentLocation.getGround().getDisplayChar()) == "t")
-                        && ((Flora) currentLocation.getGround()).numberOfFruit() > 0) {
+                        && (currentLocation.getGround() instanceof Bush ||
+                        currentLocation.getGround() instanceof Tree )
+                        && ((Flora) currentLocation.getGround()).numberOfFruit() > 0){
                     foundFruitInTreeOrBush = true;
                     locations.add(currentLocation);
                 }
+
                 if (!foundFruitInTreeOrBush) {
                     for (Item item: currentLocation.getItems()) {
                         if (objectName == "fruit" && item instanceof Fruit) {
