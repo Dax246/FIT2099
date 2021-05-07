@@ -19,15 +19,16 @@ public class Allosaur extends Dinosaur {
 	 *
 	 * @param name the name of this Stegosaur
 	 */
-	public Allosaur(String name) {
-		super(name, 'a', 100, 50);
-		this.setAge(50);
-	}
-
-	//Constructor for baby allosaur
-	public Allosaur(String name, int startingHitPoints) {
-		super(name, 'a', 100, startingHitPoints);
-		this.setAge(0);
+	public Allosaur(String name, Boolean isBaby) {
+		super(name, 'a', 100);
+		if (isBaby) {
+			this.setAge(0);
+			this.hitPoints = 20;
+		}
+		else {
+			this.setAge(50);
+			this.hitPoints = 50;
+		}
 	}
 
 	@Override

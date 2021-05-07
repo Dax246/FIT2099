@@ -17,7 +17,7 @@ import game.behaviour_action.WanderBehaviour;
  */
 public class Brachiosaur extends Dinosaur {
 	// Will need to change this to a collection if Brachiosaur gets additional Behaviours.
-	private Behaviour behaviour;
+	private Behaviour behaviour = new WanderBehaviour();
 
 	/**
 	 * Constructor.
@@ -25,10 +25,17 @@ public class Brachiosaur extends Dinosaur {
 	 *
 	 * @param name the name of this Brachiosaur
 	 */
-	public Brachiosaur(String name) {
-		super(name, 'd', 160, 100);
-		this.setAge(50);
-		behaviour = new WanderBehaviour();
+
+	public Brachiosaur(String name, Boolean isBaby) {
+		super(name, 'd', 160);
+		if (isBaby) {
+			this.setAge(0);
+			this.hitPoints = 10;
+		}
+		else {
+			this.setAge(50);
+			this.hitPoints = 100;
+		}
 	}
 
 	@Override
@@ -46,16 +53,11 @@ public class Brachiosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		if food level < 90
-		//
 		Action wander = behaviour.getAction(this, map);
 
 		if (wander != null)
 			return wander;
-//		else if next to mate
-//		Action = mate
 
-//		return Action
 		return new DoNothingAction();
 	}
 

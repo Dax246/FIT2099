@@ -9,11 +9,6 @@ public abstract class Dinosaur extends Actor {
         super(name, displayChar, maxHitPoints);
     }
 
-    public Dinosaur(String name, char displayChar, int maxHitPoints, int hitPoints) {
-        super(name, displayChar, maxHitPoints);
-        this.hitPoints = hitPoints;
-    }
-
     public int getAge() {
         return age;
     }
