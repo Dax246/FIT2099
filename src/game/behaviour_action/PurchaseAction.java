@@ -1,19 +1,28 @@
 package game.behaviour_action;
 
-import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.*;
 import game.*;
 import game.dinosaurs.AlloEgg;
 import game.dinosaurs.BrachEgg;
 import game.dinosaurs.StegEgg;
+import game.groundPackage.VendingMachine;
 
 import java.util.Scanner;
 
 public class PurchaseAction extends Action {
-
     @Override
     public String execute(Actor actor, GameMap map) {
+        VendingMachine vm = null;
+        for (Exit exit : map.locationOf(actor).getExits()) {
+            if (exit.getDestination().getGround() instanceof VendingMachine) {
+                vm = (VendingMachine) exit.getDestination().getGround();
+                break;
+            }
+        }
+        if (vm == null) {
+            throw new AssertionError("No vending machine nearby!");
+        }
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("1: Purchase Fruit for 30 eco points");
         System.out.println("2: Purchase Vegetarian Meal Kit for 100 eco points");
@@ -26,59 +35,59 @@ public class PurchaseAction extends Action {
         String selection = scanner.nextLine();
         switch (selection){
             case "1":
-                if (EcoPoints.getEcoPoints() >= 30){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Fruit")){
                     Fruit fruit = new Fruit('G');
                     actor.addItemToInventory(fruit);
-                    EcoPoints.decreaseEcoPoints(30);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Fruit"));
                     return "Purchased Fruit";
                 }
                 return "Insufficient eco points";
             case "2":
-                if (EcoPoints.getEcoPoints() >= 100){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Vegetarian meal kit")){
                     VegetarianMealKit vegetarianMealKit = new VegetarianMealKit();
                     actor.addItemToInventory(vegetarianMealKit);
-                    EcoPoints.decreaseEcoPoints(100);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Vegetarian meal kit"));
                     return "Purchased vegetarian meal kit";
                 }
                 return "Insufficient eco points";
             case "3":
-                if (EcoPoints.getEcoPoints() >= 500){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Carnivore meal kit")){
                     CarnivoreMealKit carnivoreMealKit = new CarnivoreMealKit();
                     actor.addItemToInventory(carnivoreMealKit);
-                    EcoPoints.decreaseEcoPoints(500);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Carnivore meal kit"));
                     return "Purchased carnivore meal kit";
                 }
                 return "Insufficient eco points";
             case "4":
-                if (EcoPoints.getEcoPoints() >=200){
+                if (EcoPoints.getEcoPoints() >=vm.getItemPrice("Stegosaur egg")){
                     StegEgg stegEgg = new StegEgg();
                     actor.addItemToInventory(stegEgg);
-                    EcoPoints.decreaseEcoPoints(200);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Stegosaur egg"));
                     return "Purchased stegosaur egg";
                 }
                 return "Insufficient eco points";
             case "5":
-                if (EcoPoints.getEcoPoints() >= 500){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Brachiosaur egg")){
                     BrachEgg brachEgg = new BrachEgg();
                     actor.addItemToInventory(brachEgg);
-                    EcoPoints.decreaseEcoPoints(500);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Brachiosaur egg"));
                     return "Purchased brachiosaur egg";
                 }
                 return "Insufficient eco points";
             case "6":
-                if (EcoPoints.getEcoPoints() >= 1000){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Allosaur egg")){
                     AlloEgg alloEgg = new AlloEgg();
                     actor.addItemToInventory(alloEgg);
-                    EcoPoints.decreaseEcoPoints(1000);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Allosaur egg"));
                     return "Purchased allosaur egg";
                 }
                 return "Insufficient eco points";
             case "7":
-                if (EcoPoints.getEcoPoints() >= 500){
+                if (EcoPoints.getEcoPoints() >= vm.getItemPrice("Laser gun")){
                     LaserGun laserGun = new LaserGun();
                     actor.addItemToInventory(laserGun);
-                    EcoPoints.decreaseEcoPoints(500);
-                    return "Purchased laser egg";
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Laser gun"));
+                    return "Purchased laser gun";
                 }
                 return "Insufficient eco points";
             case "8":
