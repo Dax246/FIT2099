@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
+import game.dinosaurs.Brachiosaur;
 
 import java.util.Random;
 
@@ -19,14 +20,16 @@ public class Bush extends Flora {
     @Override
     public void tick(Location location){
         super.tick(location);
-
-        Random random = new Random();
-        int fruitChance = random.nextInt(100);
-        if (fruitChance <= 10){
-            boolean addedFruitValidly = addFruit(location);
-            assert addedFruitValidly : "Bush can only add fruit to a bush";
+        if (location.getActor() instanceof Brachiosaur) {
+            location.setGround(new Dirt());
+        } else {
+            Random random = new Random();
+            int fruitChance = random.nextInt(100);
+            if (fruitChance <= 10){
+                boolean addedFruitValidly = addFruit(location);
+                assert addedFruitValidly : "Bush can only add fruit to a bush";
+            }
         }
-
     }
 
     //TODO: Add to capabilities
@@ -60,6 +63,6 @@ public class Bush extends Flora {
                 break;
             }
         }
-        return  harvestedFruit;
+        return harvestedFruit;
     }
 }
