@@ -1,0 +1,191 @@
+Gamemap:
+	updateItems(Location);  //update Ground, Bush, Tree
+
+Bush, Tree:
+	tick(); //chance for fruit to grow, and a chance to fall
+	=> update Location.items.add(Fruit fruit)
+
+
+
+class Location:
+	protected Ground ground;
+	Ground("d");
+	addItems(Item)
+	removeItems(Item)
+
+abstract Ground(Char "d", "b", "t"):
+	displayChar="d";
+
+class fruit:
+	rotteness
+
+
+public class goToDestination implements behav:
+	public Action getAction(Actor, GameMap):
+		//AI to move towards food source
+
+public class eatFruit extends Action:
+	//if next to food, eat it by going to location,
+	//removing food item, increasing food level
+
+		
+class steg:
+	playmove():
+		if location == fruitLocation:
+			Action EatItem(Item toBeEaten):
+				returns successfullyEaten
+			If sucessfullyEaten:
+				locations.items.remove(Item fruit) or location.bush.items.remove(Item Fruit)
+		else:
+			goToLocation(fruitLocation)
+		
+class Player extends Actor:
+	Action FeedDinos():
+		if location next to steg location:
+			steg food level += 20
+			Player.items.remove(fruit)
+
+class brach:
+	Action GoToMate():
+		//look for actor of same type and opposite gender
+		//return next move to get there
+	//If you're already there
+	Action breed():
+		Create egg
+
+class
+
+
+
+player:
+	private arrayList<items>
+	tile.search_fruit()
+
+
+public abstract tile:
+	public searchFruit
+	{
+		case dirt:
+		case bush:
+		case fruit:
+	}
+	print method for either dirt, tree, bush
+
+player:
+	Action feedDino(Dino, itemToFeed)
+		if itemToFeed = mealkit:
+			Dino food level = max
+
+
+
+class steg:
+	Action playAction():
+		calls eatfruitbehaviour:
+			if fruit at location:
+				change hunger level
+				return Action eatfruitaction
+			else:
+				for each item:
+					if dist(item) < dist(min_item)
+						min_item = item
+				move towards min_item
+
+
+class item:
+	this.location = location
+	getDist(source):
+		return distance from source to location
+
+
+
+World:
+	for each player:
+		execute Actor.playAction()
+
+
+
+Util:
+- NextToGroundType(Location) -> Dict{ "d": 0, "v": 1}
+- isAdj(map, location) -> 
+- LocationToMove(source, destination) -> Action
+- ListClosestItems(location, map, itemType) => list(locations):
+-- order of traversal BFS:
+--- add to list if location.items has itemType
+- getFruit(ground) -> {dirt: [fruits], bush: [fruits], tree: [fruits]}
+- getAdjacentActors(location) -> list[actors]
+
+
+
+playTurns(actions, lastAction, map, display):
+	locationOfAllo = map.loc_of(this)
+	currentLocationCorpses = location.items(Corpse)
+	if currentLocationCorpses contains corpse:
+		eatCorpseAction
+	else:
+		moveCorpseBehav.getAction(locationOfAllo, map)
+
+
+
+Dino:
+	nextToBreedableDino(location):
+		this.gender != 
+
+		MENU
+menu.Showmenu()->
+Action <--------
+
+Dinosaur.foodIncrement(Int amount)
+Dinosaur.foodDecrement(Int amount)
+
+
+
+Action pickFruitAction(Ground ground, player):
+	public execute(ground, player):
+		ground.removeItem(Item)  //60% chance
+		player.items.add(item)
+	
+
+Util.nearestFruitInTree(map, location):
+	BFS out:
+		if location.ground="t" and 
+
+groundInterface: copyItems
+
+
+ 
+Location.setGround(new Ground("b"))
+
+Action BuyFromVendingMachine(Item itemToBuy):
+	VendingMachine
+
+class Ground:
+	vendingMachineLocations
+	Fr
+
+
+class VendingMachine:
+	this.location = location
+	getPrice(Item item):
+		If item = fruit:
+			return 30
+		etc.
+
+	
+class Player:
+	public buyFromVendingMachine(Vending machine):
+		VendingMachine
+
+
+dirt extends tile:
+	search_fruit()
+
+bush extends tile
+
+tree extends tile
+	private arrayList
+
+interface Dinosaur:
+	public eat_fruit();
+
+public class steg extends actor implements dino:
+	
