@@ -36,24 +36,13 @@ public class Util {
             visited.get(currentLocation.y()).set(currentLocation.x(), true);
 
             //Do item checks after popping from queue
-            if (objectName == "actor" && currentLocation.containsAnActor()) {
+            if (objectName == "Actor" && currentLocation.containsAnActor()) {
                 locations.add(currentLocation);
             }
             else {
-                boolean foundFruitInTreeOrBush = false;
-                if (objectName == "fruit"
-                        && (currentLocation.getGround() instanceof Bush ||
-                        currentLocation.getGround() instanceof Tree )
-                        && ((Flora) currentLocation.getGround()).numberOfFruit() > 0){
-                    foundFruitInTreeOrBush = true;
+                Item item = Util.retrieveItem(objectName, currentLocation.getItems());
+                if (item != null) {
                     locations.add(currentLocation);
-                }
-
-                if (!foundFruitInTreeOrBush) {
-                    Item item = Util.retrieveItem(objectName, currentLocation.getItems());
-                    if (item != null) {
-                        locations.add(currentLocation);
-                    }
                 }
             }
 
