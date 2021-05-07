@@ -6,11 +6,8 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
-import game.AttackAction;
 import game.Behaviour;
 import game.behaviour_action.WanderBehaviour;
-
-import java.util.Random;
 
 /**
  * A herbivorous dinosaur.
@@ -19,7 +16,6 @@ import java.util.Random;
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour = new WanderBehaviour();
-	private int age;
 
 	/** 
 	 * Constructor.
@@ -46,7 +42,7 @@ public class Stegosaur extends Dinosaur {
 
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return new Actions(new AttackAction(this));
+		return super.getAllowableActions(otherActor, direction, map);
 	}
 
 	/**
@@ -59,8 +55,10 @@ public class Stegosaur extends Dinosaur {
 	 */
 
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		// If last action is done (like a multi turn action), pick a new one
+
 		super.playTurn(actions, lastAction, map, display);
-		this.age ++;
+		incrementAge(1);
 
 		//if unconscious, increment unconsciousTurnCounter
 			//if unconsciousTurnCounter > maxTurnsDeath: make Corpse(dinosaur), Return DoNothingAction()

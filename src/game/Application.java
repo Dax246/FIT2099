@@ -57,7 +57,6 @@ public class Application {
 		// Place a pair of stegosaurs in the middle of the map
 		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur", false));
 		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur", false));
-		gameMap.at(32, 20).setGround(new VendingMachine());
 
 //		System.out.println(gameMap.at(79,24).getGround().getDisplayChar());
 //		System.out.println(gameMap.getXRange().max());

@@ -1,7 +1,6 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-import game.AttackAction;
 import game.Behaviour;
 import game.behaviour_action.WanderBehaviour;
 
@@ -34,7 +33,7 @@ public class Allosaur extends Dinosaur {
 
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return new Actions(new AttackAction(this));
+		return super.getAllowableActions(otherActor, direction, map);
 	}
 
 	/**

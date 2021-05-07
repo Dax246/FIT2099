@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.DoNothingAction;
 import edu.monash.fit2099.engine.GameMap;
-import game.AttackAction;
 import game.Behaviour;
 import game.behaviour_action.WanderBehaviour;
 
@@ -41,7 +40,7 @@ public class Brachiosaur extends Dinosaur {
 
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return new Actions(new AttackAction(this));
+		return super.getAllowableActions(otherActor, direction, map);
 	}
 
 	/**
