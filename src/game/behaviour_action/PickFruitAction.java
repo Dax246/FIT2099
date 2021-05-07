@@ -2,7 +2,7 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
-import game.Flora;
+import game.groundPackage.Flora;
 
 import java.util.List;
 

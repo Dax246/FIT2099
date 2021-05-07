@@ -50,7 +50,7 @@ public class Dirt extends Ground {
 				tree_check = true;
 			}
 		}
-		if (xRange.contains(y_coord+1)) {
+		if (yRange.contains(y_coord+1)) {
 			if (gameMap.at(x_coord, y_coord + 1).getGround() instanceof Bush) {
 				bush_counter++;
 			}
@@ -58,7 +58,7 @@ public class Dirt extends Ground {
 				tree_check = true;
 			}
 		}
-		if (xRange.contains(y_coord-11)) {
+		if (yRange.contains(y_coord-11)) {
 			if (gameMap.at(x_coord, y_coord - 1).getGround() instanceof Bush) {
 				bush_counter++;
 			}

@@ -2,6 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.dinosaurs.Egg;
+import game.groundPackage.Flora;
 
 import java.util.*;
 

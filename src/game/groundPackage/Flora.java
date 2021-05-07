@@ -1,6 +1,7 @@
-package game;
+package game.groundPackage;
 
 import edu.monash.fit2099.engine.Ground;
+import game.Fruit;
 
 import java.util.ArrayList;
 import java.util.List;

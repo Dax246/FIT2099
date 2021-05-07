@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Location;
 import game.EcoPoints;
-import game.Flora;
 import game.Fruit;
 import game.behaviour_action.PickFruitAction;
 

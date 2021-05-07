@@ -1,6 +1,10 @@
 package game.groundPackage;
 
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Ground;
+import edu.monash.fit2099.engine.Location;
+import game.behaviour_action.PurchaseAction;
 
 import java.util.HashMap;
 
@@ -32,5 +36,10 @@ public class VendingMachine extends Ground {
         return goodsPrice.get(item);
     }
 
-
+    @Override
+    public Actions allowableActions(Actor actor, Location location, String direction) {
+        Actions actions = new Actions();
+        actions.add(new PurchaseAction());
+        return actions;
+    }
 }
