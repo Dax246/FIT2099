@@ -26,8 +26,8 @@ public class Brachiosaur extends Dinosaur {
 	 * @param name the name of this Brachiosaur
 	 */
 	public Brachiosaur(String name) {
-		super(name, 'd', 100);
-		
+		super(name, 'd', 160, 100);
+		this.setAge(50);
 		behaviour = new WanderBehaviour();
 	}
 

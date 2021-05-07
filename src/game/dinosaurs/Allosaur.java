@@ -11,7 +11,7 @@ import game.behaviour_action.WanderBehaviour;
  */
 public class Allosaur extends Dinosaur {
 	// Will need to change this to a collection if Allosaur gets additional Behaviours.
-	private Behaviour behaviour;
+	private Behaviour behaviour = new WanderBehaviour();
 
 	/**
 	 * Constructor.
@@ -20,9 +20,14 @@ public class Allosaur extends Dinosaur {
 	 * @param name the name of this Stegosaur
 	 */
 	public Allosaur(String name) {
-		super(name, 'a', 100);
-		
-		behaviour = new WanderBehaviour();
+		super(name, 'a', 100, 50);
+		this.setAge(50);
+	}
+
+	//Constructor for baby allosaur
+	public Allosaur(String name, int startingHitPoints) {
+		super(name, 'a', 100, startingHitPoints);
+		this.setAge(0);
 	}
 
 	@Override
@@ -40,16 +45,10 @@ public class Allosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		if food level < 90
-		//
 		Action wander = behaviour.getAction(this, map);
-
 		if (wander != null)
 			return wander;
-//		else if next to mate
-//		Action = mate
 
-//		return Action
 		return new DoNothingAction();
 	}
 

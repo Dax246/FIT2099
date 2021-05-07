@@ -10,6 +10,8 @@ import game.AttackAction;
 import game.Behaviour;
 import game.behaviour_action.WanderBehaviour;
 
+import java.util.Random;
+
 /**
  * A herbivorous dinosaur.
  *
@@ -17,6 +19,7 @@ import game.behaviour_action.WanderBehaviour;
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
 	private Behaviour behaviour;
+	private int age;
 
 	/** 
 	 * Constructor.
@@ -26,8 +29,8 @@ public class Stegosaur extends Dinosaur {
 	 */
 	public Stegosaur(String name) {
 		super(name, 's', 100);
-		
 		behaviour = new WanderBehaviour();
+		//initialise gender, age, adultAge, deathCounter
 	}
 
 	@Override
@@ -43,18 +46,32 @@ public class Stegosaur extends Dinosaur {
 	 * 
 	 * @see edu.monash.fit2099.engine.Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
-	@Override
+
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-//		if food level < 90
-		//
-		Action wander = behaviour.getAction(this, map);
+		super.playTurn(actions, lastAction, map, display);
+		//increment age
+		//if unconscious, increment unconsciousTurnCounter
+			//if unconsciousTurnCounter > maxTurnsDeath: make Corpse(dinosaur), Return DoNothingAction()
 
-		if (wander != null)
-			return wander;
-//		else if next to mate
-//		Action = mate
+		//decrement hitpoints
+			//if hitpoints == 0: unconscious = true, Return DoNothingAction
 
-//		return Action
+		//if next to mate and hitPoints > minHitPointsBreeding
+			//Return breedAction
+		//else if steg/brach and next to fruit or allo and next to steg/allo
+			//Return eatFruitAction
+		//else if food level > 90 (140 for brachiosaur)
+			//Return findMateBehaviour.getAction
+		//else
+			//Return findFruitBehaviour.getAction if not allosaur
+			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
+
+
+//		Action wander = behaviour.getAction(this, map);
+//
+//		if (wander != null)
+//			return wander;
+
 		return new DoNothingAction();
 	}
 
