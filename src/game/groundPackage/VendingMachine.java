@@ -17,13 +17,13 @@ public class VendingMachine extends Ground {
 
     private void setupVendingMachine(){
         goodsPrice = getGoodsPrice();
-        goodsPrice.put("fruit", 30);
-        goodsPrice.put("vegetarian meal kit", 100);
-        goodsPrice.put("carnivore meal kit", 500);
-        goodsPrice.put("stegosaur eggs", 200);
-        goodsPrice.put("brachiosaur eggs", 500);
-        goodsPrice.put("allosaur eggs", 1000);
-        goodsPrice.put("laser gun", 50);
+        goodsPrice.put("Fruit", 30);
+        goodsPrice.put("Vegetarian meal kit", 100);
+        goodsPrice.put("Carnivore meal kit", 500);
+        goodsPrice.put("Stegosaur egg", 200);
+        goodsPrice.put("Brachiosaur egg", 500);
+        goodsPrice.put("Allosaur egg", 1000);
+        goodsPrice.put("Laser gun", 50);
     }
 
     public VendingMachine(){
