@@ -57,7 +57,8 @@ public class Stegosaur extends Dinosaur {
 
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		super.playTurn(actions, lastAction, map, display);
-		//increment age
+		this.age ++;
+
 		//if unconscious, increment unconsciousTurnCounter
 			//if unconsciousTurnCounter > maxTurnsDeath: make Corpse(dinosaur), Return DoNothingAction()
 
@@ -66,6 +67,8 @@ public class Stegosaur extends Dinosaur {
 
 		//if next to mate and hitPoints > minHitPointsBreeding
 			//Return breedAction
+
+
 		//else if steg/brach and next to fruit or allo and next to steg/allo
 			//Return eatFruitAction
 		//else if food level > 90 (140 for brachiosaur)
