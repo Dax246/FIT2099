@@ -29,8 +29,11 @@ public class Stegosaur extends Dinosaur {
 	 */
 
 	public Stegosaur(String name, Boolean isBaby) {
+
 		//initialise gender, age, adultAge, deathCounter
 		super(name, 's', 100);
+
+
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 10;

@@ -13,6 +13,7 @@ public class Allosaur extends Dinosaur {
 	// Will need to change this to a collection if Allosaur gets additional Behaviours.
 	private Behaviour behaviour = new WanderBehaviour();
 
+
 	/**
 	 * Constructor.
 	 * All Allosaur are represented by a 'd' and have 100 hit points.

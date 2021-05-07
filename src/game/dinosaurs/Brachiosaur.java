@@ -18,6 +18,7 @@ import game.behaviour_action.WanderBehaviour;
 public class Brachiosaur extends Dinosaur {
 	// Will need to change this to a collection if Brachiosaur gets additional Behaviours.
 	private Behaviour behaviour = new WanderBehaviour();
+	private int maxHitPoints = 160;
 
 	/**
 	 * Constructor.
