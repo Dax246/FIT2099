@@ -30,10 +30,6 @@ public abstract class Dinosaur extends Actor{
         this.age = age;
     }
 
-    public void incrementAge(int incrementAmount){
-        this.age += incrementAmount;
-    }
-
     public int getLayEggCounter() {
         return layEggCounter;
     }
@@ -45,10 +41,13 @@ public abstract class Dinosaur extends Actor{
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         this.hitPoints -= 1;
+        this.age += 1;
+
         if (layEggCounter > 0){
             layEggCounter -= 1;
             // If layEggCounter == 0, lay egg action
         }
+
         return new DoNothingAction();
     }
 

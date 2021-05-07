@@ -89,6 +89,7 @@ public class FindFoodBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = itemDestination(actor, map);
+		System.out.println("Moving to: " + destination.x() + ", " + destination.y());
 
 		if (destination == null) {
 			return null;
