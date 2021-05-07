@@ -13,7 +13,7 @@ public class StegEgg extends Egg{
     public void tick(Location currentLocation) {
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            Stegosaur stegosaur = new Stegosaur("stegosaur");
+            Stegosaur stegosaur = new Stegosaur("stegosaur", false);
         }
     }
 }
