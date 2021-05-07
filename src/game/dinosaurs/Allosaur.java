@@ -5,6 +5,8 @@ import game.Behaviour;
 import game.behaviour_action.FindFoodBehaviour;
 import game.behaviour_action.WanderBehaviour;
 
+import java.util.HashMap;
+
 /**
  * A herbivorous dinosaur.
  *
@@ -12,7 +14,7 @@ import game.behaviour_action.WanderBehaviour;
 public class Allosaur extends Dinosaur {
 	// Will need to change this to a collection if Allosaur gets additional Behaviours.
 	private Behaviour behaviour = new WanderBehaviour();
-
+	private HashMap<Stegosaur, Integer> cannotAttack = new HashMap<Stegosaur, Integer>();
 
 	/**
 	 * Constructor.
@@ -32,6 +34,14 @@ public class Allosaur extends Dinosaur {
 		}
 	}
 
+	public HashMap<Stegosaur, Integer> getCannotAttack() {
+		return cannotAttack;
+	}
+
+	public void setCannotAttack(HashMap<Stegosaur, Integer> cannotAttack) {
+		this.cannotAttack = cannotAttack;
+	}
+
 	@Override
 	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
 		return super.getAllowableActions(otherActor, direction, map);
@@ -47,6 +57,9 @@ public class Allosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		//TODO: FOR STEG IN HASHMAP, DECREMENT VALUE. IF 0, REMOVE IT.
+
+		//if next to steg, attack
 		Behaviour behaviour = new FindFoodBehaviour();
 		Action hunt = behaviour.getAction(this, map);
 		return hunt;

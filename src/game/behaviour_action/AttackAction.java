@@ -1,14 +1,17 @@
 package game.behaviour_action;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import edu.monash.fit2099.engine.Action;
-import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Weapon;
-import game.PortableItem;
+import game.Player;
+import game.dinosaurs.Allosaur;
+import game.dinosaurs.Corpse;
+import game.dinosaurs.Stegosaur;
 
 /**
  * Special Action for attacking other Actors.
@@ -35,28 +38,36 @@ public class AttackAction extends Action {
 
 	@Override
 	public String execute(Actor actor, GameMap map) {
+		String result;
+		if (actor instanceof Allosaur && target instanceof Stegosaur) {
+			result = actor + " attacks " + target + " for 20 damage.";
+			target.hurt(20);
+			actor.heal(20);
+			if (target.isConscious()) {
+				HashMap<Stegosaur, Integer> cannotAttack = ((Allosaur) actor).getCannotAttack();
+				cannotAttack.put((Stegosaur) target, 20);
+				((Allosaur) actor).setCannotAttack(cannotAttack);
+			}
+		}
+		else if (actor instanceof Player) {
+			Weapon weapon = actor.getWeapon();
 
-		Weapon weapon = actor.getWeapon();
+			if (rand.nextBoolean()) {
+				return actor + " misses " + target + ".";
+			}
 
-		if (rand.nextBoolean()) {
-			return actor + " misses " + target + ".";
+			int damage = weapon.damage();
+			result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
+			target.hurt(damage);
+		}
+		else {
+			throw new AssertionError("Unexpected class attacking");
 		}
 
-		int damage = weapon.damage();
-		String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
-
-		target.hurt(damage);
 		if (!target.isConscious()) {
-			Item corpse = new PortableItem("dead " + target, '%');
+			Item corpse = new Corpse(1);
 			map.locationOf(target).addItem(corpse);
-			
-			Actions dropActions = new Actions();
-			for (Item item : target.getInventory())
-				dropActions.add(item.getDropAction());
-			for (Action drop : dropActions)		
-				drop.execute(target, map);
-			map.removeActor(target);	
-			
+			map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
 		}
 
