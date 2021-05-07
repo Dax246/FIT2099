@@ -27,7 +27,7 @@ public class PurchaseAction extends Action {
         switch (selection){
             case "1":
                 if (EcoPoints.getEcoPoints() >= 30){
-                    Fruit fruit = new Fruit();
+                    Fruit fruit = new Fruit('G');
                     actor.addItemToInventory(fruit);
                     EcoPoints.decreaseEcoPoints(30);
                     return "Purchased Fruit";

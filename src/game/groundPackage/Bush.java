@@ -2,9 +2,10 @@ package game.groundPackage;
 
 import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import game.Fruit;
-import game.behaviour_action.PickFruitAction;
+import game.behaviour_action.HarvestFruitAction;
 
 import java.util.Random;
 
@@ -13,7 +14,6 @@ public class Bush extends Flora {
     public Bush() {
         super('b');
     }
-
 
 
     @Override
@@ -33,24 +33,33 @@ public class Bush extends Flora {
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         Actions actions = new Actions();
-        if (getGrownFruits().size() > 0){
-            actions.add(new PickFruitAction());
+        if (getNumberOfFruit() > 0){
+            actions.add(new HarvestFruitAction());
         }
         return actions;
     }
 
-    @Override
-    public int numberOfFruit() {
-        return getGrownFruits().size();
-    }
 
     private boolean addFruit(Location location){
         //TODO: Decide whether to put in a parent class as bush and tree both use this
         boolean isValid = false;
         if (location.getGround() instanceof Bush){
-            ((Bush) location.getGround()).getGrownFruits().add(new Fruit());
+            location.addItem(new Fruit('B'));
             isValid = true;
         }
         return isValid;
+    }
+
+    @Override
+    public Fruit harvestFruit(Location location){
+        Fruit harvestedFruit = null;
+        for (Item item : location.getItems()){
+            if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'B'){
+                harvestedFruit = (Fruit) item;
+                location.removeItem(item);
+                break;
+            }
+        }
+        return  harvestedFruit;
     }
 }

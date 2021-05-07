@@ -1,6 +1,7 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.Location;
+import game.EcoPoints;
 
 public class StegEgg extends Egg{
 
@@ -16,6 +17,7 @@ public class StegEgg extends Egg{
         if (turnsUntilHatch == 0){
             currentLocation.addActor(new Allosaur("allosaur", true));
             currentLocation.removeItem(this);
+            EcoPoints.increaseEcoPoints(100);
         }
     }
 }

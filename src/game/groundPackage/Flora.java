@@ -1,30 +1,21 @@
 package game.groundPackage;
 
 import edu.monash.fit2099.engine.Ground;
+import edu.monash.fit2099.engine.Location;
 import game.Fruit;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Flora extends Ground {
-    private List<Fruit> grownFruits = new ArrayList<>();
+    private int numberOfFruit = 0;
 
 
     public Flora(char displayChar) {
         super(displayChar);
     }
 
-    public int numberOfFruit() {
-        return grownFruits.size();
-    }
+    public int getNumberOfFruit() { return numberOfFruit; }
 
-    public List<Fruit> getGrownFruits() {
-        return grownFruits;
-    }
-
-    public Fruit getFruit() {
-        Fruit fruit = getGrownFruits().get(0);
-        getGrownFruits().remove(0);
-        return fruit;
-    }
+    public Fruit harvestFruit(Location location) {return null}
 }

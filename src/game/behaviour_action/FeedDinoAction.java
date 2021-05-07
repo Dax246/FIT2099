@@ -1,6 +1,7 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
+import game.EcoPoints;
 import game.dinosaurs.Allosaur;
 import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Dinosaur;
@@ -62,6 +63,7 @@ public class FeedDinoAction extends Action {
                     if (fruitCheck){
                         actor.removeItemFromInventory(fruit);
                         recipient.heal(20);
+                        EcoPoints.increaseEcoPoints(10);
                         return "Player fed Fruit to Stegosaur";
                     }
                     return "Player does not have Fruit";
@@ -70,6 +72,7 @@ public class FeedDinoAction extends Action {
                         actor.removeItemFromInventory(vegetarianMealKit);
                         // Ensures healed to full
                         recipient.heal(((Stegosaur) recipient).getMaxHitPoints());
+
                         return "Player fed Vegetarian Meal Kit to Stegosaur";
                     } return "Player does not have Fruit";
                 default:
@@ -87,6 +90,7 @@ public class FeedDinoAction extends Action {
                     if (fruitCheck){
                         actor.removeItemFromInventory(fruit);
                         recipient.heal(20);
+                        EcoPoints.increaseEcoPoints(10);
                         return "Player fed Fruit to Brachiosaur";
                     }
                     return "Player does not have Fruit";

@@ -55,9 +55,9 @@ public abstract class Dinosaur extends Actor{
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = new Actions();
-        actions.add(new AttackAction(this));
         if (otherActor instanceof Player){
             actions.add(new FeedDinoAction(this));
+            actions.add(new AttackAction(this));
         }
         return actions;
     }
