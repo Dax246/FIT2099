@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.dinosaurs.Corpse;
 import game.dinosaurs.Egg;
 import game.groundPackage.Bush;
 import game.groundPackage.Flora;
@@ -49,15 +50,9 @@ public class Util {
                 }
 
                 if (!foundFruitInTreeOrBush) {
-                    for (Item item: currentLocation.getItems()) {
-                        if (objectName == "fruit" && item instanceof Fruit) {
-                            locations.add(currentLocation);
-                            break;
-                        }
-                        else if (objectName == "egg" && item instanceof Egg) {
-                            locations.add(currentLocation);
-                            break;
-                        }
+                    Item item = Util.retrieveItem(objectName, currentLocation.getItems());
+                    if (item != null) {
+                        locations.add(currentLocation);
                     }
                 }
             }
@@ -96,4 +91,14 @@ public class Util {
         }
         return locations;
     }
+
+    public static Item retrieveItem(String itemType, List<Item> locationList) {
+        for (Item item: locationList) {
+            if (item.toString() == itemType) {
+                return item;
+            }
+        }
+        return null;
+    }
+
 }
