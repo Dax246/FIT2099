@@ -58,25 +58,24 @@ public class Stegosaur extends Dinosaur {
 		// If last action is done (like a multi turn action), pick a new one
 
 		super.playTurn(actions, lastAction, map, display);
-		incrementAge(1);
 
 		//if unconscious, increment unconsciousTurnCounter
-			//if unconsciousTurnCounter > maxTurnsDeath: make Corpse(dinosaur), Return DoNothingAction()
-
-		//decrement hitpoints
-			//if hitpoints == 0: unconscious = true, Return DoNothingAction
-
-		//if next to mate and hitPoints > minHitPointsBreeding
-			//Return breedAction
-
-
-		//else if steg/brach and next to fruit or allo and next to steg/allo
-			//Return eatFruitAction
-		//else if food level > 90 (140 for brachiosaur)
-			//Return findMateBehaviour.getAction
-		//else
-			//Return findFruitBehaviour.getAction if not allosaur
-			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
+		//		//if unconsciousTurnCounter > maxTurnsDeath: make Corpse(dinosaur), Return DoNothingAction()
+		//
+		//		//decrement hitpoints
+		//			//if hitpoints == 0: unconscious = true, Return DoNothingAction
+		//
+		//		//if next to mate and hitPoints > minHitPointsBreeding
+		//			//Return breedAction
+		//
+		//
+		//		//else if steg/brach and next to fruit or allo and next to steg/allo
+		//			//Return eatFruitAction
+		//		//else if food level > 90 (140 for brachiosaur)
+		//			//Return findMateBehaviour.getAction
+		//		//else
+		//			//Return findFruitBehaviour.getAction if not allosaur
+		//			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
 
 
 //		Action wander = behaviour.getAction(this, map);

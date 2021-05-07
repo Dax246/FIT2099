@@ -2,6 +2,7 @@ package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
 import game.Behaviour;
+import game.behaviour_action.FindFoodBehaviour;
 import game.behaviour_action.WanderBehaviour;
 
 /**
@@ -46,11 +47,14 @@ public class Allosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		Action wander = behaviour.getAction(this, map);
-		if (wander != null)
-			return wander;
+		Behaviour behaviour = new FindFoodBehaviour();
+		Action hunt = behaviour.getAction(this, map);
+		return hunt;
+//		Action wander = behaviour.getAction(this, map);
+//		if (wander != null)
+//			return wander;
 
-		return new DoNothingAction();
+//		return new DoNothingAction();
 	}
 
 }
