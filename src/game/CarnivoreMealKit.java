@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CarnivoreMealKit extends Item {
     public CarnivoreMealKit(){
-        super("carnivore meal kit", 'C', true);
+        super("carnivore meal kit", 'c', true);
     }
 
 }

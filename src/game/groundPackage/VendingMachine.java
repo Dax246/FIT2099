@@ -27,7 +27,7 @@ public class VendingMachine extends Ground {
     }
 
     public VendingMachine(){
-        super('V');
+        super('M');
         setupVendingMachine();
     }
 

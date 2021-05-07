@@ -7,7 +7,7 @@ public class Fruit extends Item {
     private int rot_health = 15;
 
     public Fruit() {
-        super("fruit", 'a', true);
+        super("fruit", 'f', true);
     }
 
     @Override
