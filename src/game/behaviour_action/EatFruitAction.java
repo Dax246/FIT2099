@@ -10,7 +10,7 @@ import game.groundPackage.Tree;
 
 import java.util.ArrayList;
 
-public class eatFruitAction extends Action {
+public class EatFruitAction extends Action {
 
 
     @Override
@@ -26,6 +26,7 @@ public class eatFruitAction extends Action {
                     if (item instanceof Fruit) {
                         actorLocation.getItems().remove(item);
                         actor.heal(10);
+                        validEatFruitAction = true;
                         break;
                     }
                 }
@@ -35,6 +36,7 @@ public class eatFruitAction extends Action {
                 while (((Brachiosaur) actor).getHitPoints() <= ((Brachiosaur) actor).getMaxHitPoints() - 5) {
                     ((Tree) actorLocation.getGround()).getFruit();
                     actor.heal(5);
+                    validEatFruitAction = true;
                 }
             }
         }
