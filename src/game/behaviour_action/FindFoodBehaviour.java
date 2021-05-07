@@ -9,47 +9,47 @@ import game.groundPackage.Bush;
 import game.groundPackage.Tree;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
  * closer to a target Actor.
  */
 public class FindFoodBehaviour implements Behaviour {
-	private Location actorLocation;
+	private String foodType;
 
 	private Location itemDestination(Actor actor, GameMap map) {
-		this.actorLocation = map.locationOf(actor);
+		Location actorLocation = map.locationOf(actor);
 		if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
-			ArrayList<Location> fruitLocations = Util.locateObjects(this.actorLocation, "fruit");
+			ArrayList<Location> fruitLocations = Util.locateObjects(actorLocation, "Fruit");
 			for (Location location: fruitLocations) {
 				if (actor instanceof Stegosaur) {
-					//check bushes + fallen
-					if (location.getGround() instanceof Bush && ((Bush) location.getGround()).numberOfFruit() > 0) {
+					if (location.getGround() instanceof Bush) {
 						return location;
 					} else if (location.getGround() instanceof Tree) {
-						for (Item item : location.getItems()) {
-							if (item instanceof Fruit) {
+						for (Item item : location.getItems()){
+							if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'G') {
 								return location;
 							}
 						}
 					}
 				} else {
-					//check trees
-					if (location.getGround() instanceof Tree && ((Tree) location.getGround()).numberOfFruit() > 0) {
-						return location;
+					if (location.getGround() instanceof Tree) {
+						for (Item item : location.getItems()){
+							if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'T') {
+								return location;
+							}
+						}
 					}
 				}
 			}
-			return null;
 		}
 		else {
 			ArrayList<Location> closestLocations = new ArrayList<>();
-			ArrayList<Location> corpseLocations= Util.locateObjects(this.actorLocation, "corpse");
-			ArrayList<Location> eggLocations= Util.locateObjects(this.actorLocation, "egg");
-			ArrayList<Location> ActorLocations= Util.locateObjects(this.actorLocation, "actor");
+			ArrayList<Location> corpseLocations= Util.locateObjects(actorLocation, "Corpse");
+			ArrayList<Location> eggLocations= Util.locateObjects(actorLocation, "Egg");
+			ArrayList<Location> ActorLocations= Util.locateObjects(actorLocation, "Actor");
 			for (Location corpseLocation: corpseLocations) {
-				Item corpse = Util.retrieveItem("corpse", corpseLocation.getItems());
+				Item corpse = Util.retrieveItem("Corpse", corpseLocation.getItems());
 				if (corpse != null) {
 					closestLocations.add(corpseLocation);
 					break;
@@ -57,16 +57,16 @@ public class FindFoodBehaviour implements Behaviour {
 			}
 
 			for (Location eggLocation: eggLocations) {
-				Item corpse = Util.retrieveItem("egg", eggLocation.getItems());
+				Item corpse = Util.retrieveItem("Egg", eggLocation.getItems());
 				if (corpse != null) {
 					closestLocations.add(eggLocation);
 					break;
 				}
 			}
 
-			for (Location actorLocation: ActorLocations) {
+			for (Location stegLocation: ActorLocations) {
 				if (actorLocation.getActor() instanceof Stegosaur) {
-					closestLocations.add(actorLocation);
+					closestLocations.add(stegLocation);
 					break;
 				}
 			}
@@ -77,25 +77,36 @@ public class FindFoodBehaviour implements Behaviour {
 				if (closestLocation == null) {
 					closestLocation = location;
 				}
-				else if (location != null && distance(this.actorLocation, location) < distance(this.actorLocation, closestLocation)) {
+				else if (location != null && distance(actorLocation, location) < distance(actorLocation, closestLocation)) {
 					closestLocation = location;
 				}
 			}
-
 			return closestLocation;
 		}
+		return null;
 	}
 
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = itemDestination(actor, map);
-		System.out.println("Moving to: " + destination.x() + ", " + destination.y());
+		if (destination != null) {
+			System.out.println("Moving towards: " + destination.x() + ", " + destination.y());
+		}
 
 		if (destination == null) {
 			return null;
+		} else if (distance(destination, map.locationOf(actor)) == 0) {
+			if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
+				return new EatFruitAction();
+			} else {
+				return new EatNonFruitAction();
+			}
+		}
+		else if (distance(destination, map.locationOf(actor)) == 1 && actor instanceof Allosaur && map.getActorAt(destination) instanceof Stegosaur) {
+			return new AttackAction(map.getActorAt(destination));
 		}
 		else {
-			Behaviour moveToLocation = new moveToLocationBehaviour(destination);
+			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 			return moveToLocation.getAction(actor, map);
 		}
 	}
