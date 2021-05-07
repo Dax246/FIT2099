@@ -9,7 +9,7 @@ import game.dinosaurs.Dinosaur;
 import game.dinosaurs.Stegosaur;
 
 public class BreedAction extends Action {
-    Dinosaur mate;
+    private Dinosaur mate;
 
     public BreedAction(Dinosaur mate) {
         this.mate = mate;
@@ -17,8 +17,6 @@ public class BreedAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-
-
         Actor female = null;
         if (((Dinosaur) actor).getSex() == 'F'){
             female = actor;
@@ -28,7 +26,7 @@ public class BreedAction extends Action {
         }
         assert !(female == null);
         // This action should not be called if the female is already pregnant
-        assert ((Dinosaur) female).getLayEggCounter() == 0;
+        assert ((Dinosaur) female).getLayEggCounter() == 0;  //may be incorrect due to world.run
 
         if (female instanceof Stegosaur){
             ((Stegosaur) female).setLayEggCounter(10);
