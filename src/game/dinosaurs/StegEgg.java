@@ -6,7 +6,7 @@ import game.EcoPoints;
 public class StegEgg extends Egg{
 
     public StegEgg(){
-        super("stegosaur egg", 'e', true);
+        super("Stegosaur egg", 'e', true);
         super.turnsUntilHatch = 10;
     }
 
@@ -15,7 +15,7 @@ public class StegEgg extends Egg{
         super.tick(currentLocation);
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            currentLocation.addActor(new Allosaur("allosaur", true));
+            currentLocation.addActor(new Stegosaur("Stegosaur", true));
             currentLocation.removeItem(this);
             EcoPoints.increaseEcoPoints(100);
         }

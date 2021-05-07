@@ -6,8 +6,8 @@ import game.EcoPoints;
 public class AlloEgg extends Egg{
 
     public AlloEgg(){
-        super("allosaur egg", 'e', true);
-        super.turnsUntilHatch = 10;
+        super("Allosaur egg", 'e', true);
+        super.turnsUntilHatch = 50;
     }
 
     @Override
@@ -15,7 +15,7 @@ public class AlloEgg extends Egg{
         super.tick(currentLocation);
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            currentLocation.addActor(new Allosaur("allosaur", true));
+            currentLocation.addActor(new Allosaur("Allosaur", true));
             currentLocation.removeItem(this);
             EcoPoints.increaseEcoPoints(1000);
         }

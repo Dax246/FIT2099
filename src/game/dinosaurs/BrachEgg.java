@@ -6,7 +6,7 @@ import game.EcoPoints;
 public class BrachEgg extends Egg{
 
     public BrachEgg(){
-        super("brachiosaur egg", 'e', true);
+        super("Brachiosaur egg", 'e', true);
         super.turnsUntilHatch = 10;
 
     }
@@ -16,7 +16,7 @@ public class BrachEgg extends Egg{
         super.tick(currentLocation);
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            currentLocation.addActor(new Brachiosaur("brachiosaur", true));
+            currentLocation.addActor(new Brachiosaur("Brachiosaur", true));
             currentLocation.removeItem(this);
             EcoPoints.increaseEcoPoints(1000);
         }
