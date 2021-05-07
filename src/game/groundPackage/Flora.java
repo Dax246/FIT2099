@@ -17,5 +17,5 @@ public abstract class Flora extends Ground {
 
     public int getNumberOfFruit() { return numberOfFruit; }
 
-    public Fruit harvestFruit(Location location) {return null}
+    public Fruit harvestFruit(Location location) {return null;}
 }

@@ -63,7 +63,7 @@ public class Tree extends Flora {
 	@Override
 	public Actions allowableActions(Actor actor, Location location, String direction){
 		Actions actions = new Actions();
-		if (getNumberOfFruit() > 0){
+		if (super.getNumberOfFruit() > 0){
 			actions.add(new HarvestFruitAction());
 		}
 		return actions;
@@ -79,6 +79,6 @@ public class Tree extends Flora {
 				break;
 			}
 		}
-		return  harvestedFruit;
+		return harvestedFruit;
 	}
 }
