@@ -7,7 +7,7 @@ import game.Behaviour;
  * A class that figures out a MoveAction that will move the actor one step 
  * closer to a target Actor.
  */
-public class moveToLocationBehaviour implements Behaviour {
+public class MoveToLocationBehaviour implements Behaviour {
 
 	private Location target;
 
@@ -16,7 +16,7 @@ public class moveToLocationBehaviour implements Behaviour {
 	 *
 	 * @param target the Location to move towards
 	 */
-	public moveToLocationBehaviour(Location target) {
+	public MoveToLocationBehaviour(Location target) {
 		this.target = target;
 	}
 
