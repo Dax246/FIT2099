@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
 import game.groundPackage.Flora;
 
-import java.util.List;
 import java.util.Random;
 
 public class HarvestFruitAction extends Action {
@@ -17,6 +16,7 @@ public class HarvestFruitAction extends Action {
         int HarvestChance = random.nextInt(100);
         if (location.getGround() instanceof Flora){
             if (HarvestChance <= 60){
+                EcoPoints.increaseEcoPoints(10);
                 actor.addItemToInventory(((Flora)location.getGround()).harvestFruit(location));
                 return "Player has harvested a fruit!";
             } return "Player has searched for fruit but is unable to find any ripe ones";
