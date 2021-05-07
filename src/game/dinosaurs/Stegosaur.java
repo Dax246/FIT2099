@@ -18,7 +18,7 @@ import java.util.Random;
  */
 public class Stegosaur extends Dinosaur {
 	// Will need to change this to a collection if Stegosaur gets additional Behaviours.
-	private Behaviour behaviour;
+	private Behaviour behaviour = new WanderBehaviour();
 	private int age;
 
 	/** 
@@ -27,10 +27,18 @@ public class Stegosaur extends Dinosaur {
 	 * 
 	 * @param name the name of this Stegosaur
 	 */
-	public Stegosaur(String name) {
-		super(name, 's', 100);
-		behaviour = new WanderBehaviour();
+
+	public Stegosaur(String name, Boolean isBaby) {
 		//initialise gender, age, adultAge, deathCounter
+		super(name, 's', 100);
+		if (isBaby) {
+			this.setAge(0);
+			this.hitPoints = 10;
+		}
+		else {
+			this.setAge(30);
+			this.hitPoints = 50;
+		}
 	}
 
 	@Override
