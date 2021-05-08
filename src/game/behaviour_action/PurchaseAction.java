@@ -24,14 +24,14 @@ public class PurchaseAction extends Action {
         }
 
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Ecopoints: " + Integer.toString(EcoPoints.getEcoPoints()));
         System.out.println("1: Purchase Fruit for 30 eco points");
         System.out.println("2: Purchase Vegetarian Meal Kit for 100 eco points");
         System.out.println("3: Purchase Carnivore Meal Kit for 500 eco points");
         System.out.println("4: Purchase Stegosaur Egg for 200 eco points");
         System.out.println("5: Purchase Brachiosaur Egg for 500 eco points");
         System.out.println("6: Purchase Allosaur Egg for 1000 eco points");
-        System.out.println("7: Purchase Laser Egg for 500 eco points");
-        System.out.println("8: Display eco points");
+        System.out.println("7: Purchase Laser Gun for 500 eco points");
         String selection = scanner.nextLine();
         switch (selection){
             case "1":
@@ -90,8 +90,6 @@ public class PurchaseAction extends Action {
                     return "Purchased laser gun";
                 }
                 return "Insufficient eco points";
-            case "8":
-                return Integer.toString(EcoPoints.getEcoPoints());
             default:
                 return "Invalid Choice selected";
         }
