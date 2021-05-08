@@ -12,8 +12,6 @@ import java.util.HashMap;
  *
  */
 public class Allosaur extends Dinosaur {
-	// Will need to change this to a collection if Allosaur gets additional Behaviours.
-	private Behaviour behaviour = new WanderBehaviour();
 	private HashMap<Stegosaur, Integer> cannotAttack = new HashMap<Stegosaur, Integer>();
 
 	/**
@@ -55,10 +53,14 @@ public class Allosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		//TODO: FOR STEG IN HASHMAP, DECREMENT VALUE. IF 0, REMOVE IT.
-
-		Behaviour behaviour = new FindFoodBehaviour();
-		return behaviour.getAction(this, map);
+		for (Stegosaur key : cannotAttack.keySet()) {
+			int turnsRemaining = cannotAttack.get(key);
+			if (turnsRemaining == 0) {
+				cannotAttack.remove(key);
+			} else {
+				cannotAttack.put(key, turnsRemaining - 1);
+			}
+		}
+		return super.playTurn(actions, lastAction, map, display);
 	}
-
 }
