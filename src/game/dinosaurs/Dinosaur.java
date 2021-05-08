@@ -1,6 +1,7 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
+import game.Behaviour;
 import game.behaviour_action.*;
 import game.Player;
 
@@ -90,7 +91,7 @@ public abstract class Dinosaur extends Actor{
             }
         }
 
-        //if unconscious, increment counter
+        //increment unconscious counter
         if (!isConscious()) {
             unconsciousTurnsCounter += 1;
             if (unconsciousTurnsCounter == maxUnconsciousTurns) {
@@ -107,7 +108,7 @@ public abstract class Dinosaur extends Actor{
             }
             this.hitPoints -= 1;
 
-            // fall unconscious due to hunger
+            // fell unconscious due to hunger
             if (!isConscious()) {
                 return new DoNothingAction();
             }
@@ -119,8 +120,24 @@ public abstract class Dinosaur extends Actor{
                 return new BreedAction((Dinosaur) map.getActorAt(nearestMate));
             }
 
-            //consume current location's food
-//            Location nearestFood = (new )
+            //consume/move towards food if hungry
+            if (hitPoints < hungerThreshold) {
+                Behaviour findFoodBehaviour = new FindFoodBehaviour();
+                Action nextAction = findFoodBehaviour.getAction(this, map);
+                if (nextAction != null) {
+                    return nextAction;
+                }
+            } else {  //move towards mate since not hungry
+                Behaviour breedBehaviour = new BreedBehaviour();
+                Action nextAction = breedBehaviour.getAction(this, map);
+                if (nextAction != null) {
+                    return nextAction;
+                }
+            }
+
+            //not hungry and no mate
+
+
 
         }
 
