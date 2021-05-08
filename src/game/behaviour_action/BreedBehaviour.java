@@ -35,10 +35,6 @@ public class BreedBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = mateDestination(actor, map);
-		if (destination != null) {
-			System.out.println("Moving to mate: " + destination.x() + ", " + destination.y());
-		}
-
 		if (destination == null) {
 			return null;
 		} else if (distance(destination, map.locationOf(actor)) == 1) {
