@@ -26,19 +26,22 @@ public class BreedAction extends Action {
         }
         assert !(female == null);
         // This action should not be called if the female is already pregnant
-        assert ((Dinosaur) female).getLayEggCounter() == 0;  //may be incorrect due to world.run
-
-        if (female instanceof Stegosaur){
-            ((Stegosaur) female).setLayEggCounter(10);
-            return "Stegosaur will lay egg in 10 turns";
-        }
-        else if (female instanceof Brachiosaur){
-            ((Brachiosaur) female).setLayEggCounter(30);
-            return "Brachiosaur will lay egg in 30 turns";
-        }
-        else if (female instanceof Allosaur){
-            ((Allosaur) female).setLayEggCounter(20);
-            return "Allosaur will lay egg in 20 turns";
+        if (((Dinosaur) female).getLayEggCounter() == 0) {
+            if (female instanceof Stegosaur){
+                ((Stegosaur) female).setLayEggCounter(10);
+                return "Stegosaur will lay egg in 10 turns";
+            }
+            else if (female instanceof Brachiosaur){
+                ((Brachiosaur) female).setLayEggCounter(30);
+                return "Brachiosaur will lay egg in 30 turns";
+            }
+            else if (female instanceof Allosaur){
+                ((Allosaur) female).setLayEggCounter(20);
+                return "Allosaur will lay egg in 20 turns";
+            }
+            else {
+                throw new AssertionError("Unexpected dinosaur falling pregnant");
+            }
         }
         return null;
     }
