@@ -15,12 +15,14 @@ public class MoveToPlayerBehaviour implements Behaviour {
 	private String foodType;
 
 	public Location locatePlayer(Actor actor, GameMap map) {
-		ArrayList<Location> playerLocations = Util.locateObjects(map.locationOf(actor), "Actor");
-		for (Location playerLocation : playerLocations) {
-			if (playerLocation.getActor() instanceof Player) {
-				return playerLocation;
+		for (int i = 0; i < map.getXRange().max(); i++) {
+			for (int j = 0; j < map.getYRange().max(); j++) {
+				if (map.isAnActorAt(map.at(i, j)) && map.getActorAt(map.at(i, j)) instanceof Player) {
+					return map.at(i, j);
+				}
 			}
 		}
+		assert false : "Player does not exist in map";
 		return null;
 	}
 
