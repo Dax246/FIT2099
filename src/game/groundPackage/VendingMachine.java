@@ -23,12 +23,17 @@ public class VendingMachine extends Ground {
         goodsPrice.put("Stegosaur egg", 200);
         goodsPrice.put("Brachiosaur egg", 500);
         goodsPrice.put("Allosaur egg", 1000);
-        goodsPrice.put("Laser gun", 50);
+        goodsPrice.put("Laser gun", 500);
     }
 
-    public VendingMachine(){
-        super('M');
+    public VendingMachine() {
+        super('v');
         setupVendingMachine();
+    }
+
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return false;
     }
 
     public int getItemPrice(String item){
