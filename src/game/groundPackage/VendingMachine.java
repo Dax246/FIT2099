@@ -10,7 +10,7 @@ import java.util.HashMap;
 /**
  * @author Allan Chan and Damien Ambegoda
  * @version 1.0.0
- * @see Ground, EcoPoints
+ * @see EcoPoints
  * A class that players interact with to puchase items
  */
 public class VendingMachine extends Ground {

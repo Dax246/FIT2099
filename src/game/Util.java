@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Allan Chan and Damien Ambegoda
  * @version 1.0.0
- * @see GameMap, Location
+ * @see GameMap
  * Class representing Utility functions that are commonly used through the program.
  */
 public class Util {

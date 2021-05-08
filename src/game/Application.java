@@ -14,7 +14,7 @@ import game.groundPackage.*;
 /**
  * @author Allan Chan and Damien Ambegoda
  * @version 1.0.0
- * @see World, GameMap, Actor, Dinosaur
+ * @see World
  * The main class for the Jurassic World game.
  */
 public class Application {
