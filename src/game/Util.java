@@ -1,11 +1,6 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
-import game.dinosaurs.Corpse;
-import game.dinosaurs.Egg;
-import game.groundPackage.Bush;
-import game.groundPackage.Flora;
-import game.groundPackage.Tree;
 
 import java.util.*;
 
@@ -40,9 +35,11 @@ public class Util {
                 locations.add(currentLocation);
             }
             else {
-                Item item = Util.retrieveItem(objectName, currentLocation.getItems());
-                if (item != null) {
-                    locations.add(currentLocation);
+                if (!gameMap.isAnActorAt(currentLocation)) {
+                    Item item = Util.retrieveItem(objectName, currentLocation.getItems());
+                    if (item != null) {
+                        locations.add(currentLocation);
+                    }
                 }
             }
 

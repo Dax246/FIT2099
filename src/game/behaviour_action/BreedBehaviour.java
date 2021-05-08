@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class BreedBehaviour implements Behaviour {
 
-	private Location mateDestination(Actor actor, GameMap map) {
+	public Location mateDestination(Actor actor, GameMap map) {
 		Dinosaur currentActor = (Dinosaur) actor;
 		ArrayList<Location> ActorLocations = Util.locateObjects(map.locationOf(actor), "actor");
 		for (Location actorLocation : ActorLocations) {
@@ -41,12 +41,13 @@ public class BreedBehaviour implements Behaviour {
 
 		if (destination == null) {
 			return null;
-		} else if (distance(destination, map.locationOf(actor)) == 1) {
-			return new BreedAction((Dinosaur) map.getActorAt(destination));
 		}
-		else {
+		else if (distance(destination, map.locationOf(actor)) > 1) {
 			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 			return moveToLocation.getAction(actor, map);
+		}
+		else {
+			throw new AssertionError("Should not have called behaviour");
 		}
 	}
 
