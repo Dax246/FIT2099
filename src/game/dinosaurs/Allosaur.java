@@ -24,6 +24,9 @@ public class Allosaur extends Dinosaur {
 	 */
 	public Allosaur(String name, Boolean isBaby) {
 		super(name, 'a', 100);
+		setMaxUnconsciousTurns(20);
+		setHungerThreshold(70);
+		setBreedThreshold(50);
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 20;
@@ -42,11 +45,6 @@ public class Allosaur extends Dinosaur {
 		this.cannotAttack = cannotAttack;
 	}
 
-	@Override
-	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return super.getAllowableActions(otherActor, direction, map);
-	}
-
 	/**
 	 * Figure out what to do next.
 	 * 
@@ -59,15 +57,8 @@ public class Allosaur extends Dinosaur {
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
 		//TODO: FOR STEG IN HASHMAP, DECREMENT VALUE. IF 0, REMOVE IT.
 
-		//if next to steg, attack
 		Behaviour behaviour = new FindFoodBehaviour();
-		Action hunt = behaviour.getAction(this, map);
-		return hunt;
-//		Action wander = behaviour.getAction(this, map);
-//		if (wander != null)
-//			return wander;
-
-//		return new DoNothingAction();
+		return behaviour.getAction(this, map);
 	}
 
 }

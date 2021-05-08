@@ -1,9 +1,10 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-import game.behaviour_action.AttackAction;
+import game.behaviour_action.*;
 import game.Player;
-import game.behaviour_action.FeedDinoAction;
+
+import java.util.Random;
 
 public abstract class Dinosaur extends Actor{
     private int age;
@@ -14,12 +15,27 @@ public abstract class Dinosaur extends Actor{
     // 'M' for Male and 'F' for female
     private Character sex;
     private int layEggCounter = 0;
-
+    private int maxUnconsciousTurns;
+    private int unconsciousTurnsCounter;
+    private int hungerThreshold;
+    private int breedThreshold;
 
 
 
     public Dinosaur(String name, char displayChar, int maxHitPoints) {
         super(name, displayChar, maxHitPoints);
+
+        //assign random sex
+        Random sexRandomiser = new Random();
+        int randomSex = sexRandomiser.nextInt(2);
+        if (randomSex == 0) {
+            sex = 'M';
+        }
+        else {
+            sex = 'F';
+        }
+
+        unconsciousTurnsCounter = 0;
     }
 
     public int getAge() {
@@ -30,6 +46,18 @@ public abstract class Dinosaur extends Actor{
         this.age = age;
     }
 
+    public int getHungerThreshold() {
+        return hungerThreshold;
+    }
+
+    public void setHungerThreshold(int hunger) {
+        hungerThreshold = hunger;
+    }
+
+    public void setBreedThreshold(int breedThreshold) {
+        this.breedThreshold = breedThreshold;
+    }
+
     public int getLayEggCounter() {
         return layEggCounter;
     }
@@ -38,17 +66,102 @@ public abstract class Dinosaur extends Actor{
         this.layEggCounter = layEggCounter;
     }
 
+    public void setMaxUnconsciousTurns(int turns) {
+        maxUnconsciousTurns = turns;
+    }
+
+    public int getUnconsciousTurnsCounter() {
+        return unconsciousTurnsCounter;
+    }
+
+    public int getMaxUnconsciousTurns() {
+        return maxUnconsciousTurns;
+    }
+
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-        this.hitPoints -= 1;
         this.age += 1;
 
+        //lay egg if pregnant
         if (layEggCounter > 0){
             layEggCounter -= 1;
-            // If layEggCounter == 0, lay egg action
+            if (layEggCounter == 0) {
+                return new LayEggAction();
+            }
         }
 
-        return new DoNothingAction();
+        //if unconscious, increment counter
+        if (!isConscious()) {
+            unconsciousTurnsCounter += 1;
+            if (unconsciousTurnsCounter == maxUnconsciousTurns) {
+                return new DeathAction();
+            }
+            if (unconsciousTurnsCounter > maxUnconsciousTurns) {
+                throw new AssertionError("Dinosaur should have already died");
+            }
+        }
+        else {
+            unconsciousTurnsCounter = 0;
+            if (hitPoints == hungerThreshold) {
+                System.out.println(this.toString() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ") is getting hungry! ");
+            }
+            this.hitPoints -= 1;
+
+            // fall unconscious due to hunger
+            if (!isConscious()) {
+                return new DoNothingAction();
+            }
+
+            //mate adjacent mate
+            Location nearestMate = (new BreedBehaviour()).mateDestination(this, map);
+            if (distance(nearestMate, map.locationOf(this)) == 1
+                    && hitPoints >= breedThreshold) {
+                return new BreedAction((Dinosaur) map.getActorAt(nearestMate));
+            }
+
+            //consume current location's food
+//            Location nearestFood = (new )
+
+        }
+
+
+
+
+        //		else if (distance(destination, map.locationOf(actor)) == 1) {
+//			return new BreedAction((Dinosaur) map.getActorAt(destination));
+//		}
+
+//		 else if (distance(destination, map.locationOf(actor)) == 0) {
+//			if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
+//				return new EatFruitAction();
+//			} else {
+//				return new EatNonFruitAction();
+//			}
+//		}
+//		else if (distance(destination, map.locationOf(actor)) == 1 && actor instanceof Allosaur && map.getActorAt(destination) instanceof Stegosaur) {
+//			return new AttackAction(map.getActorAt(destination));
+//		}
+
+        //increment age
+        //if unconscious, increment unconsciousTurnCounter
+        //		//if unconsciousTurnCounter > maxTurnsDeath: return new DeathAction()
+        //
+        //		//decrement hitpoints
+        //if hungry, print message
+        //			//if hitpoints == 0: unconscious = true, Return DoNothingAction
+        //
+        //		//if next to mate and hitPoints > minHitPointsBreeding
+        //			//Return breedAction
+        //
+        //
+        //		//else if steg/brach and next to fruit or allo and next to steg/allo
+        //			//Return eatFruitAction
+        //		//else if food level > 90 (140 for brachiosaur)
+        //			//Return findMateBehaviour.getAction
+        //		//else
+        //			//Return findFruitBehaviour.getAction if not allosaur
+        //			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
+        // if no suitable moves, move towards player
     }
 
     @Override
@@ -71,5 +184,31 @@ public abstract class Dinosaur extends Actor{
 
     public Character getSex() {
         return sex;
+    }
+
+    public boolean isAdult() {
+        if (this.name == "Stegosaur") {
+            if (age >= 30) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else if (this.name == "Brachiosaur" || this.name == "Allosaur") {
+            if (this.age >= 50) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            throw new AssertionError("Unexpected Dinosaur");
+        }
+    };
+
+    private int distance(Location a, Location b) {
+        return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
     }
 }

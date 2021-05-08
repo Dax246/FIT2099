@@ -28,6 +28,9 @@ public class Brachiosaur extends Dinosaur {
 
 	public Brachiosaur(String name, Boolean isBaby) {
 		super(name, 'd', 160);
+		setMaxUnconsciousTurns(15);
+		setHungerThreshold(140);
+		setBreedThreshold(70);
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 10;
@@ -36,11 +39,6 @@ public class Brachiosaur extends Dinosaur {
 			this.setAge(50);
 			this.hitPoints = 100;
 		}
-	}
-
-	@Override
-	public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
-		return super.getAllowableActions(otherActor, direction, map);
 	}
 
 	/**
