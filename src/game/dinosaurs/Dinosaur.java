@@ -84,7 +84,7 @@ public abstract class Dinosaur extends Actor{
         this.age += 1;
 
         //lay egg if pregnant
-        if (layEggCounter > 0){
+        if (layEggCounter > 0) {
             layEggCounter -= 1;
             if (layEggCounter == 0) {
                 return new LayEggAction();
@@ -96,13 +96,15 @@ public abstract class Dinosaur extends Actor{
             unconsciousTurnsCounter += 1;
             if (unconsciousTurnsCounter == maxUnconsciousTurns) {
                 return new DeathAction();
-            }
-            if (unconsciousTurnsCounter > maxUnconsciousTurns) {
+            } else if (unconsciousTurnsCounter > maxUnconsciousTurns) {
                 throw new AssertionError("Dinosaur should have already died");
             }
-        }
-        else {
+            else {
+                return new DoNothingAction();
+            }
+        } else {
             unconsciousTurnsCounter = 0;
+            //becomes hungry
             if (hitPoints == hungerThreshold) {
                 System.out.println(this.toString() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ") is getting hungry! ");
             }
@@ -113,51 +115,33 @@ public abstract class Dinosaur extends Actor{
                 return new DoNothingAction();
             }
 
-            //mate adjacent mate
-            Location nearestMate = (new BreedBehaviour()).mateDestination(this, map);
-            if (distance(nearestMate, map.locationOf(this)) == 1
-                    && hitPoints >= breedThreshold) {
-                return new BreedAction((Dinosaur) map.getActorAt(nearestMate));
+            //mate if adjacent to mate
+            BreedBehaviour breedBehaviour = new BreedBehaviour();
+            Action breedBehaviourNextAction = breedBehaviour.getAction(this, map);
+            if (breedBehaviourNextAction instanceof BreedAction) {
+                if (hitPoints >= breedThreshold) {
+                    return breedBehaviourNextAction;
+                }
             }
 
-            //consume/move towards food if hungry
+            //otherwise consume/move towards food if hungry
             if (hitPoints < hungerThreshold) {
                 Behaviour findFoodBehaviour = new FindFoodBehaviour();
                 Action nextAction = findFoodBehaviour.getAction(this, map);
                 if (nextAction != null) {
                     return nextAction;
                 }
-            } else {  //move towards mate since not hungry
-                Behaviour breedBehaviour = new BreedBehaviour();
-                Action nextAction = breedBehaviour.getAction(this, map);
-                if (nextAction != null) {
-                    return nextAction;
+            } else { //move towards mate since not hungry
+                if (breedBehaviourNextAction instanceof MoveActorAction) {
+                    return breedBehaviourNextAction;
                 }
             }
 
-            //not hungry and no mate
-
-
-
+            //not hungry and no mate so move towards player
+            Behaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
+            return moveToPlayerBehaviour.getAction(this, map);
         }
-
-
-
-
-        //		else if (distance(destination, map.locationOf(actor)) == 1) {
-//			return new BreedAction((Dinosaur) map.getActorAt(destination));
-//		}
-
-//		 else if (distance(destination, map.locationOf(actor)) == 0) {
-//			if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
-//				return new EatFruitAction();
-//			} else {
-//				return new EatNonFruitAction();
-//			}
-//		}
-//		else if (distance(destination, map.locationOf(actor)) == 1 && actor instanceof Allosaur && map.getActorAt(destination) instanceof Stegosaur) {
-//			return new AttackAction(map.getActorAt(destination));
-//		}
+    }
 
         //increment age
         //if unconscious, increment unconsciousTurnCounter
@@ -179,7 +163,6 @@ public abstract class Dinosaur extends Actor{
         //			//Return findFruitBehaviour.getAction if not allosaur
         //			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
         // if no suitable moves, move towards player
-    }
 
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
