@@ -65,7 +65,7 @@ public class AttackAction extends Action {
 		}
 
 		if (!target.isConscious()) {
-			Item corpse = new Corpse(1);
+			Corpse corpse = new Corpse(1);
 			map.locationOf(target).addItem(corpse);
 			map.removeActor(target);
 			result += System.lineSeparator() + target + " is killed.";
