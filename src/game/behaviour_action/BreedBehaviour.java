@@ -15,7 +15,7 @@ public class BreedBehaviour implements Behaviour {
 
 	public Location mateDestination(Actor actor, GameMap map) {
 		Dinosaur currentActor = (Dinosaur) actor;
-		ArrayList<Location> ActorLocations = Util.locateObjects(map.locationOf(actor), "actor");
+		ArrayList<Location> ActorLocations = Util.locateObjects(map.locationOf(actor), "Actor");
 		for (Location actorLocation : ActorLocations) {
 			Dinosaur mate = (Dinosaur) actorLocation.getActor();
 			if (currentActor.getDisplayChar() == mate.getDisplayChar()
