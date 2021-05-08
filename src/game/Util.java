@@ -31,7 +31,8 @@ public class Util {
             visited.get(currentLocation.y()).set(currentLocation.x(), true);
 
             //Do item checks after popping from queue
-            if (objectName == "Actor" && currentLocation.containsAnActor()) {
+            if (objectName == "Actor" && currentLocation.containsAnActor()
+                    && !(currentLocation.getActor() instanceof Player)) {
                 locations.add(currentLocation);
             }
             else {
@@ -71,9 +72,6 @@ public class Util {
                     visited.get(currentLocation.y() - 1).set(currentLocation.x(), true);
                 }
             }
-        }
-        for (Location location:locations) {
-            System.out.println(location.x() + ", " + location.y());
         }
         return locations;
     }
