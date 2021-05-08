@@ -41,7 +41,7 @@ public class BreedBehaviour implements Behaviour {
 
 		if (destination == null) {
 			return null;
-		} else if (distance(destination, map.locationOf(actor)) > 0) {
+		} else if (distance(destination, map.locationOf(actor)) == 1) {
 			return new BreedAction((Dinosaur) destination.getActor());
 		} else if (distance(destination, map.locationOf(actor)) > 1) {
 			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
