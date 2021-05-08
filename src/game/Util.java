@@ -36,7 +36,7 @@ public class Util {
                 locations.add(currentLocation);
             }
             else {
-                if (!gameMap.isAnActorAt(currentLocation)) {
+                if (!gameMap.isAnActorAt(currentLocation) || currentLocation == source) {
                     Item item = Util.retrieveItem(objectName, currentLocation.getItems());
                     if (item != null) {
                         locations.add(currentLocation);
