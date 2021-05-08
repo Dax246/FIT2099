@@ -98,18 +98,18 @@ public class FindFoodBehaviour implements Behaviour {
 
 		if (destination == null) {
 			return null;
-		}
-		else if (distance(destination, map.locationOf(actor)) > 0) {
-			if (distance(destination, map.locationOf(actor)) == 1) {
-				if (destination.containsAnActor()) {
-					return new AttackAction(destination.getActor());
-				}
+		} else if (distance(destination, map.locationOf(actor)) == 0) {
+			if (actor instanceof Allosaur) {
+				return new EatNonFruitAction();
+			} else {
+				return new EatFruitAction();
 			}
-			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
-			return moveToLocation.getAction(actor, map);
+		} else if (distance(destination, map.locationOf(actor)) == 1 && map.getActorAt(destination) instanceof Stegosaur) {
+			return new AttackAction(map.getActorAt(destination));
 		}
 		else {
-			throw new AssertionError("Should not have called behaviour");
+			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
+			return moveToLocation.getAction(actor, map);
 		}
 	}
 

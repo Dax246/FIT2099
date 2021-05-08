@@ -48,7 +48,7 @@ public class EatNonFruitAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor.toString() + " is eating fruit";
+        return actor.toString() + " is eating non fruit";
     }
 }
 
