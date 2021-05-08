@@ -29,7 +29,6 @@ public class MoveToPlayerBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = locatePlayer(actor, map);
-		System.out.println(actor.toString() + " at (" + map.locationOf(actor).x() + ", " + map.locationOf(actor).y() + ") moving towards (" + destination.x() + ", " + destination.y() + ")");
 		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 		return moveToLocation.getAction(actor, map);
 	}

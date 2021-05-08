@@ -12,6 +12,7 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Dinosaur dinoActor = (Dinosaur) actor;
+        Location deathLocation = map.locationOf(actor);
         if (dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurns()) {
             Corpse corpse;
             if (dinoActor instanceof Stegosaur) {
@@ -26,13 +27,13 @@ public class DeathAction extends Action {
             else {
                 throw new AssertionError("Unexpected actor dying.");
             }
-            map.locationOf(actor).addItem(corpse);
+            deathLocation.addItem(corpse);
             map.removeActor(actor);
         }
         else {
             throw new AssertionError("Dinosaur should not be dying");
         }
-        return actor.toString() + " has died at (" + map.locationOf(actor).x() + ", " + map.locationOf(actor).y() + ")";
+        return actor.toString() + " has died at (" + deathLocation.x() + ", " + deathLocation.y() + ")";
     }
 
     @Override

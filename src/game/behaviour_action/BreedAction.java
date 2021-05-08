@@ -33,11 +33,11 @@ public class BreedAction extends Action {
             }
             else if (female instanceof Brachiosaur){
                 ((Brachiosaur) female).setLayEggCounter(30);
-                return "Brachiosaur mate! Egg laid in 30 turns";
+                return "Brachiosaurs mate! Egg laid in 30 turns";
             }
             else if (female instanceof Allosaur){
                 ((Allosaur) female).setLayEggCounter(20);
-                return "Allosaur mate! Egg egg laid in 20 turns";
+                return "Allosaurs mate! Egg egg laid in 20 turns";
             }
             else {
                 throw new AssertionError("Unexpected dinosaur falling pregnant");
