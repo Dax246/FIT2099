@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * A carnivorous dinosaur.
@@ -47,13 +48,17 @@ public class Allosaur extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		cannotAttack.replaceAll((key, v) -> v - 1);
+
+		HashSet<Stegosaur> removedSteg = new HashSet<>();
 		for (Stegosaur key : cannotAttack.keySet()) {
 			int turnsRemaining = cannotAttack.get(key);
 			if (turnsRemaining == 0) {
-				cannotAttack.remove(key);
-			} else {
-				cannotAttack.put(key, turnsRemaining - 1);
+				removedSteg.add(key);
 			}
+		}
+		for (Stegosaur key: removedSteg) {
+			cannotAttack.remove(key);
 		}
 		return super.playTurn(actions, lastAction, map, display);
 	}
