@@ -7,7 +7,7 @@ public class BrachEgg extends Egg{
 
     public BrachEgg(){
         super("Brachiosaur egg", 'e', true);
-        super.turnsUntilHatch = 10;
+        super.turnsUntilHatch = 30;
 
     }
 
