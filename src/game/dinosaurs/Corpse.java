@@ -8,7 +8,7 @@ public class Corpse extends Item {
     private int rot_health;
 
     public Corpse(int corpseOf) {
-        super("corpse", 'c', false);
+        super("Corpse", 'c', false);
         this.corpseOf = corpseOf;  //1 for steg, 2 for brach, 3 for allo
         if (corpseOf == 1 || corpseOf == 3) {
             this.rot_health = 20;
