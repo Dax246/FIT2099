@@ -20,7 +20,7 @@ public class Application {
 	public static void main(String[] args) {
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new VendingMachine());
 		
 		List<String> map = Arrays.asList(
 		"................................................................................",
@@ -30,7 +30,7 @@ public class Application {
 		".....#_____#....................................................................",
 		".....###.###....................................................................",
 		"................................................................................",
-		"......................................+++.......................................",
+		".......v..............................+++.......................................",
 		".......................................++++.....................................",
 		"...................................+++++........................................",
 		".....................................++++++.....................................",
@@ -54,16 +54,21 @@ public class Application {
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));
 		
-		// Place a pair of stegosaurs in the middle of the map
-		gameMap.at(30, 12).addActor(new Stegosaur("Stegosaur", false));
-		gameMap.at(32, 12).addActor(new Stegosaur("Stegosaur", false));
-		gameMap.at(69, 20).addActor(new Allosaur("Allosaur", false));
+		// Create a herd of 2 male and 2 female Brachiosaurs
+		gameMap.at(28, 12).addActor(new Brachiosaur("Brachiosaur", false));
+		gameMap.at(30, 12).addActor(new Brachiosaur("Brachiosaur", false));
+		gameMap.at(32, 12).addActor(new Brachiosaur("Brachiosaur", false));
+		gameMap.at(34, 12).addActor(new Brachiosaur("Brachiosaur", false));
+		((Brachiosaur) gameMap.getActorAt(gameMap.at(28, 12))).setSex('M');
+		((Brachiosaur) gameMap.getActorAt(gameMap.at(30, 12))).setSex('M');
+		((Brachiosaur) gameMap.getActorAt(gameMap.at(32, 12))).setSex('F');
+		((Brachiosaur) gameMap.getActorAt(gameMap.at(34, 12))).setSex('F');
 
-//		System.out.println(gameMap.at(79,24).getGround().getDisplayChar());
-//		System.out.println(gameMap.getXRange().max());
-//		System.out.println(gameMap.getXRange().min());
-//		System.out.println(gameMap.getYRange().max());
-//		System.out.println(gameMap.at(79, 24).getGround().getDisplayChar());
+		//Place a triplet of Stegosaurs in the middle of the map
+		gameMap.at(20, 12).addActor(new Stegosaur("Stegosaur", false));
+		gameMap.at(22, 12).addActor(new Stegosaur("Stegosaur", false));
+		gameMap.at(24, 12).addActor(new Stegosaur("Stegosaur", false));
+
 		world.run();
 	}
 }

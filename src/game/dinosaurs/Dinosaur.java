@@ -81,6 +81,10 @@ public abstract class Dinosaur extends Actor{
         return maxUnconsciousTurns;
     }
 
+    public void setSex(Character sex) {
+        this.sex = sex;
+    }
+
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         this.age += 1;
