@@ -15,9 +15,13 @@ public class StegEgg extends Egg{
         super.tick(currentLocation);
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            currentLocation.addActor(new Stegosaur("Stegosaur", true));
-            currentLocation.removeItem(this);
-            EcoPoints.increaseEcoPoints(100);
+            if (currentLocation.containsAnActor()) {
+                turnsUntilHatch += 1;
+            } else {
+                currentLocation.addActor(new Stegosaur("Stegosaur", true));
+                currentLocation.removeItem(this);
+                EcoPoints.increaseEcoPoints(100);
+            }
         }
     }
 }

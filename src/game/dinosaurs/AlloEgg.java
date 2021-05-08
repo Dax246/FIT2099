@@ -15,9 +15,13 @@ public class AlloEgg extends Egg{
         super.tick(currentLocation);
         turnsUntilHatch -= 1;
         if (turnsUntilHatch == 0){
-            currentLocation.addActor(new Allosaur("Allosaur", true));
-            currentLocation.removeItem(this);
-            EcoPoints.increaseEcoPoints(1000);
+            if (currentLocation.containsAnActor()) {
+                turnsUntilHatch += 1;
+            } else {
+                currentLocation.addActor(new Allosaur("Allosaur", true));
+                currentLocation.removeItem(this);
+                EcoPoints.increaseEcoPoints(1000);
+            }
         }
     }
 }
