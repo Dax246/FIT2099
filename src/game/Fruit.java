@@ -12,7 +12,7 @@ public class Fruit extends Item {
     //TODO: Remove capability of fruit to be picked up if in Bush or Tree
 
     public Fruit(char storedLocation) {
-        super("fruit", 'f', true);
+        super("Fruit", 'f', true);
         this.storedLocation = storedLocation;
     }
 
