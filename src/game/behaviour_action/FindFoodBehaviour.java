@@ -15,7 +15,6 @@ import java.util.ArrayList;
  * closer to a target Actor.
  */
 public class FindFoodBehaviour implements Behaviour {
-	private String foodType;
 
 	private Location itemDestination(Actor actor, GameMap map) {
 		Location actorLocation = map.locationOf(actor);
@@ -48,6 +47,7 @@ public class FindFoodBehaviour implements Behaviour {
 			ArrayList<Location> corpseLocations= Util.locateObjects(actorLocation, "Corpse");
 			ArrayList<Location> eggLocations= Util.locateObjects(actorLocation, "Egg");
 			ArrayList<Location> ActorLocations= Util.locateObjects(actorLocation, "Actor");
+
 			for (Location corpseLocation: corpseLocations) {
 				Item corpse = Util.retrieveItem("Corpse", corpseLocation.getItems());
 				if (corpse != null) {
