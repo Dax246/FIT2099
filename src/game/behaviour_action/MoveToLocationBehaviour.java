@@ -25,9 +25,6 @@ public class MoveToLocationBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 
 		int currentDistance = distance(here, this.target);
-		if (currentDistance == 1) {
-			throw new AssertionError("Shouldn't need to move to location that is in reach");
-		}
 
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
@@ -38,7 +35,6 @@ public class MoveToLocationBehaviour implements Behaviour {
 				}
 			}
 		}
-
 		return null;
 	}
 
