@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FindFoodBehaviour implements Behaviour {
 	private String foodType;
 
-	public Location itemDestination(Actor actor, GameMap map) {
+	private Location itemDestination(Actor actor, GameMap map) {
 		Location actorLocation = map.locationOf(actor);
 		if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
 			ArrayList<Location> fruitLocations = Util.locateObjects(actorLocation, "Fruit");
