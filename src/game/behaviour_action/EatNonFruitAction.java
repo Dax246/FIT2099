@@ -43,7 +43,7 @@ public class EatNonFruitAction extends Action {
             }
         }
 
-        return actor.toString() + " ate " + foodEaten;
+        return actor.toString() + " ate " + foodEaten + " at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
     }
 
     @Override

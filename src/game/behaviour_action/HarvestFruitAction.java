@@ -18,10 +18,10 @@ public class HarvestFruitAction extends Action {
             if (HarvestChance <= 60){
                 EcoPoints.increaseEcoPoints(10);
                 actor.addItemToInventory(((Flora)location.getGround()).harvestFruit(location));
-                return "Player has harvested a fruit!";
-            } return "Player has searched for fruit but is unable to find any ripe ones";
+                return "Player has harvested a fruit at: (" + location.x() + ", " + location.y() + ")";
+            } return "Player has searched for fruit but is unable to find any ripe ones at: (" + location.x() + ", " + location.y() + ")";
         }
-        return "No Fruit to Harvest";
+        return "No Fruit to Harvest at: (" + location.x() + ", " + location.y() + ")";
     }
 
     @Override

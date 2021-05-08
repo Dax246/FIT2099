@@ -32,7 +32,7 @@ public class DeathAction extends Action {
         else {
             throw new AssertionError("Dinosaur should not be dying");
         }
-        return actor.toString() + " has died";
+        return actor.toString() + " has died at (" + map.locationOf(actor).x() + ", " + map.locationOf(actor).y() + ")";
     }
 
     @Override

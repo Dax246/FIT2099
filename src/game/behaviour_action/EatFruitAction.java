@@ -48,9 +48,9 @@ public class EatFruitAction extends Action {
         }
 
         if (validEatFruitAction) {
-            return actor.toString() + " ate Fruit";
+            return actor.toString() + " ate Fruit at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
         } else {
-            return actor.toString() + " failed to eat Fruit";
+            return actor.toString() + " failed to eat Fruit at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
         }
     }
 
