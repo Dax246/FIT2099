@@ -21,6 +21,7 @@ public class AlloEgg extends Egg{
                 currentLocation.addActor(new Allosaur("Allosaur", true));
                 currentLocation.removeItem(this);
                 EcoPoints.increaseEcoPoints(1000);
+                System.out.println("Allo egg hatched at (" + currentLocation.x() + ", " + currentLocation.y() + ")");
             }
         }
     }

@@ -21,6 +21,7 @@ public class StegEgg extends Egg{
                 currentLocation.addActor(new Stegosaur("Stegosaur", true));
                 currentLocation.removeItem(this);
                 EcoPoints.increaseEcoPoints(100);
+                System.out.println("Steg egg hatched at (" + currentLocation.x() + ", " + currentLocation.y() + ")");
             }
         }
     }
