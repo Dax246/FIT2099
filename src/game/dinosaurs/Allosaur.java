@@ -1,14 +1,12 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-import game.Behaviour;
-import game.behaviour_action.FindFoodBehaviour;
-import game.behaviour_action.WanderBehaviour;
+
 
 import java.util.HashMap;
 
 /**
- * A herbivorous dinosaur.
+ * A carnivorous dinosaur.
  *
  */
 public class Allosaur extends Dinosaur {
@@ -16,7 +14,7 @@ public class Allosaur extends Dinosaur {
 
 	/**
 	 * Constructor.
-	 * All Allosaur are represented by a 'd' and have 100 hit points.
+	 * All Allosaur are represented by an 'a' and have up to 100 hit points.
 	 *
 	 * @param name the name of this Stegosaur
 	 */
@@ -44,10 +42,6 @@ public class Allosaur extends Dinosaur {
 	}
 
 	/**
-	 * Figure out what to do next.
-	 * 
-	 * FIXME: Allosaur wanders around at random, or if no suitable MoveActions are available, it
-	 * just stands there.  That's boring.
 	 * 
 	 * @see Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
