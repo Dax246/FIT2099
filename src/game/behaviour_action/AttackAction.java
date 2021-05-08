@@ -6,7 +6,6 @@ import java.util.Random;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Weapon;
 import game.Player;
 import game.dinosaurs.Allosaur;
@@ -14,6 +13,8 @@ import game.dinosaurs.Corpse;
 import game.dinosaurs.Stegosaur;
 
 /**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
  * Special Action for attacking other Actors.
  */
 public class AttackAction extends Action {
@@ -36,6 +37,12 @@ public class AttackAction extends Action {
 		this.target = target;
 	}
 
+	/**
+	 * Method that is run when an action is executed.
+	 * @param actor The actor performing the action.
+	 * @param map The map the actor is on.
+	 * @return String that will be printed on menu
+	 */
 	@Override
 	public String execute(Actor actor, GameMap map) {
 		String result;
@@ -74,6 +81,11 @@ public class AttackAction extends Action {
 		return result;
 	}
 
+	/**
+	 * Returns string to print on menu
+	 * @param actor The actor performing the action.
+	 * @return String to print on menu
+	 */
 	@Override
 	public String menuDescription(Actor actor) {
 		return actor + " attacks " + target;

@@ -3,14 +3,26 @@ package game.dinosaurs;
 import edu.monash.fit2099.engine.Location;
 import game.EcoPoints;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Egg
+ * A class that hatches to an Brachiosaur.
+ */
 public class BrachEgg extends Egg{
-
+    /**
+     * Constructor
+     */
     public BrachEgg(){
         super("Brachiosaur egg", 'e', true);
         super.turnsUntilHatch = 30;
 
     }
 
+    /**
+     * Hatches egg if location has no actor and turns until hatch = 0
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         super.tick(currentLocation);

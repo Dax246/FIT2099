@@ -6,18 +6,35 @@ import game.dinosaurs.Allosaur;
 import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Dinosaur;
 import game.dinosaurs.Stegosaur;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Dinosaur
+ * Action for player to feed dinosaurs.
+ */
 public class FeedDinoAction extends Action {
+    /**
+     * Dinosaur to be fed by player
+     */
     private Dinosaur recipient;
 
+    /**
+     * Sets recipient
+     * @param recipient dinosaur to be fed
+     */
     public FeedDinoAction(Dinosaur recipient) {
         this.recipient = recipient;
     }
 
+    /**
+     * Feeds dinosaur an item if it is in player's inventory
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String to be printed in menu
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);

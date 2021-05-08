@@ -12,11 +12,16 @@ import game.dinosaurs.*;
 import game.groundPackage.*;
 
 /**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see World, GameMap, Actor, Dinosaur
  * The main class for the Jurassic World game.
- *
  */
 public class Application {
-
+	/**
+	 * Main method that is executed to run game
+	 * @param args any arguments given
+	 */
 	public static void main(String[] args) {
 		World world = new World(new Display());
 

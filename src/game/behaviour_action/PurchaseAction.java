@@ -9,7 +9,20 @@ import game.groundPackage.VendingMachine;
 
 import java.util.Scanner;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see game.Player
+ * A class that figures out a MoveAction that will move the actor one step
+ * closer to the player.
+ */
 public class PurchaseAction extends Action {
+    /**
+     * Purchases item from vending machine for player.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String that will be printed.
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         VendingMachine vm = null;

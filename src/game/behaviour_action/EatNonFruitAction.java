@@ -5,8 +5,19 @@ import game.Util;
 import game.dinosaurs.Corpse;
 import game.dinosaurs.Dinosaur;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Dinosaur
+ * Action to remove item that an allosaur eats.
+ */
 public class EatNonFruitAction extends Action {
-
+    /**
+     * Removes item that allosaur eats.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String result that will be printed in menu
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);

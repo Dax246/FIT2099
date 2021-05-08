@@ -1,30 +1,52 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-import game.Behaviour;
-import game.Util;
 import game.behaviour_action.*;
 import game.Player;
-
-import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Actor
+ * A class that contains the shared methods/attributes for all dinosaurs.
+ */
 public abstract class Dinosaur extends Actor{
+    /**
+     * Age of dinosaur
+     */
     private int age;
-
-    //TODO: Make sure hatch egg is top of priority is egg is ready to be layed
-    //TODO: Construct dinosaurs with Sex
-
-    // 'M' for Male and 'F' for female
+    /**
+     * Sex of dinosaur
+     */
     private Character sex;
+    /**
+     * Turns until egg is laid
+     */
     private int layEggCounter = 0;
+    /**
+     * Number of turns until a dinosaur dies
+     */
     private int maxUnconsciousTurns;
+    /**
+     * Number of turns a dinosaur has been unconscious
+     */
     private int unconsciousTurnsCounter;
+    /**
+     * Level of hitpoints that it becomes hungry
+     */
     private int hungerThreshold;
+    /**
+     * Level of hitpoints it won't breed below
+     */
     private int breedThreshold;
 
-
-
+    /**
+     * Constructor
+     * @param name Name of Dinosaur
+     * @param displayChar Char to represent dinosaur in output
+     * @param maxHitPoints max hitpoints of dinosaur
+     */
     public Dinosaur(String name, char displayChar, int maxHitPoints) {
         super(name, displayChar, maxHitPoints);
 
@@ -47,10 +69,6 @@ public abstract class Dinosaur extends Actor{
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public int getHungerThreshold() {
-        return hungerThreshold;
     }
 
     public void setHungerThreshold(int hunger) {
@@ -85,6 +103,14 @@ public abstract class Dinosaur extends Actor{
         this.sex = sex;
     }
 
+    /**
+     * Returns action to execute this turn.
+     * @param actions    collection of possible Actions for this Actor
+     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Actor
+     * @param display    the I/O object to which messages may be written
+     * @return Action to execute this turn.
+     */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
         this.age += 1;
@@ -154,6 +180,13 @@ public abstract class Dinosaur extends Actor{
         }
     }
 
+    /**
+     * Interactions players can have with dinosaurs
+     * @param otherActor the Actor that might be performing attack
+     * @param direction  String representing the direction of the other Actor
+     * @param map        current GameMap
+     * @return Actions that players can have with dinosaurs
+     */
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {
         Actions actions = new Actions();
@@ -164,10 +197,6 @@ public abstract class Dinosaur extends Actor{
         return actions;
     }
 
-    public int getHitPoints(){
-        return hitPoints;
-    }
-
     public int getMaxHitPoints(){
         return maxHitPoints;
     }
@@ -176,6 +205,10 @@ public abstract class Dinosaur extends Actor{
         return sex;
     }
 
+    /**
+     * Determines if dinosaur is adult based on age
+     * @return boolean that's true if dinosaur is an adult
+     */
     public boolean isAdult() {
         if (this.name == "Stegosaur") {
             if (age >= 30) {
@@ -197,8 +230,4 @@ public abstract class Dinosaur extends Actor{
             throw new AssertionError("Unexpected Dinosaur");
         }
     };
-
-    private int distance(Location a, Location b) {
-        return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
-    }
 }

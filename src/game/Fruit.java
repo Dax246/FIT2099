@@ -3,19 +3,36 @@ package game;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Item
+ * The class for item that flora produce
+ */
 public class Fruit extends Item {
+    /**
+     * Ticks until fruit rot
+     */
     private int rot_health = 15;
 
-    // 'G' if on the Ground, 'B' if in a Bush, 'T' if in a tree
-    private char storedLocation;
+    /**
+     * Char to represent where fruit is
+     */
+    private char storedLocation; // 'G' if on the Ground, 'B' if in a Bush, 'T' if in a tree
 
-    //TODO: Remove capability of fruit to be picked up if in Bush or Tree
-
+    /**
+     * Constructor
+     * @param storedLocation Char to represent where fruit is
+     */
     public Fruit(char storedLocation) {
         super("Fruit", 'f', true);
         this.storedLocation = storedLocation;
     }
 
+    /**
+     * Ticks fruit rot counter
+     * @param currentLocation The location of the ground on which we lie.
+     */
     @Override
     public void tick(Location currentLocation) {
         rot_health -= 1;

@@ -8,13 +8,32 @@ import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Dinosaur;
 import game.dinosaurs.Stegosaur;
 
+
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see BreedBehaviour
+ */
 public class BreedAction extends Action {
+    /**
+     * Stores the mate of the dinosaur
+     */
     private Dinosaur mate;
 
+    /**
+     * Constructor of the action
+     * @param mate actor to mate with
+     */
     public BreedAction(Dinosaur mate) {
         this.mate = mate;
     }
 
+    /**
+     * Method that sets a counter for when a female mate lays their egg.
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Actor female = null;
@@ -46,6 +65,11 @@ public class BreedAction extends Action {
         return null;
     }
 
+    /**
+     * Returns string to print on menu
+     * @param actor The actor performing the action.
+     * @return String to print on menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Dinosaur will mate";

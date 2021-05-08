@@ -7,17 +7,31 @@ import edu.monash.fit2099.engine.Location;
 import game.EcoPoints;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
-
 import java.util.Random;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Flora
+ * A class that can produce fruit.
+ */
 public class Tree extends Flora {
+	/**
+	 * Age
+	 */
 	private int age = 0;
 
-
+	/**
+	 * Constructor
+	 */
 	public Tree() {
 		super('+');
 	}
 
+	/**
+	 * Method to produce fruit by chance
+	 * @param location The location of the Ground
+	 */
 	@Override
 	public void tick(Location location) {
 		super.tick(location);
@@ -41,6 +55,11 @@ public class Tree extends Flora {
 		}
 	}
 
+	/**
+	 * Adds fruit to location
+	 * @param location to add fruit
+	 * @return boolean if adding fruit was successful
+	 */
 	private boolean addFruit(Location location){
 		boolean isValid = false;
 		if (location.getGround() instanceof Tree){
@@ -50,7 +69,10 @@ public class Tree extends Flora {
 		return isValid;
 	}
 
-
+	/**
+	 * Method to drop fruit
+	 * @param location to drop fruit
+	 */
 	private void dropFruit(Location location){
 		for (Item item : location.getItems()){
 			if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'T'){
@@ -60,6 +82,13 @@ public class Tree extends Flora {
 		}
 	}
 
+	/**
+	 * Adds ability for players to interact with tree
+	 * @param actor the Actor acting
+	 * @param location the current Location
+	 * @param direction the direction of the Ground from the Actor
+	 * @return Actions that players can interact with tree
+	 */
 	@Override
 	public Actions allowableActions(Actor actor, Location location, String direction){
 		Actions actions = new Actions();
@@ -69,6 +98,11 @@ public class Tree extends Flora {
 		return actions;
 	}
 
+	/**
+	 * Method to remove fruit from tree
+	 * @param location to remove fruit from
+	 * @return fruit removed
+	 */
 	@Override
 	public Fruit harvestFruit(Location location){
 		Fruit harvestedFruit = null;

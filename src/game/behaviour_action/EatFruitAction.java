@@ -7,9 +7,19 @@ import game.dinosaurs.Stegosaur;
 import game.groundPackage.Bush;
 import game.groundPackage.Tree;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see game.dinosaurs.Dinosaur
+ * Action to remove fruit that dinosaurs eat.
+ */
 public class EatFruitAction extends Action {
-
-
+    /**
+     * Removes fruit that dinosaurs eat
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String that will be printed on menu
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);

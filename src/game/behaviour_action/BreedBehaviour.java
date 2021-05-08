@@ -8,11 +8,19 @@ import game.dinosaurs.Dinosaur;
 import java.util.ArrayList;
 
 /**
- * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Dinosaur
+ * A class that figures out whether to breed or move towards a mate.
  */
 public class BreedBehaviour implements Behaviour {
 
+	/**
+	 * Finds the location of the closest mate.
+	 * @param actor The actor looking for a mate.
+	 * @param map The map the actor is on.
+	 * @return Location of closest mate
+	 */
 	public Location mateDestination(Actor actor, GameMap map) {
 		Dinosaur currentActor = (Dinosaur) actor;
 		ArrayList<Location> ActorLocations = Util.locateObjects(map.locationOf(actor), "Actor");
@@ -32,6 +40,12 @@ public class BreedBehaviour implements Behaviour {
 		return null;
 	}
 
+	/**
+	 * Returns the action based on breeding depending on map
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return Action to execute
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = mateDestination(actor, map);

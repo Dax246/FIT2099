@@ -4,20 +4,27 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
-import game.groundPackage.Bush;
-import game.groundPackage.Tree;
 
 import java.util.Random;
 
 /**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Ground
  * A class that represents bare dirt.
  */
 public class Dirt extends Ground {
-
+	/**
+	 * Constructor
+	 */
 	public Dirt() {
 		super('.');
 	}
 
+	/**
+	 * Turns dirt to bush based on probability.
+	 * @param location The location of the Ground
+	 */
 	@Override
 	public void tick(Location location) {
 		super.tick(location);
@@ -62,7 +69,7 @@ public class Dirt extends Ground {
 			}
 		}
 		Random random = new Random();
-		int bushChance = random.nextInt(1000);
+		int bushChance = random.nextInt(100);
 		if (!tree_check) {
 			if (bush_counter >= 2 && bushChance <= 10) {
 				location.setGround(new Bush());

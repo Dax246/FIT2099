@@ -1,14 +1,21 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
-import game.Fruit;
 import game.dinosaurs.*;
-import game.groundPackage.Bush;
-import game.groundPackage.Tree;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Dinosaur
+ * Action when a dinosaur is not conscious for long enough.
+ */
 public class DeathAction extends Action {
-
-
+    /**
+     * Creates a corpse of a starved dinosaur
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return String
+     */
     @Override
     public String execute(Actor actor, GameMap map) {
         Dinosaur dinoActor = (Dinosaur) actor;

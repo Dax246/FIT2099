@@ -11,11 +11,18 @@ import game.groundPackage.Tree;
 import java.util.ArrayList;
 
 /**
- * A class that figures out a MoveAction that will move the actor one step 
- * closer to a target Actor.
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see Dinosaur
+ * Behaviour that determines which eat action or movement to do.
  */
 public class FindFoodBehaviour implements Behaviour {
-
+	/**
+	 * Determines closest viable item for dinosaur.
+	 * @param actor Actor that's finding food.
+	 * @param map GameMap actor is on.
+	 * @return Closest viable item for actor.
+	 */
 	private Location itemDestination(Actor actor, GameMap map) {
 		Location actorLocation = map.locationOf(actor);
 		if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
@@ -89,6 +96,12 @@ public class FindFoodBehaviour implements Behaviour {
 		return null;
 	}
 
+	/**
+	 * Returns action based on dinosaur and location of closest food.
+	 * @param actor the Actor acting
+	 * @param map the GameMap containing the Actor
+	 * @return action to eat/move.
+	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = itemDestination(actor, map);

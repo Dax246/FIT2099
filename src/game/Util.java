@@ -4,8 +4,19 @@ import edu.monash.fit2099.engine.*;
 
 import java.util.*;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * @see GameMap, Location
+ * Class representing Utility functions that are commonly used through the program.
+ */
 public class Util {
-
+    /**
+     * Method to locate items with name objectName
+     * @param source order of locations to return from
+     * @param objectName item name
+     * @return arraylist of Locations with item
+     */
     public static ArrayList<Location> locateObjects(Location source, String objectName) {
         NumberRange xRange = source.map().getXRange();
         NumberRange yRange = source.map().getYRange();
@@ -76,6 +87,12 @@ public class Util {
         return locations;
     }
 
+    /**
+     * Returns item of type itemType
+     * @param itemType name of item
+     * @param locationList item list in location
+     * @return item in location
+     */
     public static Item retrieveItem(String itemType, List<Item> locationList) {
         for (Item item: locationList) {
             if (item.toString() == itemType) {
