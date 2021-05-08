@@ -2,9 +2,11 @@ package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
 import game.Behaviour;
+import game.Util;
 import game.behaviour_action.*;
 import game.Player;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Dinosaur extends Actor{
@@ -126,7 +128,7 @@ public abstract class Dinosaur extends Actor{
 
             //otherwise consume/move towards food if hungry
             if (hitPoints < hungerThreshold) {
-                Behaviour findFoodBehaviour = new FindFoodBehaviour();
+                FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
                 Action nextAction = findFoodBehaviour.getAction(this, map);
                 if (nextAction != null) {
                     return nextAction;
@@ -138,31 +140,15 @@ public abstract class Dinosaur extends Actor{
             }
 
             //not hungry and no mate so move towards player
-            Behaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
-            return moveToPlayerBehaviour.getAction(this, map);
+            MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
+            Action nextAction = moveToPlayerBehaviour.getAction(this, map);
+            if (nextAction != null) {
+                return nextAction;
+            } else {
+                return (new WanderBehaviour()).getAction(this, map);
+            }
         }
     }
-
-        //increment age
-        //if unconscious, increment unconsciousTurnCounter
-        //		//if unconsciousTurnCounter > maxTurnsDeath: return new DeathAction()
-        //
-        //		//decrement hitpoints
-        //if hungry, print message
-        //			//if hitpoints == 0: unconscious = true, Return DoNothingAction
-        //
-        //		//if next to mate and hitPoints > minHitPointsBreeding
-        //			//Return breedAction
-        //
-        //
-        //		//else if steg/brach and next to fruit or allo and next to steg/allo
-        //			//Return eatFruitAction
-        //		//else if food level > 90 (140 for brachiosaur)
-        //			//Return findMateBehaviour.getAction
-        //		//else
-        //			//Return findFruitBehaviour.getAction if not allosaur
-        //			//Return findFoodBehaviour.getAction if allosaur (corpse, egg, steg)
-        // if no suitable moves, move towards player
 
     @Override
     public Actions getAllowableActions(Actor otherActor, String direction, GameMap map) {

@@ -32,7 +32,6 @@ public class Bush extends Flora {
         }
     }
 
-    //TODO: Add to capabilities
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         Actions actions = new Actions();
@@ -44,7 +43,6 @@ public class Bush extends Flora {
 
 
     private boolean addFruit(Location location){
-        //TODO: Decide whether to put in a parent class as bush and tree both use this
         boolean isValid = false;
         if (location.getGround() instanceof Bush){
             location.addItem(new Fruit('B'));
