@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FindFoodBehaviour implements Behaviour {
 	private String foodType;
 
-	private Location itemDestination(Actor actor, GameMap map) {
+	public Location itemDestination(Actor actor, GameMap map) {
 		Location actorLocation = map.locationOf(actor);
 		if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
 			ArrayList<Location> fruitLocations = Util.locateObjects(actorLocation, "Fruit");
@@ -65,9 +65,12 @@ public class FindFoodBehaviour implements Behaviour {
 			}
 
 			for (Location stegLocation: ActorLocations) {
-				if (actorLocation.getActor() instanceof Stegosaur) {
-					closestLocations.add(stegLocation);
-					break;
+				if (stegLocation.getActor() instanceof Stegosaur) {
+					Allosaur alloActor = (Allosaur) actor;
+					if (!alloActor.getCannotAttack().containsKey((Stegosaur) stegLocation.getActor())) {
+						closestLocations.add(stegLocation);
+						break;
+					}
 				}
 			}
 
@@ -95,19 +98,18 @@ public class FindFoodBehaviour implements Behaviour {
 
 		if (destination == null) {
 			return null;
-		} else if (distance(destination, map.locationOf(actor)) == 0) {
-			if (actor instanceof Stegosaur || actor instanceof Brachiosaur) {
-				return new EatFruitAction();
-			} else {
-				return new EatNonFruitAction();
+		}
+		else if (distance(destination, map.locationOf(actor)) > 0) {
+			if (distance(destination, map.locationOf(actor)) == 1) {
+				if (destination.containsAnActor()) {
+					return new AttackAction(destination.getActor());
+				}
 			}
-		}
-		else if (distance(destination, map.locationOf(actor)) == 1 && actor instanceof Allosaur && map.getActorAt(destination) instanceof Stegosaur) {
-			return new AttackAction(map.getActorAt(destination));
-		}
-		else {
 			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 			return moveToLocation.getAction(actor, map);
+		}
+		else {
+			throw new AssertionError("Should not have called behaviour");
 		}
 	}
 
