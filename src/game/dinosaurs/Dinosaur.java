@@ -128,6 +128,15 @@ public abstract class Dinosaur extends Actor{
         }
     }
 
+    public void quench() {
+        if (this instanceof Stegosaur || this instanceof Allosaur) {
+            waterLevel += 30;
+        } else {
+            waterLevel += 80;
+        }
+        waterLevel = Math.min(waterLevel, maxWaterLevel);
+    }
+
     /**
      * Returns action to execute this turn.
      * @param actions    collection of possible Actions for this Actor
@@ -138,6 +147,7 @@ public abstract class Dinosaur extends Actor{
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        Action nextAction;
         currentLocation = map.locationOf(this);
         this.age += 1;
 
@@ -179,28 +189,38 @@ public abstract class Dinosaur extends Actor{
         //mate if adjacent to mate
         BreedBehaviour breedBehaviour = new BreedBehaviour();
         Action breedBehaviourNextAction = breedBehaviour.getAction(this, map);
-        if (breedBehaviourNextAction instanceof BreedAction) {
-            if (hitPoints >= breedThreshold) {
-                return breedBehaviourNextAction;
-            }
+        if (breedBehaviourNextAction instanceof BreedAction
+                && hitPoints >= breedThreshold) {
+            return breedBehaviourNextAction;
         }
 
-        //otherwise consume/move towards food if hungry
-        if (hitPoints < hungerThreshold) {
-            FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
-            Action nextAction = findFoodBehaviour.getAction(this, map);
+        //sip/find water if thirsty
+        if (waterLevel < thirstThreshold) {
+            FindWaterBehaviour findWaterBehaviour = new FindWaterBehaviour();
+            nextAction = findWaterBehaviour.getAction(this, map);
             if (nextAction != null) {
                 return nextAction;
             }
-        } else { //move towards mate since not hungry
-            if (breedBehaviourNextAction instanceof MoveActorAction) {
-                return breedBehaviourNextAction;
+        }
+
+
+        //consume/move towards food if hungry
+        if (hitPoints < hungerThreshold) {
+            FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
+            nextAction = findFoodBehaviour.getAction(this, map);
+            if (nextAction != null) {
+                return nextAction;
             }
         }
 
-        //not hungry and no mate so move towards player
+        //move towards mate
+        if (breedBehaviourNextAction instanceof MoveActorAction) {
+            return breedBehaviourNextAction;
+        }
+
+        //move towards player
         MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
-        Action nextAction = moveToPlayerBehaviour.getAction(this, map);
+        nextAction = moveToPlayerBehaviour.getAction(this, map);
         if (nextAction != null) {
             return nextAction;
         } else {
@@ -239,7 +259,7 @@ public abstract class Dinosaur extends Actor{
      * @return boolean that's true if dinosaur is an adult
      */
     public boolean isAdult() {
-        if (this.name == "Stegosaur") {
+        if (this instanceof Stegosaur) {
             if (age >= 30) {
                 return true;
             }
@@ -247,7 +267,7 @@ public abstract class Dinosaur extends Actor{
                 return false;
             }
         }
-        else if (this.name == "Brachiosaur" || this.name == "Allosaur") {
+        else if (this instanceof Allosaur || this instanceof Brachiosaur) {
             if (this.age >= 50) {
                 return true;
             }

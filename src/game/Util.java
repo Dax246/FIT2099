@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.groundPackage.Lake;
 
 import java.util.*;
 
@@ -41,9 +42,13 @@ public class Util {
             Location currentLocation = bfs.remove();
             visited.get(currentLocation.y()).set(currentLocation.x(), true);
 
-            //Do item checks after popping from queue
+            //Do object check after popping from queue
             if (objectName == "Actor" && currentLocation.containsAnActor()
                     && !(currentLocation.getActor() instanceof Player)) {
+                locations.add(currentLocation);
+            }
+            else if (objectName == "Water" && currentLocation.getGround() instanceof Lake
+                    && ((Lake) currentLocation.getGround()).getCapacity() > 0) {
                 locations.add(currentLocation);
             }
             else {

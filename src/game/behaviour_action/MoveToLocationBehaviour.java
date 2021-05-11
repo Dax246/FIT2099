@@ -2,6 +2,7 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.Behaviour;
+import game.groundPackage.Lake;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -40,7 +41,7 @@ public class MoveToLocationBehaviour implements Behaviour {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, this.target);
-				if (newDistance < currentDistance) {
+				if (newDistance < currentDistance  && !(destination.getGround() instanceof Lake)) {
 					return new MoveActorAction(destination, exit.getName());
 				}
 			}
