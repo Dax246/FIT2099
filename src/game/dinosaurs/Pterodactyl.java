@@ -2,9 +2,6 @@ package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
 /**
  * @author Allan Chan and Damien Ambegoda
  * @version 1.0.0
@@ -12,6 +9,9 @@ import java.util.HashSet;
  * A flying carnivorous dinosaur.
  */
 public class Pterodactyl extends Dinosaur {
+	private int flightTime = 0;
+	private boolean flying = false;
+
 	/**
 	 * Constructor.
 	 * All Pterodactyl are represented by an 'p' and have up to 100 hit points.
@@ -35,12 +35,29 @@ public class Pterodactyl extends Dinosaur {
 		}
 	}
 
+	public int getFlightTime() {
+		return flightTime;
+	}
+
+	public void setFlightTime(int flightTime) {
+		this.flightTime = flightTime;
+	}
+
+	public boolean isFlying() {
+		return flying;
+	}
+
+	public void setFlying(boolean flying) {
+		this.flying = flying;
+	}
+
 	/**
 	 * Determines which action to take this turn. Overrides super to decrement Stegosaurs it cannot attack
 	 * @see Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+		flightTime += 1;
 		return super.playTurn(actions, lastAction, map, display);
 	}
 }
