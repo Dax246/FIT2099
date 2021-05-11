@@ -2,6 +2,7 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.Behaviour;
+import game.dinosaurs.Pterodactyl;
 import game.groundPackage.Lake;
 
 /**
@@ -41,8 +42,11 @@ public class MoveToLocationBehaviour implements Behaviour {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
 				int newDistance = distance(destination, this.target);
-				if (newDistance < currentDistance  && !(destination.getGround() instanceof Lake)) {
-					return new MoveActorAction(destination, exit.getName());
+				if (newDistance < currentDistance) {
+					if (!(destination.getGround() instanceof Lake)
+							|| (actor instanceof Pterodactyl && ((Pterodactyl) actor).isFlying())) {
+						return new MoveActorAction(destination, exit.getName());
+					}
 				}
 			}
 		}
