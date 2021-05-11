@@ -18,6 +18,7 @@ public class Brachiosaur extends Dinosaur {
 		setMaxUnconsciousTurns(15);
 		setHungerThreshold(140);
 		setBreedThreshold(70);
+		setMaxWaterLevel(200);
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 10;

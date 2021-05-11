@@ -18,6 +18,7 @@ public class Stegosaur extends Dinosaur {
 		setMaxUnconsciousTurns(20);
 		setHungerThreshold(90);
 		setBreedThreshold(50);
+		setMaxWaterLevel(100);
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 10;

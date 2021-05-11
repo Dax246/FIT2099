@@ -29,6 +29,7 @@ public class Allosaur extends Dinosaur {
 		setMaxUnconsciousTurns(20);
 		setHungerThreshold(70);
 		setBreedThreshold(50);
+		setMaxWaterLevel(100);
 		if (isBaby) {
 			this.setAge(0);
 			this.hitPoints = 20;

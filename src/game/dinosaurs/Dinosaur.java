@@ -41,6 +41,12 @@ public abstract class Dinosaur extends Actor{
      */
     private int breedThreshold;
 
+    private int waterLevel = 60;
+
+    private int maxWaterLevel;
+
+    private boolean unconsciousDueToThirst = false;
+
     /**
      * Constructor
      * @param name Name of Dinosaur
@@ -89,6 +95,10 @@ public abstract class Dinosaur extends Actor{
 
     public void setMaxUnconsciousTurns(int turns) {
         maxUnconsciousTurns = turns;
+    }
+
+    public void setMaxWaterLevel(int maxWaterLevel) {
+        this.maxWaterLevel = maxWaterLevel;
     }
 
     public int getUnconsciousTurnsCounter() {
