@@ -49,51 +49,52 @@ public class FindFoodBehaviour implements Behaviour {
 				}
 			}
 		}
+		else if (actor instanceof Pterodactyl) {
+			ArrayList<String> diet = new ArrayList<String>();
+			diet.add("Fish");
+			diet.add("Corpse");
+			diet.add("Egg");
+			return nonFoodDestination(actor, map, diet);
+		}
 		else {
-			ArrayList<Location> closestLocations = new ArrayList<>();
-			ArrayList<Location> corpseLocations= Util.locateObjects(actorLocation, "Corpse");
-			ArrayList<Location> eggLocations= Util.locateObjects(actorLocation, "Egg");
+			ArrayList<String> diet = new ArrayList<String>();
+			diet.add("Corpse");
+			diet.add("Egg");
+			Location closestLocation = nonFoodDestination(actor, map, diet);
+
 			ArrayList<Location> ActorLocations= Util.locateObjects(actorLocation, "Actor");
-
-			for (Location corpseLocation: corpseLocations) {
-				Item corpse = Util.retrieveItem("Corpse", corpseLocation.getItems());
-				if (corpse != null) {
-					closestLocations.add(corpseLocation);
-					break;
-				}
-			}
-
-			for (Location eggLocation: eggLocations) {
-				Item corpse = Util.retrieveItem("Egg", eggLocation.getItems());
-				if (corpse != null) {
-					closestLocations.add(eggLocation);
-					break;
-				}
-			}
 
 			for (Location stegLocation: ActorLocations) {
 				if (stegLocation.getActor() instanceof Stegosaur) {
 					Allosaur alloActor = (Allosaur) actor;
 					if (!alloActor.getCannotAttack().containsKey((Stegosaur) stegLocation.getActor())) {
-						closestLocations.add(stegLocation);
-						break;
+						if (closestLocation == null) {
+							closestLocation = stegLocation;
+						} else if (distance(actorLocation, stegLocation) < distance(actorLocation, closestLocation)) {
+							closestLocation = stegLocation;
+							break;
+						}
 					}
-				}
-			}
-
-			Location closestLocation = null;
-
-			for (Location location: closestLocations) {
-				if (closestLocation == null) {
-					closestLocation = location;
-				}
-				else if (location != null && distance(actorLocation, location) < distance(actorLocation, closestLocation)) {
-					closestLocation = location;
 				}
 			}
 			return closestLocation;
 		}
 		return null;
+	}
+
+	private Location nonFoodDestination(Actor actor, GameMap map, ArrayList<String> diet) {
+		Location actorLocation = map.locationOf(actor);
+		Location closestDestination = null;
+
+		for (String item : diet) {
+			ArrayList<Location> itemLocations = Util.locateObjects(actorLocation, item);
+			if (itemLocations.size() > 0) {
+				if (closestDestination == null || distance(actorLocation, itemLocations.get(0)) < distance(actorLocation, closestDestination)) {
+					closestDestination = itemLocations.get(0);
+				}
+			}
+		}
+		return closestDestination;
 	}
 
 	/**
@@ -108,12 +109,14 @@ public class FindFoodBehaviour implements Behaviour {
 		if (destination == null) {
 			return null;
 		} else if (distance(destination, map.locationOf(actor)) == 0) {
-			if (actor instanceof Allosaur) {
+			if (actor instanceof Allosaur || actor instanceof Pterodactyl) {
 				return new EatNonFruitAction();
 			} else {
 				return new EatFruitAction();
 			}
-		} else if (distance(destination, map.locationOf(actor)) == 1 && map.getActorAt(destination) instanceof Stegosaur) {
+		} else if (distance(destination, map.locationOf(actor)) == 1
+				&& map.getActorAt(destination) instanceof Stegosaur
+				&& actor instanceof Allosaur) {
 			return new AttackAction(map.getActorAt(destination));
 		}
 		else {
