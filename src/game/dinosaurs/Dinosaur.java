@@ -31,7 +31,7 @@ public abstract class Dinosaur extends Actor{
     /**
      * Number of turns a dinosaur has been unconscious
      */
-    private int unconsciousTurnsCounter;
+    private int unconsciousTurnsCounter = 0;
     /**
      * Level of hitpoints that it becomes hungry
      */
@@ -45,8 +45,11 @@ public abstract class Dinosaur extends Actor{
 
     private int maxWaterLevel;
 
-    private boolean unconsciousDueToThirst = false;
+    private int maxUnconsciousTurnsDueToThirst = 15;
 
+    private int thirstThreshold = 40;
+
+    private Location currentLocation;
     /**
      * Constructor
      * @param name Name of Dinosaur
@@ -65,8 +68,6 @@ public abstract class Dinosaur extends Actor{
         else {
             sex = 'F';
         }
-
-        unconsciousTurnsCounter = 0;
     }
 
     public int getAge() {
@@ -113,6 +114,20 @@ public abstract class Dinosaur extends Actor{
         this.sex = sex;
     }
 
+    public void decrementWaterLevel() {
+        waterLevel -= 1;
+        if (waterLevel == thirstThreshold - 1) {
+            System.out.println(this.toString() + " at (" + currentLocation.x() + ", " + currentLocation.y() + ") is getting thirsty! ");
+        }
+    }
+
+    public void decrementHungerLevel() {
+        hitPoints -= 1;
+        if (hitPoints == hungerThreshold - 1) {
+            System.out.println(this.toString() + " at (" + currentLocation.x() + ", " + currentLocation.y() + ") is getting hungry! ");
+        }
+    }
+
     /**
      * Returns action to execute this turn.
      * @param actions    collection of possible Actions for this Actor
@@ -123,6 +138,7 @@ public abstract class Dinosaur extends Actor{
      */
     @Override
     public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
+        currentLocation = map.locationOf(this);
         this.age += 1;
 
         //lay egg if pregnant
@@ -133,61 +149,64 @@ public abstract class Dinosaur extends Actor{
             }
         }
 
-        //increment unconscious counter
+        // decrement hp and water levels based on consciousness
         if (!isConscious()) {
             unconsciousTurnsCounter += 1;
-            if (unconsciousTurnsCounter == maxUnconsciousTurns) {
+            if (!isUnconsciousDueToThirst()) {
+                decrementWaterLevel();
+            }
+        } else if (isUnconsciousDueToThirst()) {
+            unconsciousTurnsCounter += 1;
+            decrementHungerLevel();
+        } else {
+            decrementHungerLevel();
+            decrementWaterLevel();
+        }
+
+        // check for death
+        if (!isConscious() || isUnconsciousDueToThirst()) {
+            if (unconsciousTurnsCounter == maxUnconsciousTurns
+                    || unconsciousTurnsCounter == maxUnconsciousTurnsDueToThirst) {
                 return new DeathAction();
-            } else if (unconsciousTurnsCounter > maxUnconsciousTurns) {
-                throw new AssertionError("Dinosaur should have already died");
             }
             else {
                 return new DoNothingAction();
             }
-        } else {
-            unconsciousTurnsCounter = 0;
-            //becomes hungry
-            if (hitPoints == hungerThreshold) {
-                System.out.println(this.toString() + " at (" + map.locationOf(this).x() + ", " + map.locationOf(this).y() + ") is getting hungry! ");
-            }
-            this.hitPoints -= 1;
+        }
 
-            // fell unconscious due to hunger
-            if (!isConscious()) {
-                return new DoNothingAction();
-            }
+        unconsciousTurnsCounter = 0;
 
-            //mate if adjacent to mate
-            BreedBehaviour breedBehaviour = new BreedBehaviour();
-            Action breedBehaviourNextAction = breedBehaviour.getAction(this, map);
-            if (breedBehaviourNextAction instanceof BreedAction) {
-                if (hitPoints >= breedThreshold) {
-                    return breedBehaviourNextAction;
-                }
-            }
-
-            //otherwise consume/move towards food if hungry
-            if (hitPoints < hungerThreshold) {
-                FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
-                Action nextAction = findFoodBehaviour.getAction(this, map);
-                if (nextAction != null) {
-                    return nextAction;
-                }
-            } else { //move towards mate since not hungry
-                if (breedBehaviourNextAction instanceof MoveActorAction) {
-                    return breedBehaviourNextAction;
-                }
-            }
-
-            //not hungry and no mate so move towards player
-            MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
-            Action nextAction = moveToPlayerBehaviour.getAction(this, map);
-            if (nextAction != null) {
-                return nextAction;
-            } else {
-                return (new WanderBehaviour()).getAction(this, map);
+        //mate if adjacent to mate
+        BreedBehaviour breedBehaviour = new BreedBehaviour();
+        Action breedBehaviourNextAction = breedBehaviour.getAction(this, map);
+        if (breedBehaviourNextAction instanceof BreedAction) {
+            if (hitPoints >= breedThreshold) {
+                return breedBehaviourNextAction;
             }
         }
+
+        //otherwise consume/move towards food if hungry
+        if (hitPoints < hungerThreshold) {
+            FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
+            Action nextAction = findFoodBehaviour.getAction(this, map);
+            if (nextAction != null) {
+                return nextAction;
+            }
+        } else { //move towards mate since not hungry
+            if (breedBehaviourNextAction instanceof MoveActorAction) {
+                return breedBehaviourNextAction;
+            }
+        }
+
+        //not hungry and no mate so move towards player
+        MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
+        Action nextAction = moveToPlayerBehaviour.getAction(this, map);
+        if (nextAction != null) {
+            return nextAction;
+        } else {
+            return (new WanderBehaviour()).getAction(this, map);
+        }
+
     }
 
     /**
@@ -240,4 +259,11 @@ public abstract class Dinosaur extends Actor{
             throw new AssertionError("Unexpected Dinosaur");
         }
     };
+
+    public boolean isUnconsciousDueToThirst() {
+        if (waterLevel == 0) {
+            return true;
+        }
+        return false;
+    }
 }
