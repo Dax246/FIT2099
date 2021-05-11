@@ -1,9 +1,12 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
+import game.Fish;
 import game.Util;
 import game.dinosaurs.Corpse;
 import game.dinosaurs.Dinosaur;
+
+import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -23,7 +26,7 @@ public class EatNonFruitAction extends Action {
         Location actorLocation = map.locationOf(actor);
         Item itemToEat = Util.retrieveItem("Egg", actorLocation.getItems());
 
-        String foodEaten;
+        String foodEaten = "";
         if (itemToEat != null) {
             actor.heal(10);
             actorLocation.removeItem(itemToEat);
@@ -50,7 +53,19 @@ public class EatNonFruitAction extends Action {
                 }
             }
             else {
-                throw new AssertionError("No food source nearby for allosaur at: (" + actorLocation.x() + ", " + actorLocation.y() + ")");
+                Random rand = new Random();
+                int fishCaught = rand.nextInt(3);
+
+                for (int i = 0; i < fishCaught; i++) {
+                    itemToEat = Util.retrieveItem("Fish", actorLocation.getItems());
+                    if (itemToEat != null) {
+                        actor.heal(5);
+                        actorLocation.removeItem(itemToEat);
+                        foodEaten = "Fish";
+                    }
+                }
+
+                ((Dinosaur) actor).quench(30);
             }
         }
 
