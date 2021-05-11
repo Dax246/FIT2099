@@ -1,9 +1,11 @@
 package game.groundPackage;
 
 import edu.monash.fit2099.engine.*;
+import game.Fish;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
 import game.dinosaurs.Brachiosaur;
+import game.dinosaurs.Pterodactyl;
 
 import java.util.Random;
 
@@ -15,11 +17,13 @@ import java.util.Random;
  */
 public class Lake extends Ground {
     private int capacity = 25;
+    private boolean initialisedFish = false;
     /**
      * Constructor
      */
     public Lake() {
         super('~');
+
     }
 
     public int getCapacity() {
@@ -36,9 +40,19 @@ public class Lake extends Ground {
      */
     @Override
     public void tick(Location location){
+        if (!initialisedFish) {
+            for (int i = 0; i < 5; i++) {
+                location.addItem(new Fish());
+            }
+        }
         super.tick(location);
-        //TODO: IF RAIN, ADD WATER TO CAPACITY
+
+        //TODO: IF MAP RAINED, ADD RANDOM AMOUNT OF WATER TO CAPACITY
     }
 
-    //TODO: BEGIN WITH 5 FISH IN LOCATION ITEMS
+
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return actor instanceof Pterodactyl;
+    }
 }
