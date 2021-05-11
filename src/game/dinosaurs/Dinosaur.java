@@ -128,12 +128,8 @@ public abstract class Dinosaur extends Actor{
         }
     }
 
-    public void quench() {
-        if (this instanceof Stegosaur || this instanceof Allosaur) {
-            waterLevel += 30;
-        } else {
-            waterLevel += 80;
-        }
+    public void quench(int quenchedAmount) {
+        waterLevel += quenchedAmount;
         waterLevel = Math.min(waterLevel, maxWaterLevel);
     }
 
