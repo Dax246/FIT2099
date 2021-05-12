@@ -28,7 +28,10 @@ public class FindTreeBehaviour implements Behaviour {
 			destination = closestTrees.get(0);
 			if (map.locationOf(actor) != destination) {
 				Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
-				return moveToLocation.getAction(actor, map);
+				Action nextAction = moveToLocation.getAction(actor, map);
+				if (nextAction != null) {
+					return nextAction;
+				}
 			}
 		}
 		return new DoNothingAction();
