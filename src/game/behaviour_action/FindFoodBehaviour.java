@@ -70,17 +70,20 @@ public class FindFoodBehaviour implements Behaviour {
 
 			ArrayList<Location> ActorLocations= Util.locateObjects(actorLocation, "Actor");
 
-			for (Location stegLocation: ActorLocations) {
-				if (stegLocation.getActor() instanceof Stegosaur) {
+			for (Location iterActorLocation: ActorLocations) {
+				if (iterActorLocation.getActor() instanceof Stegosaur) {
 					Allosaur alloActor = (Allosaur) actor;
-					if (!alloActor.getCannotAttack().containsKey((Stegosaur) stegLocation.getActor())) {
+					if (!alloActor.getCannotAttack().containsKey((Stegosaur) iterActorLocation.getActor())) {
 						if (closestLocation == null) {
-							closestLocation = stegLocation;
-						} else if (distance(actorLocation, stegLocation) < distance(actorLocation, closestLocation)) {
-							closestLocation = stegLocation;
+							closestLocation = iterActorLocation;
+						} else if (distance(iterActorLocation, iterActorLocation) < distance(iterActorLocation, closestLocation)) {
+							closestLocation = iterActorLocation;
 							break;
 						}
 					}
+				} else if (iterActorLocation.getActor() instanceof Pterodactyl && !((Pterodactyl) iterActorLocation.getActor()).isFlying()) {
+					closestLocation = iterActorLocation;
+					break;
 				}
 			}
 			return closestLocation;
@@ -142,15 +145,22 @@ public class FindFoodBehaviour implements Behaviour {
 			} else {
 				return new EatFruitAction();
 			}
-		} else if (distance(destination, actorLocation) == 1
-				&& map.getActorAt(destination) instanceof Stegosaur
-				&& actor instanceof Allosaur) {
-			return new AttackAction(map.getActorAt(destination));
 		}
-		else {
-			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
-			return moveToLocation.getAction(actor, map);
+
+		if (distance(destination, actorLocation) == 1 && actor instanceof Allosaur) {
+			if (destination.getActor() instanceof Stegosaur) {
+				return new AttackAction(map.getActorAt(destination));
+			}
+
+			//instantly devour Pterodactyls
+			assert destination.getActor() instanceof Pterodactyl;
+			actor.heal(((Allosaur) actor).getMaxHitPoints());
+			map.removeActor(destination.getActor());
+			return null;
 		}
+
+		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
+		return moveToLocation.getAction(actor, map);
 	}
 
 	/**
