@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.Util;
 import game.dinosaurs.Corpse;
 import game.dinosaurs.Dinosaur;
+import game.dinosaurs.Pterodactyl;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -33,27 +34,20 @@ public class EatNonFruitAction extends Action {
             itemToEat = Util.retrieveItem("Corpse", actorLocation.getItems());
             if (itemToEat != null) {
                 Corpse corpse = (Corpse) itemToEat;
-                if (corpse.getCorpseInt() == 1) {
-                    actor.heal(50);
-                    actorLocation.removeItem(itemToEat);
-                    foodEaten = "Stegosaur corpse";
+
+                if (actor instanceof Pterodactyl) {
+                    actor.heal(10);
+                    corpse.pteroNibble();
+                    if (corpse.getCorpseHeal() == 0) {
+                        actorLocation.removeItem(itemToEat);
+                        foodEaten = corpse.getCorpseDinoName() + " corpse";
+                    }
                 }
-                else if (corpse.getCorpseInt() == 2) {
-                    actor.heal(((Dinosaur) actor).getMaxHitPoints());
+                else {
+                    actor.heal(corpse.getCorpseHeal());
                     actorLocation.removeItem(itemToEat);
-                    foodEaten = "Brachiosaur corpse";
+                    foodEaten = corpse.getCorpseDinoName() + " corpse";
                 }
-                else if (corpse.getCorpseInt() == 3) {
-                    actor.heal(50);
-                    actorLocation.removeItem(itemToEat);
-                    foodEaten = "Allosaur corpse";
-                }
-                else if (corpse.getCorpseInt() == 4) {
-                    actor.heal(30);
-                    actorLocation.removeItem(itemToEat);
-                    foodEaten = "Pterodactyl corpse";
-                }
-                assert false : "Unexpected corpse";
             }
         }
 
