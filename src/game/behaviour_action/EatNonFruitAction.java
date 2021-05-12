@@ -52,21 +52,6 @@ public class EatNonFruitAction extends Action {
                     foodEaten = "Allosaur corpse";
                 }
             }
-            else {
-                Random rand = new Random();
-                int fishCaught = rand.nextInt(3);
-
-                for (int i = 0; i < fishCaught; i++) {
-                    itemToEat = Util.retrieveItem("Fish", actorLocation.getItems());
-                    if (itemToEat != null) {
-                        actor.heal(5);
-                        actorLocation.removeItem(itemToEat);
-                        foodEaten = "Fish";
-                    }
-                }
-
-                ((Dinosaur) actor).quench(30);
-            }
         }
 
         return actor.toString() + " ate " + foodEaten + " at (" + actorLocation.x() + ", " + actorLocation.y() + ")";

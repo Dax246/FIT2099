@@ -6,9 +6,11 @@ import game.Fruit;
 import game.Util;
 import game.dinosaurs.*;
 import game.groundPackage.Bush;
+import game.groundPackage.Lake;
 import game.groundPackage.Tree;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -51,7 +53,11 @@ public class FindFoodBehaviour implements Behaviour {
 		}
 		else if (actor instanceof Pterodactyl) {
 			ArrayList<String> diet = new ArrayList<String>();
-			diet.add("Fish");
+
+			// can only eat fish if they are flying
+			if (((Pterodactyl) actor).isFlying()) {
+				diet.add("Fish");
+			}
 			diet.add("Corpse");
 			diet.add("Egg");
 			return nonFoodDestination(actor, map, diet);
@@ -105,16 +111,38 @@ public class FindFoodBehaviour implements Behaviour {
 	 */
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
+		Location actorLocation = map.locationOf(actor);
 		Location destination = itemDestination(actor, map);
 		if (destination == null) {
 			return null;
-		} else if (distance(destination, map.locationOf(actor)) == 0) {
+		}
+
+		if (distance(destination, actorLocation) == 0) {
 			if (actor instanceof Allosaur || actor instanceof Pterodactyl) {
+				if (destination.getGround() instanceof Lake) {
+					//swoop 0 - 2 fish instantly
+					Random rand = new Random();
+					int fishCaught = rand.nextInt(3);
+
+					for (int i = 0; i < fishCaught; i++) {
+						Item itemToEat = Util.retrieveItem("Fish", actorLocation.getItems());
+						if (itemToEat != null) {
+							actor.heal(5);
+							actorLocation.removeItem(itemToEat);
+						}
+					}
+
+					//sip water
+					SipWaterAction sipWaterAction = new SipWaterAction(actorLocation);
+					sipWaterAction.execute(actor, map);
+
+					return null;
+				}
 				return new EatNonFruitAction();
 			} else {
 				return new EatFruitAction();
 			}
-		} else if (distance(destination, map.locationOf(actor)) == 1
+		} else if (distance(destination, actorLocation) == 1
 				&& map.getActorAt(destination) instanceof Stegosaur
 				&& actor instanceof Allosaur) {
 			return new AttackAction(map.getActorAt(destination));
