@@ -135,6 +135,8 @@ public class FindFoodBehaviour implements Behaviour {
 						}
 					}
 
+					System.out.println(actor.toString() + " swooped into lake and grabbed " + fishCaught + " fish");
+
 					//sip water
 					SipWaterAction sipWaterAction = new SipWaterAction(actorLocation);
 					sipWaterAction.execute(actor, map);
