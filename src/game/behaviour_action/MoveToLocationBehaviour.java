@@ -37,6 +37,8 @@ public class MoveToLocationBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 
 		int currentDistance = distance(here, this.target);
+		Location bestLocation = null;
+		String exitName = "";
 
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
@@ -45,11 +47,21 @@ public class MoveToLocationBehaviour implements Behaviour {
 				if (newDistance < currentDistance) {
 					if (!(destination.getGround() instanceof Lake)
 							|| (actor instanceof Pterodactyl && ((Pterodactyl) actor).isFlying())) {
-						return new MoveActorAction(destination, exit.getName());
+						if (bestLocation == null) {
+							bestLocation = destination;
+							exitName = exit.getName();
+						}
+						else if (newDistance < distance(here, bestLocation)) {
+							bestLocation = destination;
+							exitName = exit.getName();
+						}
 					}
 				}
 			}
 		}
-		return null;
+		if (bestLocation == null) {
+			return null;
+		}
+		return new MoveActorAction(bestLocation, exitName);
 	}
 }
