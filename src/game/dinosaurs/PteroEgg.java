@@ -30,7 +30,7 @@ public class PteroEgg extends Egg{
             if (currentLocation.containsAnActor()) {
                 turnsUntilHatch += 1;
             } else {
-                currentLocation.addActor(new Stegosaur("Pterodactyl", true));
+                currentLocation.addActor(new Pterodactyl("Pterodactyl", true));
                 currentLocation.removeItem(this);
                 EcoPoints.increaseEcoPoints(100);
                 System.out.println("Ptero egg hatched at (" + currentLocation.x() + ", " + currentLocation.y() + ")");
