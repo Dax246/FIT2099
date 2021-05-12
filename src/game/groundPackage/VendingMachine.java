@@ -36,6 +36,7 @@ public class VendingMachine extends Ground {
         goodsPrice.put("Vegetarian meal kit", 100);
         goodsPrice.put("Carnivore meal kit", 500);
         goodsPrice.put("Stegosaur egg", 200);
+        goodsPrice.put("Pterodactyl egg", 200);
         goodsPrice.put("Brachiosaur egg", 500);
         goodsPrice.put("Allosaur egg", 1000);
         goodsPrice.put("Laser gun", 500);

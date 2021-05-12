@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.*;
 import game.*;
 import game.dinosaurs.AlloEgg;
 import game.dinosaurs.BrachEgg;
+import game.dinosaurs.PteroEgg;
 import game.dinosaurs.StegEgg;
 import game.groundPackage.VendingMachine;
 
@@ -45,6 +46,7 @@ public class PurchaseAction extends Action {
         System.out.println("5: Purchase Brachiosaur Egg for 500 eco points");
         System.out.println("6: Purchase Allosaur Egg for 1000 eco points");
         System.out.println("7: Purchase Laser Gun for 500 eco points");
+        System.out.println("8: Purchase Pterodactyl Egg for 200 eco points");
         String selection = scanner.nextLine();
         switch (selection){
             case "1":
@@ -76,7 +78,7 @@ public class PurchaseAction extends Action {
                     StegEgg stegEgg = new StegEgg();
                     actor.addItemToInventory(stegEgg);
                     EcoPoints.decreaseEcoPoints(vm.getItemPrice("Stegosaur egg"));
-                    return "Purchased stegosaur egg";
+                    return "Purchased Stegosaur egg";
                 }
                 return "Insufficient eco points";
             case "5":
@@ -84,7 +86,7 @@ public class PurchaseAction extends Action {
                     BrachEgg brachEgg = new BrachEgg();
                     actor.addItemToInventory(brachEgg);
                     EcoPoints.decreaseEcoPoints(vm.getItemPrice("Brachiosaur egg"));
-                    return "Purchased brachiosaur egg";
+                    return "Purchased Brachiosaur egg";
                 }
                 return "Insufficient eco points";
             case "6":
@@ -92,7 +94,7 @@ public class PurchaseAction extends Action {
                     AlloEgg alloEgg = new AlloEgg();
                     actor.addItemToInventory(alloEgg);
                     EcoPoints.decreaseEcoPoints(vm.getItemPrice("Allosaur egg"));
-                    return "Purchased allosaur egg";
+                    return "Purchased Allosaur egg";
                 }
                 return "Insufficient eco points";
             case "7":
@@ -101,6 +103,14 @@ public class PurchaseAction extends Action {
                     actor.addItemToInventory(laserGun);
                     EcoPoints.decreaseEcoPoints(vm.getItemPrice("Laser gun"));
                     return "Purchased laser gun";
+                }
+                return "Insufficient eco points";
+            case "8":
+                if (EcoPoints.getEcoPoints() >=vm.getItemPrice("Pterodactyl egg")){
+                    PteroEgg pteroEgg = new PteroEgg();
+                    actor.addItemToInventory(pteroEgg);
+                    EcoPoints.decreaseEcoPoints(vm.getItemPrice("Pterodactyl egg"));
+                    return "Purchased Pterodactyl egg";
                 }
                 return "Insufficient eco points";
             default:
