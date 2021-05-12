@@ -20,8 +20,6 @@ public class DeathAction extends Action {
     public String execute(Actor actor, GameMap map) {
         Dinosaur dinoActor = (Dinosaur) actor;
         Location deathLocation = map.locationOf(actor);
-        assert (dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurns()
-                || dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurnsDueToThirst());
 
         Corpse corpse;
         if (dinoActor instanceof Stegosaur) {
