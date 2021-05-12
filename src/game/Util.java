@@ -49,10 +49,12 @@ public class Util {
                 locations.add(currentLocation);
             }
             else if (objectName == "Water" && currentLocation.getGround() instanceof Lake
-                    && ((Lake) currentLocation.getGround()).getCapacity() > 0) {
+                    && ((Lake) currentLocation.getGround()).getCapacity() > 0
+                    && (!gameMap.isAnActorAt(currentLocation) || currentLocation == source)) {
                 locations.add(currentLocation);
             }
-            else if (objectName == "Tree" && currentLocation.getGround() instanceof Tree) {
+            else if (objectName == "Tree" && currentLocation.getGround() instanceof Tree
+                    && (!gameMap.isAnActorAt(currentLocation) || currentLocation == source)) {
                 locations.add(currentLocation);
             }
             else {
@@ -65,35 +67,26 @@ public class Util {
             }
 
             //add each unvisited neighbour
-            if (xRange.contains(currentLocation.x() + 1) && yRange.contains(currentLocation.y())) {
-                if (!visited.get(currentLocation.y()).get(currentLocation.x() + 1)) {
-                    bfs.add(gameMap.at(currentLocation.x() + 1, currentLocation.y()));
-                    visited.get(currentLocation.y()).set(currentLocation.x() + 1, true);
-                }
-            }
-
-            if (xRange.contains(currentLocation.x() - 1) && yRange.contains(currentLocation.y())) {
-                if (!visited.get(currentLocation.y()).get(currentLocation.x() - 1)) {
-                    bfs.add(gameMap.at(currentLocation.x() - 1, currentLocation.y()));
-                    visited.get(currentLocation.y()).set(currentLocation.x() + 1, true);
-                }
-            }
-
-            if (xRange.contains(currentLocation.x()) && yRange.contains(currentLocation.y() + 1)) {
-                if (!visited.get(currentLocation.y() + 1).get(currentLocation.x())) {
-                    bfs.add(gameMap.at(currentLocation.x(), currentLocation.y() + 1));
-                    visited.get(currentLocation.y() + 1).set(currentLocation.x(), true);
-                }
-            }
-
-            if (xRange.contains(currentLocation.x()) && yRange.contains(currentLocation.y() - 1)) {
-                if (!visited.get(currentLocation.y() - 1).get(currentLocation.x())) {
-                    bfs.add(gameMap.at(currentLocation.x(), currentLocation.y() - 1));
-                    visited.get(currentLocation.y() - 1).set(currentLocation.x(), true);
+            for (Exit neighbour : currentLocation.getExits()) {
+                Location currentNeighbour = neighbour.getDestination();
+                if (walkable(currentNeighbour) && !visited.get(currentNeighbour.y()).get(currentNeighbour.x())) {
+                    bfs.add(currentNeighbour);
+                    visited.get(currentNeighbour.y()).set(currentNeighbour.x(), true);
                 }
             }
         }
         return locations;
+    }
+
+    private static boolean walkable(Location location) {
+        GameMap map = location.map();
+        NumberRange xRange = map.getXRange();
+        NumberRange yRange = map.getYRange();
+        if (!map.isAnActorAt(location) && xRange.contains(location.x())
+                && yRange.contains(location.y())) {
+            return true;
+        }
+        return true;
     }
 
     /**

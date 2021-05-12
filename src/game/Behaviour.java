@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
+import edu.monash.fit2099.engine.Location;
 
 public interface Behaviour {
 	
@@ -25,7 +26,12 @@ public interface Behaviour {
 	 * @param actor the Actor acting
 	 * @param map the GameMap containing the Actor
 	 * @return an Action that actor can perform, or null if actor can't do this.
-	 * @see Actor#playTurn(Actions, Action, GameMap, Display)
 	 */
 	Action getAction(Actor actor, GameMap map);
+
+	default int distance(Location a, Location b) {
+		int xdist = Math.abs(a.x() - b.x());
+		int ydist = Math.abs(a.y() - b.y());
+		return (int) Math.floor(Math.sqrt(xdist * xdist + ydist * ydist));
+	}
 }

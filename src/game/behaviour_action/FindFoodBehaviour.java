@@ -164,15 +164,4 @@ public class FindFoodBehaviour implements Behaviour {
 		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 		return moveToLocation.getAction(actor, map);
 	}
-
-	/**
-	 * Compute the Manhattan distance between two locations.
-	 * 
-	 * @param a the first location
-	 * @param b the first location
-	 * @return the number of steps between a and b if you only move in the four cardinal directions.
-	 */
-	private int distance(Location a, Location b) {
-		return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
-	}
 }
