@@ -153,12 +153,7 @@ public class FindFoodBehaviour implements Behaviour {
 			if (destination.getActor() instanceof Stegosaur) {
 				return new AttackAction(map.getActorAt(destination));
 			}
-
-			//instantly devour Pterodactyls
-			assert destination.getActor() instanceof Pterodactyl;
-			actor.heal(((Allosaur) actor).getMaxHitPoints());
-			map.removeActor(destination.getActor());
-			return null;
+			return new EatNonFruitAction();
 		}
 
 		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);

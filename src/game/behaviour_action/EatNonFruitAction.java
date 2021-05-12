@@ -2,6 +2,7 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.Util;
+import game.dinosaurs.Allosaur;
 import game.dinosaurs.Corpse;
 import game.dinosaurs.Dinosaur;
 import game.dinosaurs.Pterodactyl;
@@ -51,6 +52,18 @@ public class EatNonFruitAction extends Action {
                     actor.heal(corpse.getCorpseHeal());
                     actorLocation.removeItem(itemToEat);
                     foodEaten = corpse.getCorpseDinoName() + " corpse";
+                }
+            }
+            else {
+                //instantly devour Pterodactyl
+                assert actor instanceof Allosaur;
+                for (Exit exit : actorLocation.getExits()) {
+                    if (exit.getDestination().getActor() instanceof Pterodactyl) {
+                        actor.heal(100);
+                        map.removeActor(exit.getDestination().getActor());
+                        foodEaten = "Pterodactyl";
+                        break;
+                    }
                 }
             }
         }
