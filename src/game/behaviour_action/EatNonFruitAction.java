@@ -22,6 +22,7 @@ public class EatNonFruitAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);
+        String verb = " ate ";
         Item itemToEat = Util.retrieveItem("Egg", actorLocation.getItems());
 
         String foodEaten = "";
@@ -40,8 +41,11 @@ public class EatNonFruitAction extends Action {
                     corpse.pteroNibble();
                     if (corpse.getCorpseHeal() == 0) {
                         actorLocation.removeItem(itemToEat);
-                        foodEaten = corpse.getCorpseDinoName() + " corpse";
                     }
+                    else {
+                        verb = " nibbled on ";
+                    }
+                    foodEaten = corpse.getCorpseDinoName() + " corpse";
                 }
                 else {
                     actor.heal(corpse.getCorpseHeal());
@@ -51,7 +55,7 @@ public class EatNonFruitAction extends Action {
             }
         }
 
-        return actor.toString() + " ate " + foodEaten + " at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
+        return actor.toString() + verb + foodEaten + " at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
     }
 
     @Override
