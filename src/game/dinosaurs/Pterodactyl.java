@@ -35,14 +35,6 @@ public class Pterodactyl extends Dinosaur {
 		}
 	}
 
-	public int getFlightTime() {
-		return flightTime;
-	}
-
-	public void setFlightTime(int flightTime) {
-		this.flightTime = flightTime;
-	}
-
 	public boolean isFlying() {
 		return flightTime < 30;
 	}
