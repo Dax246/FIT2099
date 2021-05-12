@@ -125,8 +125,8 @@ public class FeedDinoAction extends Action {
 
         else if (recipient instanceof Allosaur){
             Scanner scanner = new Scanner(System.in);
-            System.out.println("1: Feed Brachiosaur Egg");
-            System.out.println("2: Feed Brachiosaur Carnivore Meal Kit");
+            System.out.println("1: Feed Allosaur Egg");
+            System.out.println("2: Feed Allosaur Carnivore Meal Kit");
             String selection = scanner.nextLine();
             switch (selection){
                 case "1":
