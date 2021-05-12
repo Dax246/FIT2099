@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.*;
 import game.Behaviour;
 import game.Util;
 import game.dinosaurs.Dinosaur;
+import game.dinosaurs.Pterodactyl;
+
 import java.util.ArrayList;
 
 /**
@@ -29,15 +31,17 @@ public class FindWaterBehaviour implements Behaviour {
 			return null;
 		}
 
-		if (distance(destination, map.locationOf(actor)) == 0) {
-			//assert not pterodactyl
+		if (distance(destination, map.locationOf(actor)) == 0 && ((actor instanceof Pterodactyl) && ((Pterodactyl) actor).isFlying())) {
 			return new SipWaterAction(destination);
 		}
-		else {
-			assert distance(destination, map.locationOf(actor)) > 0;
-			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
-			return moveToLocation.getAction(actor, map);
+
+		if (distance(destination, map.locationOf(actor)) == 1) {
+			if (!((actor instanceof Pterodactyl) && ((Pterodactyl) actor).isFlying())) {
+				return new SipWaterAction(destination);
+			}
 		}
+		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
+		return moveToLocation.getAction(actor, map);
 	}
 
 	/**

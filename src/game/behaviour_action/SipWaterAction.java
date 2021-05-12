@@ -1,13 +1,8 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
-import game.Fruit;
-import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Dinosaur;
-import game.dinosaurs.Stegosaur;
-import game.groundPackage.Bush;
 import game.groundPackage.Lake;
-import game.groundPackage.Tree;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -35,15 +30,16 @@ public class SipWaterAction extends Action {
 
         assert lakeSipLocation.getCapacity() > 0;
 
-        lakeSipLocation.setCapacity(lakeSipLocation.getCapacity() - 1);
-        dinosaurActor.quench(30);
+        int amountSipped = Math.min(lakeSipLocation.getCapacity(), dinosaurActor.maxSip());
+        lakeSipLocation.setCapacity(lakeSipLocation.getCapacity() - amountSipped);
+        dinosaurActor.quench(amountSipped);
 
         return actor.toString() + " sipped water from (" + sipLocation.x() + ", " + sipLocation.y() + ")";
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor.toString() + " is sipping fruit";
+        return actor.toString() + " is sipping water";
     }
 }
 
