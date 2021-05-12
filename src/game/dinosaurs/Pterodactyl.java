@@ -1,6 +1,7 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
+import game.groundPackage.Tree;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -10,7 +11,6 @@ import edu.monash.fit2099.engine.*;
  */
 public class Pterodactyl extends Dinosaur {
 	private int flightTime = 0;
-	private boolean flying = false;
 
 	/**
 	 * Constructor.
@@ -44,11 +44,7 @@ public class Pterodactyl extends Dinosaur {
 	}
 
 	public boolean isFlying() {
-		return flying;
-	}
-
-	public void setFlying(boolean flying) {
-		this.flying = flying;
+		return flightTime < 30;
 	}
 
 	/**
@@ -57,7 +53,11 @@ public class Pterodactyl extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		flightTime += 1;
+		if (map.locationOf(this).getGround() instanceof Tree) {
+			this.flightTime = 0;
+		} else if (isFlying()) {
+			this.flightTime += 1;
+		}
 		return super.playTurn(actions, lastAction, map, display);
 	}
 }
