@@ -35,6 +35,7 @@ public abstract class Dinosaur extends Actor{
      * Number of turns a dinosaur has been unconscious
      */
     private int unconsciousTurnsCounter = 0;
+    private int unconsciousTurnsCounterThirst = 0;
     /**
      * Level of hitpoints that it becomes hungry
      */
@@ -113,10 +114,6 @@ public abstract class Dinosaur extends Actor{
         return maxUnconsciousTurns;
     }
 
-    public int getMaxUnconsciousTurnsDueToThirst() {
-        return maxUnconsciousTurnsDueToThirst;
-    }
-
     public void setSex(Character sex) {
         this.sex = sex;
     }
@@ -154,6 +151,10 @@ public abstract class Dinosaur extends Actor{
         currentLocation = map.locationOf(this);
         this.age += 1;
 
+        if (this instanceof Pterodactyl) {
+            this.hitPoints = 100;
+        }
+
         //lay egg if pregnant
         if (layEggCounter > 0) {
             layEggCounter -= 1;
@@ -168,10 +169,15 @@ public abstract class Dinosaur extends Actor{
             if (!isUnconsciousDueToThirst()) {
                 decrementWaterLevel();
             }
-        } else if (isUnconsciousDueToThirst()) {
-            unconsciousTurnsCounter += 1;
+            else {
+                unconsciousTurnsCounterThirst += 1;
+            }
+        }
+        else if (isUnconsciousDueToThirst()) {
+            unconsciousTurnsCounterThirst += 1;
             decrementHungerLevel();
-        } else {
+        }
+        else {
             decrementHungerLevel();
             decrementWaterLevel();
         }
@@ -179,7 +185,7 @@ public abstract class Dinosaur extends Actor{
         // check for death
         if (!isConscious() || isUnconsciousDueToThirst()) {
             if (unconsciousTurnsCounter == maxUnconsciousTurns
-                    || unconsciousTurnsCounter == maxUnconsciousTurnsDueToThirst) {
+                    || unconsciousTurnsCounterThirst == maxUnconsciousTurnsDueToThirst) {
                 return new DeathAction();
             }
             else {
@@ -188,6 +194,7 @@ public abstract class Dinosaur extends Actor{
         }
 
         unconsciousTurnsCounter = 0;
+        unconsciousTurnsCounterThirst = 0;
 
         //Stay in tree if pregnant Pterodactyl
         if ((this instanceof Pterodactyl) && layEggCounter > 0) {
