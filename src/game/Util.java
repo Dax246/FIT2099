@@ -2,6 +2,7 @@ package game;
 
 import edu.monash.fit2099.engine.*;
 import game.groundPackage.Lake;
+import game.groundPackage.Tree;
 
 import java.util.*;
 
@@ -49,6 +50,9 @@ public class Util {
             }
             else if (objectName == "Water" && currentLocation.getGround() instanceof Lake
                     && ((Lake) currentLocation.getGround()).getCapacity() > 0) {
+                locations.add(currentLocation);
+            }
+            else if (objectName == "Tree" && currentLocation.getGround() instanceof Tree) {
                 locations.add(currentLocation);
             }
             else {

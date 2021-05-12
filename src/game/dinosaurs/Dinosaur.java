@@ -1,8 +1,11 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
+import game.Util;
 import game.behaviour_action.*;
 import game.Player;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -219,15 +222,19 @@ public abstract class Dinosaur extends Actor{
             return breedBehaviourAction;
         }
 
-        //move towards player
-        MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
-        nextAction = moveToPlayerBehaviour.getAction(this, map);
-        if (nextAction != null) {
-            return nextAction;
-        } else {
+        //move towards player if not Pterodactyl
+        if (!(this instanceof Pterodactyl)) {
+            MoveToPlayerBehaviour moveToPlayerBehaviour = new MoveToPlayerBehaviour();
+            nextAction = moveToPlayerBehaviour.getAction(this, map);
+            if (nextAction != null) {
+                return nextAction;
+            }
             return (new WanderBehaviour()).getAction(this, map);
         }
 
+        //move towards closest tree
+        FindTreeBehaviour findTreeBehaviour = new FindTreeBehaviour();
+        return findTreeBehaviour.getAction(this, map);
     }
 
     /**
@@ -293,5 +300,9 @@ public abstract class Dinosaur extends Actor{
             return true;
         }
         return false;
+    }
+
+    public Location getCurrentLocation() {
+        return currentLocation;
     }
 }
