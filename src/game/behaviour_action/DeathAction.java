@@ -20,29 +20,28 @@ public class DeathAction extends Action {
     public String execute(Actor actor, GameMap map) {
         Dinosaur dinoActor = (Dinosaur) actor;
         Location deathLocation = map.locationOf(actor);
-        if (dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurns()) {
-            Corpse corpse;
-            if (dinoActor instanceof Stegosaur) {
-                corpse = new Corpse(1);
-            }
-            else if (dinoActor instanceof Brachiosaur) {
-                corpse = new Corpse(2);
-            }
-            else if (dinoActor instanceof Allosaur) {
-                corpse = new Corpse(3);
-            }
-            else if (dinoActor instanceof Pterodactyl) {
-                corpse = new Corpse(4);
-            }
-            else {
-                throw new AssertionError("Unexpected actor dying.");
-            }
-            deathLocation.addItem(corpse);
-            map.removeActor(actor);
+        assert (dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurns()
+                || dinoActor.getUnconsciousTurnsCounter() == dinoActor.getMaxUnconsciousTurnsDueToThirst());
+
+        Corpse corpse;
+        if (dinoActor instanceof Stegosaur) {
+            corpse = new Corpse(1);
+        }
+        else if (dinoActor instanceof Brachiosaur) {
+            corpse = new Corpse(2);
+        }
+        else if (dinoActor instanceof Allosaur) {
+            corpse = new Corpse(3);
+        }
+        else if (dinoActor instanceof Pterodactyl) {
+            corpse = new Corpse(4);
         }
         else {
-            throw new AssertionError("Dinosaur should not be dying");
+            throw new AssertionError("Unexpected actor dying.");
         }
+        deathLocation.addItem(corpse);
+        map.removeActor(actor);
+
         return actor.toString() + " has died at (" + deathLocation.x() + ", " + deathLocation.y() + ")";
     }
 
