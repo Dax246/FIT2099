@@ -48,9 +48,9 @@ public abstract class Dinosaur extends Actor{
 
     private int maxWaterLevel;
 
-    private int maxUnconsciousTurnsDueToThirst = 15;
+    private final int maxUnconsciousTurnsDueToThirst = 15;
 
-    private int thirstThreshold = 40;
+    private final int thirstThreshold = 40;
 
     private Location currentLocation;
     /**
@@ -111,6 +111,10 @@ public abstract class Dinosaur extends Actor{
 
     public int getMaxUnconsciousTurns() {
         return maxUnconsciousTurns;
+    }
+
+    public int getMaxUnconsciousTurnsDueToThirst() {
+        return maxUnconsciousTurnsDueToThirst;
     }
 
     public void setSex(Character sex) {
@@ -207,7 +211,6 @@ public abstract class Dinosaur extends Actor{
             }
         }
 
-
         //consume/move towards food if hungry
         if (hitPoints < hungerThreshold) {
             FindFoodBehaviour findFoodBehaviour = new FindFoodBehaviour();
@@ -288,7 +291,7 @@ public abstract class Dinosaur extends Actor{
         }
     };
 
-    public int maxSip() {
+    public int quenchAmount() {
         if (this instanceof Brachiosaur) {
             return 80;
         }
