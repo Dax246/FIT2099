@@ -58,21 +58,25 @@ public class Application {
 		
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));
-		
-		// Create a herd of 2 male and 2 female Brachiosaurs
-		gameMap.at(28, 12).addActor(new Brachiosaur("Brachiosaur", false));
-		gameMap.at(30, 12).addActor(new Brachiosaur("Brachiosaur", false));
-		gameMap.at(32, 12).addActor(new Brachiosaur("Brachiosaur", false));
-		gameMap.at(34, 12).addActor(new Brachiosaur("Brachiosaur", false));
-		((Brachiosaur) gameMap.getActorAt(gameMap.at(28, 12))).setSex('M');
-		((Brachiosaur) gameMap.getActorAt(gameMap.at(30, 12))).setSex('M');
-		((Brachiosaur) gameMap.getActorAt(gameMap.at(32, 12))).setSex('F');
-		((Brachiosaur) gameMap.getActorAt(gameMap.at(34, 12))).setSex('F');
 
-		//Place a triplet of Stegosaurs in the middle of the map
-		gameMap.at(20, 12).addActor(new Stegosaur("Stegosaur", false));
-		gameMap.at(22, 12).addActor(new Stegosaur("Stegosaur", false));
-		gameMap.at(24, 12).addActor(new Stegosaur("Stegosaur", false));
+		gameMap.at(28, 12).addActor(new Pterodactyl("Pterodactyl", false));
+//		gameMap.at(30, 12).addActor(new Allosaur("Allosaur", false));
+//		gameMap.at(28, 12).addActor(new Pterodactyl("Pterodactyl", false));
+
+//		// Create a herd of 2 male and 2 female Brachiosaurs
+//		gameMap.at(28, 12).addActor(new Brachiosaur("Brachiosaur", false));
+//		gameMap.at(30, 12).addActor(new Brachiosaur("Brachiosaur", false));
+//		gameMap.at(32, 12).addActor(new Brachiosaur("Brachiosaur", false));
+//		gameMap.at(34, 12).addActor(new Brachiosaur("Brachiosaur", false));
+//		((Brachiosaur) gameMap.getActorAt(gameMap.at(28, 12))).setSex('M');
+//		((Brachiosaur) gameMap.getActorAt(gameMap.at(30, 12))).setSex('M');
+//		((Brachiosaur) gameMap.getActorAt(gameMap.at(32, 12))).setSex('F');
+//		((Brachiosaur) gameMap.getActorAt(gameMap.at(34, 12))).setSex('F');
+//
+//		//Place a triplet of Stegosaurs in the middle of the map
+//		gameMap.at(20, 12).addActor(new Stegosaur("Stegosaur", false));
+//		gameMap.at(22, 12).addActor(new Stegosaur("Stegosaur", false));
+//		gameMap.at(24, 12).addActor(new Stegosaur("Stegosaur", false));
 
 		world.run();
 	}

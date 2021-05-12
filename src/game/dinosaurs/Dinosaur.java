@@ -151,10 +151,6 @@ public abstract class Dinosaur extends Actor{
         currentLocation = map.locationOf(this);
         this.age += 1;
 
-        if (this instanceof Pterodactyl) {
-            this.hitPoints = 100;
-        }
-
         //lay egg if pregnant
         if (layEggCounter > 0) {
             layEggCounter -= 1;

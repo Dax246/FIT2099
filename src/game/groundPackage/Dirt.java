@@ -69,7 +69,7 @@ public class Dirt extends Ground {
 			}
 		}
 		Random random = new Random();
-		int bushChance = random.nextInt(100);
+		int bushChance = random.nextInt(1000);
 		if (!tree_check) {
 			if (bush_counter >= 2 && bushChance <= 10) {
 				location.setGround(new Bush());
