@@ -182,12 +182,17 @@ public abstract class Dinosaur extends Actor{
 
         unconsciousTurnsCounter = 0;
 
+        //Stay in tree if pregnant Pterodactyl
+        if ((this instanceof Pterodactyl) && layEggCounter > 0) {
+            return new DoNothingAction();
+        }
+
         //mate if adjacent to mate
         BreedBehaviour breedBehaviour = new BreedBehaviour();
-        Action breedBehaviourNextAction = breedBehaviour.getAction(this, map);
-        if (breedBehaviourNextAction instanceof BreedAction
+        Action breedBehaviourAction = breedBehaviour.getAction(this, map);
+        if (breedBehaviourAction instanceof BreedAction
                 && hitPoints >= breedThreshold) {
-            return breedBehaviourNextAction;
+            return breedBehaviourAction;
         }
 
         //sip/find water if thirsty
@@ -210,8 +215,8 @@ public abstract class Dinosaur extends Actor{
         }
 
         //move towards mate
-        if (breedBehaviourNextAction instanceof MoveActorAction) {
-            return breedBehaviourNextAction;
+        if (breedBehaviourAction instanceof MoveActorAction) {
+            return breedBehaviourAction;
         }
 
         //move towards player
@@ -263,7 +268,7 @@ public abstract class Dinosaur extends Actor{
                 return false;
             }
         }
-        else if (this instanceof Allosaur || this instanceof Brachiosaur) {
+        else if (this instanceof Allosaur || this instanceof Brachiosaur || this instanceof Pterodactyl) {
             if (this.age >= 50) {
                 return true;
             }
@@ -275,6 +280,13 @@ public abstract class Dinosaur extends Actor{
             throw new AssertionError("Unexpected Dinosaur");
         }
     };
+
+    public int maxSip() {
+        if (this instanceof Brachiosaur) {
+            return 80;
+        }
+        return 30;
+    }
 
     public boolean isUnconsciousDueToThirst() {
         if (waterLevel == 0) {

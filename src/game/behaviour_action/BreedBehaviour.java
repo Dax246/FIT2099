@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.*;
 import game.Behaviour;
 import game.Util;
 import game.dinosaurs.Dinosaur;
+import game.dinosaurs.Pterodactyl;
+import game.groundPackage.Tree;
 
 import java.util.ArrayList;
 
@@ -51,15 +53,22 @@ public class BreedBehaviour implements Behaviour {
 		Location destination = mateDestination(actor, map);
 		if (destination == null) {
 			return null;
-		} else if (distance(destination, map.locationOf(actor)) == 1) {
-			return new BreedAction((Dinosaur) destination.getActor());
-		} else if (distance(destination, map.locationOf(actor)) > 1) {
+		}
+
+		if (distance(destination, map.locationOf(actor)) == 1) {
+			//Pterodactyls can only mate in adjacent trees
+			if (!(actor instanceof Pterodactyl)
+					|| ((map.locationOf(actor).getGround() instanceof Tree) && destination.getGround() instanceof Tree)) {
+				return new BreedAction((Dinosaur) destination.getActor());
+			}
+		}
+
+		if (distance(destination, map.locationOf(actor)) > 1) {
 			Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 			return moveToLocation.getAction(actor, map);
 		}
-		else {
-			throw new AssertionError("Should not have called behaviour");
-		}
+
+		return null;
 	}
 
 	/**

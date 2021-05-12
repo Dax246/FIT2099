@@ -3,10 +3,7 @@ package game.behaviour_action;
 import edu.monash.fit2099.engine.Action;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.GameMap;
-import game.dinosaurs.Allosaur;
-import game.dinosaurs.Brachiosaur;
-import game.dinosaurs.Dinosaur;
-import game.dinosaurs.Stegosaur;
+import game.dinosaurs.*;
 
 
 /**
@@ -57,6 +54,10 @@ public class BreedAction extends Action {
             else if (female instanceof Allosaur){
                 ((Allosaur) female).setLayEggCounter(20);
                 return "Allosaurs mate! Egg egg laid in 20 turns";
+            }
+            else if (female instanceof Pterodactyl){
+                ((Pterodactyl) female).setLayEggCounter(10);
+                return "Pterodactyls mate! Egg egg laid in 10 turns";
             }
             else {
                 throw new AssertionError("Unexpected dinosaur falling pregnant");
