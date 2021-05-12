@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.*;
 import game.Behaviour;
 import game.Util;
 import game.dinosaurs.Dinosaur;
-import game.dinosaurs.Pterodactyl;
 
 import java.util.ArrayList;
 
@@ -27,15 +26,11 @@ public class FindTreeBehaviour implements Behaviour {
 		Location destination;
 		if (closestTrees.size() > 0) {
 			destination = closestTrees.get(0);
-		} else {
-			return null;
+			if (map.locationOf(actor) != destination) {
+				Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
+				return moveToLocation.getAction(actor, map);
+			}
 		}
-
-		if (map.locationOf(actor) == destination) {
-			return new DoNothingAction();
-		}
-
-		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
-		return moveToLocation.getAction(actor, map);
+		return new DoNothingAction();
 	}
 }
