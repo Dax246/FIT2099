@@ -53,6 +53,6 @@ public class Lake extends Ground {
 
     @Override
     public boolean canActorEnter(Actor actor) {
-        return actor instanceof Pterodactyl;
+        return (actor instanceof Pterodactyl && ((Pterodactyl) actor).isFlying());
     }
 }
