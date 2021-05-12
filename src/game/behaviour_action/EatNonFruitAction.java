@@ -1,12 +1,9 @@
 package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
-import game.Fish;
 import game.Util;
 import game.dinosaurs.Corpse;
 import game.dinosaurs.Dinosaur;
-
-import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -36,21 +33,27 @@ public class EatNonFruitAction extends Action {
             itemToEat = Util.retrieveItem("Corpse", actorLocation.getItems());
             if (itemToEat != null) {
                 Corpse corpse = (Corpse) itemToEat;
-                if (corpse.getCorpseOf() == 1) {
+                if (corpse.getCorpseInt() == 1) {
                     actor.heal(50);
                     actorLocation.removeItem(itemToEat);
                     foodEaten = "Stegosaur corpse";
                 }
-                else if (corpse.getCorpseOf() == 2) {
+                else if (corpse.getCorpseInt() == 2) {
                     actor.heal(((Dinosaur) actor).getMaxHitPoints());
                     actorLocation.removeItem(itemToEat);
                     foodEaten = "Brachiosaur corpse";
                 }
-                else {
+                else if (corpse.getCorpseInt() == 3) {
                     actor.heal(50);
                     actorLocation.removeItem(itemToEat);
                     foodEaten = "Allosaur corpse";
                 }
+                else if (corpse.getCorpseInt() == 4) {
+                    actor.heal(30);
+                    actorLocation.removeItem(itemToEat);
+                    foodEaten = "Pterodactyl corpse";
+                }
+                assert false : "Unexpected corpse";
             }
         }
 

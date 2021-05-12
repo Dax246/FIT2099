@@ -13,7 +13,7 @@ public class Corpse extends Item {
     /**
      * int to differentiate between different dinosaurs
      */
-    private int corpseOf;
+    private int corpseInt;
     /**
      * Turns until corpse rots and is removed from map.
      */
@@ -21,16 +21,16 @@ public class Corpse extends Item {
 
     /**
      * Constructor
-     * @param corpseOf int to differentiate between different dinosaurs
+     * @param corpseInt int to differentiate between different dinosaurs
      */
-    public Corpse(int corpseOf) {
+    public Corpse(int corpseInt) {
         super("Corpse", 'c', false);
-        this.corpseOf = corpseOf;  //1 for steg, 2 for brach, 3 for allo
-        if (corpseOf == 1 || corpseOf == 3) {
-            this.rot_health = 20;
+        this.corpseInt = corpseInt;  //1 for steg, 2 for brach, 3 for allo, 4 for ptero
+        if (corpseInt == 2) {
+            this.rot_health = 40;
         }
         else {
-            this.rot_health = 40;
+            this.rot_health = 20;
         }
     }
 
@@ -38,8 +38,8 @@ public class Corpse extends Item {
      * Gets int of corpse
      * @return int to differentiate corpse
      */
-    public int getCorpseOf() {
-        return corpseOf;
+    public int getCorpseInt() {
+        return corpseInt;
     }
 
     /**

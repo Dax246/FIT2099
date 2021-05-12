@@ -31,6 +31,9 @@ public class DeathAction extends Action {
             else if (dinoActor instanceof Allosaur) {
                 corpse = new Corpse(3);
             }
+            else if (dinoActor instanceof Pterodactyl) {
+                corpse = new Corpse(4);
+            }
             else {
                 throw new AssertionError("Unexpected actor dying.");
             }
