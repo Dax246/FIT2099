@@ -23,15 +23,14 @@ public class Lake extends Ground {
      */
     public Lake() {
         super('~');
-
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void sip() {
+        capacity -= 1;
     }
 
     /**
@@ -44,6 +43,7 @@ public class Lake extends Ground {
             for (int i = 0; i < 5; i++) {
                 location.addItem(new Fish());
             }
+            initialisedFish = true;
         }
         super.tick(location);
 

@@ -30,9 +30,8 @@ public class SipWaterAction extends Action {
 
         assert lakeSipLocation.getCapacity() > 0;
 
-        int amountSipped = Math.min(lakeSipLocation.getCapacity(), dinosaurActor.maxSip());
-        lakeSipLocation.setCapacity(lakeSipLocation.getCapacity() - amountSipped);
-        dinosaurActor.quench(amountSipped);
+        lakeSipLocation.sip();
+        dinosaurActor.quench(dinosaurActor.quenchAmount());
 
         return actor.toString() + " sipped water from (" + sipLocation.x() + ", " + sipLocation.y() + ")";
     }
