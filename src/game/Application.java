@@ -55,7 +55,10 @@ public class Application {
 		"................................................................................");
 		GameMap gameMap = new GameMap(groundFactory, map );
 		world.addGameMap(gameMap);
-		
+		GameMap gameMap2 = new GameMap(groundFactory, '.', gameMap.getXRange().max()+1, gameMap.getYRange().max()+1);
+		world.addGameMap(gameMap2);
+		Util.ConnectMapNorth(gameMap, gameMap2);
+
 		Actor player = new Player("Player", '@', 100);
 		world.addPlayer(player, gameMap.at(9, 4));
 

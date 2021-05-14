@@ -104,4 +104,16 @@ public class Util {
         return null;
     }
 
+    public static void ConnectMapNorth(GameMap southMap, GameMap northMap){
+        NumberRange width = southMap.getXRange();
+//        assert width == northMap.getXRange();
+        NumberRange height = southMap.getYRange();
+//        assert height == northMap.getYRange();
+        for (int x : width){
+            Location southLocation = southMap.at(x, 0);
+            Location northLocation = northMap.at(x, height.max());
+            southLocation.addExit(new Exit("Move North", northLocation, "8"));
+            northLocation.addExit(new Exit("Move South", southLocation, "2"));
+        }
+    }
 }

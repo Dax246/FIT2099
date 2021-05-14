@@ -18,6 +18,7 @@ import java.util.Random;
 public class Lake extends Ground {
     private int capacity = 25;
     private boolean initialisedFish = false;
+    private int rainCounter = 0;
     /**
      * Constructor
      */
@@ -45,9 +46,30 @@ public class Lake extends Ground {
             }
             initialisedFish = true;
         }
-        super.tick(location);
 
-        //TODO: IF MAP RAINED, ADD RANDOM AMOUNT OF WATER TO CAPACITY
+        Random random = new Random();
+        // Rain tick
+        rainCounter ++;
+        if (rainCounter == 10){
+            rainCounter = 0;
+            int rainChance = random.nextInt(100);
+            if (rainChance < 20) {
+                int intRainFall = random.nextInt(60);
+                while (intRainFall < 10) {
+                    intRainFall = random.nextInt(60);
+                }
+                double doubleRainFall = intRainFall / 100.0;
+                int rainFallAmount = (int) Math.floor(doubleRainFall * 20);
+                capacity += rainFallAmount;
+            }
+        }
+
+        // Fish tick
+        if (random.nextInt(100) < 60){
+            location.addItem(new Fish());
+        }
+
+        super.tick(location);
     }
 
 
