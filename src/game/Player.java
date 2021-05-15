@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Display;
 import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Menu;
+import game.behaviour_action.QuitAction;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -42,6 +43,7 @@ public class Player extends Actor {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
+		actions.add(new QuitAction());
 		return menu.showMenu(this, actions, display);
 	}
 }

@@ -2,12 +2,13 @@ package edu.monash.fit2099.engine;
 
 import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
+import game.behaviour_action.QuitAction;
 
 import java.util.*;
 
 
 public class GameStart {
-    // 1 if challenge mode, 2 if sandbox mode
+    // 1 if challenge mode, 2 if sandbox mode, 3 if exiting
     private int gameMode;
     private int maxGameTurns;
     private int ecoPointsNumber;
@@ -191,6 +192,12 @@ public class GameStart {
         actions.add(new DoNothingAction());
 
         Action action = actor.playTurn(actions, lastActionMap.get(actor), map, display);
+        // if action is quit Action
+        // return
+        if (action instanceof QuitAction){
+            exitCheck = true;
+            return;
+        }
         lastActionMap.put(actor, action);
 
         String result = action.execute(actor, map);
