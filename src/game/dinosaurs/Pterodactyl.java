@@ -45,7 +45,7 @@ public class Pterodactyl extends Dinosaur {
 	 */
 	@Override
 	public Action playTurn(Actions actions, Action lastAction, GameMap map, Display display) {
-		if (map.locationOf(this).getGround() instanceof Tree) {
+		if (!isFlying() && map.locationOf(this).getGround() instanceof Tree) {
 			this.flightTime = 0;
 		} else if (isFlying()) {
 			this.flightTime += 1;
