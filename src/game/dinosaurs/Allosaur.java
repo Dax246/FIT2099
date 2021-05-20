@@ -45,7 +45,7 @@ public class Allosaur extends Dinosaur {
 	 * @return cannotAttack hashmap
 	 */
 	public HashMap<Stegosaur, Integer> getCannotAttack() {
-		return cannotAttack;
+		return new HashMap<>(cannotAttack);
 	}
 
 	/**
