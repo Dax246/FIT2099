@@ -3,6 +3,7 @@ package game.groundPackage;
 import edu.monash.fit2099.engine.*;
 import game.Fish;
 import game.Fruit;
+import game.Util;
 import game.behaviour_action.HarvestFruitAction;
 import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Pterodactyl;
@@ -49,19 +50,14 @@ public class Lake extends Ground {
 
         Random random = new Random();
         // Rain tick
-        rainCounter ++;
-        if (rainCounter == 10){
-            rainCounter = 0;
-            int rainChance = random.nextInt(100);
-            if (rainChance < 20) {
-                int intRainFall = random.nextInt(60);
-                while (intRainFall < 10) {
-                    intRainFall = random.nextInt(60);
-                }
-                double doubleRainFall = intRainFall / 100.0;
-                int rainFallAmount = (int) Math.floor(doubleRainFall * 20);
-                capacity += rainFallAmount;
+        if (Util.rainThisTick) {
+            int intRainFall = random.nextInt(60);
+            while (intRainFall < 10) {
+                intRainFall = random.nextInt(60);
             }
+            double doubleRainFall = intRainFall / 100.0;
+            int rainFallAmount = (int) Math.floor(doubleRainFall * 20);
+            capacity += rainFallAmount;
         }
 
         // Fish tick

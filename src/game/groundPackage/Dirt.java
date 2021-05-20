@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.GameMap;
 import edu.monash.fit2099.engine.Ground;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.NumberRange;
+import edu.monash.fit2099.interfaces.GroundInterface;
 
 import java.util.Random;
 
@@ -13,7 +14,7 @@ import java.util.Random;
  * @see Ground
  * A class that represents bare dirt.
  */
-public class Dirt extends Ground {
+public class Dirt extends Ground implements GroundInterface {
 	/**
 	 * Constructor
 	 */
@@ -27,6 +28,7 @@ public class Dirt extends Ground {
 	 */
 	@Override
 	public void tick(Location location) {
+		resThirstyDinos(location);
 		super.tick(location);
 		NumberRange xRange = location.map().getXRange();
 		NumberRange yRange = location.map().getYRange();

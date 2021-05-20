@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.interfaces.GroundInterface;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
 import game.dinosaurs.Brachiosaur;
@@ -15,7 +16,7 @@ import java.util.Random;
  * @see Flora
  * A class that can produce fruit.
  */
-public class Bush extends Flora {
+public class Bush extends Flora implements GroundInterface {
     /**
      * Constructor
      */
@@ -29,6 +30,7 @@ public class Bush extends Flora {
      */
     @Override
     public void tick(Location location){
+        resThirstyDinos(location);
         super.tick(location);
         if (location.getActor() instanceof Brachiosaur) {
             location.setGround(new Dirt());

@@ -4,6 +4,7 @@ import edu.monash.fit2099.engine.Actions;
 import edu.monash.fit2099.engine.Actor;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.interfaces.GroundInterface;
 import game.EcoPoints;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
@@ -15,7 +16,7 @@ import java.util.Random;
  * @see Flora
  * A class that can produce fruit.
  */
-public class Tree extends Flora {
+public class Tree extends Flora implements GroundInterface {
 	/**
 	 * Age
 	 */
@@ -34,6 +35,7 @@ public class Tree extends Flora {
 	 */
 	@Override
 	public void tick(Location location) {
+		resThirstyDinos(location);
 		super.tick(location);
 
 		age++;
