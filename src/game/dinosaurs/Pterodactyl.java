@@ -22,15 +22,15 @@ public class Pterodactyl extends Dinosaur {
 		//same stats as Allosaur
 		super(name, 'p', 100);
 		setMaxUnconsciousTurns(20);
-		setHungerThreshold(70);
+		setHungerThreshold(90);
 		setBreedThreshold(50);
 		setMaxWaterLevel(100);
 		if (isBaby) {
 			this.setAge(0);
-			this.hitPoints = 20;
+			this.hitPoints = 10;
 		}
 		else {
-			this.setAge(50);
+			this.setAge(30);
 			this.hitPoints = 50;
 		}
 	}
