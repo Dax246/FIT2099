@@ -2,6 +2,7 @@ package edu.monash.fit2099.engine;
 
 import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
+import game.Util;
 import game.behaviour_action.QuitAction;
 
 import java.util.*;
@@ -13,6 +14,7 @@ public class GameStart {
     private int maxGameTurns;
     private int ecoPointsNumber;
     private boolean exitCheck = false;
+    private int rainCounter = 0;
     protected Display display;
     protected ArrayList<GameMap> gameMaps = new ArrayList<GameMap>();
     protected ActorLocations actorLocations = new ActorLocations();
@@ -95,6 +97,18 @@ public class GameStart {
         actorLocations.setPlayer(player);
     }
 
+    public boolean isRaining() {
+        rainCounter++;
+        if (rainCounter == 10) {
+            rainCounter = 0;
+            Random random = new Random();
+            int rainChance = random.nextInt(100);
+            System.out.println(rainChance < 20);
+            return rainChance < 20;
+        }
+        return false;
+    }
+
     /**
      * Run the game.
      * <p>
@@ -130,16 +144,23 @@ public class GameStart {
             playersMap.draw(display);
             System.out.println("Current Turn: " + currentTurn);
 
-            // Process all the actors.
-            for (Actor actor : actorLocations) {
-                stillRunning();
-                if (!exitCheck)
-                    processActorTurn(actor);
+            if (isRaining()) {
+                Util.rainThisTick = true;
+            }
+            else {
+                Util.rainThisTick = false;
             }
 
             // Tick over all the maps. For the map stuff.
             for (GameMap gameMap : gameMaps) {
                 gameMap.tick();
+            }
+
+            // Process all the actors.
+            for (Actor actor : actorLocations) {
+                stillRunning();
+                if (!exitCheck)
+                    processActorTurn(actor);
             }
             stillRunning();
         }

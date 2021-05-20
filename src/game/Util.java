@@ -116,4 +116,6 @@ public class Util {
             northLocation.addExit(new Exit("Move South", southLocation, "2"));
         }
     }
+
+    public static boolean rainThisTick;
 }
