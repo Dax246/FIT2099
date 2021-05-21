@@ -8,7 +8,7 @@ import game.behaviour_action.QuitAction;
 import java.util.*;
 
 
-public class GameStart {
+public class GameDriver {
     // 1 if challenge mode, 2 if sandbox mode, 3 if exiting
     private int gameMode;
     private int maxGameTurns;
@@ -21,7 +21,7 @@ public class GameStart {
     protected Actor player; // We only draw the particular map this actor is on.
     protected Map<Actor, Action> lastActionMap = new HashMap<Actor, Action>();
 
-    public GameStart(Display display) {
+    public GameDriver(Display display) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Rogue Dino!!");
         boolean validStart = false;

@@ -22,7 +22,7 @@ public class Application {
 
 		boolean quitCheck = false;
 		while (!quitCheck){
-			GameStart gameStart = new GameStart(new Display());
+			GameDriver gameDriver = new GameDriver(new Display());
 
 			FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Tree(), new VendingMachine(), new Lake());
 
@@ -82,17 +82,17 @@ public class Application {
 					"................................................................................");
 
 			GameMap gameMap = new GameMap(groundFactory, map );
-			gameStart.addGameMap(gameMap);
+			gameDriver.addGameMap(gameMap);
 			GameMap gameMap2 = new GameMap(groundFactory, secondMap);
 //			GameMap gameMap2 = new GameMap(groundFactory, '.', gameMap.getXRange().max()+1, gameMap.getYRange().max()+1);
-			gameStart.addGameMap(gameMap2);
+			gameDriver.addGameMap(gameMap2);
 			Util.ConnectMapNorth(gameMap, gameMap2);
 
 			Actor player = new Player("Player", '@', 100);
-			gameStart.addPlayer(player, gameMap.at(9, 4));
+			gameDriver.addPlayer(player, gameMap.at(9, 4));
 
 			gameMap.at(28, 12).addActor(new Pterodactyl("Pterodactyl", false));
-			quitCheck = gameStart.run();
+			quitCheck = gameDriver.run();
 		}
 
 		// Commented out code from before
