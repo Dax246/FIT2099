@@ -1,6 +1,7 @@
 package edu.monash.fit2099.interfaces;
 
 import edu.monash.fit2099.engine.Location;
+import game.Util;
 import game.dinosaurs.Dinosaur;
 
 /**
@@ -10,7 +11,7 @@ import game.dinosaurs.Dinosaur;
 
 public interface GroundInterface {
     default void resThirstyDinos(Location location) {
-        if (location.containsAnActor() && location.getActor() instanceof Dinosaur) {
+        if (Util.rainThisTick && location.containsAnActor() && location.getActor() instanceof Dinosaur) {
             Dinosaur dinoActor = (Dinosaur) location.getActor();
             if (dinoActor.isUnconsciousDueToThirst()) {
                 dinoActor.quench(10);
