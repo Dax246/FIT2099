@@ -98,7 +98,24 @@ public class FindFoodBehaviour implements Behaviour {
 		for (String item : diet) {
 			ArrayList<Location> itemLocations = Util.locateObjects(actorLocation, item);
 			if (itemLocations.size() > 0) {
-				if (closestDestination == null || distance(actorLocation, itemLocations.get(0)) < distance(actorLocation, closestDestination)) {
+				if (actor instanceof Pterodactyl && item == "Corpse") {
+					for (Location corpseLocation : itemLocations) {
+						if (closestDestination == null || distance(actorLocation, corpseLocation) < distance(actorLocation, closestDestination)) {
+							boolean foundCorpse = false;
+							for (Exit exit : corpseLocation.getExits()) {
+								if (!(exit.getDestination().containsAnActor() && exit.getDestination().getActor() instanceof Allosaur)) {
+									foundCorpse = true;
+									closestDestination = corpseLocation;
+									break;
+								}
+							}
+							if (foundCorpse) {
+								break;
+							}
+						}
+					}
+				}
+				else if (closestDestination == null || distance(actorLocation, itemLocations.get(0)) < distance(actorLocation, closestDestination)) {
 					closestDestination = itemLocations.get(0);
 				}
 			}
