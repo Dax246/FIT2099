@@ -112,8 +112,8 @@ public class Util {
         for (int x : width){
             Location southLocation = southMap.at(x, 0);
             Location northLocation = northMap.at(x, height.max());
-            southLocation.addExit(new Exit("Move North", northLocation, "8"));
-            northLocation.addExit(new Exit("Move South", southLocation, "2"));
+            southLocation.addExit(new Exit("to North Map", northLocation, "8"));
+            northLocation.addExit(new Exit("to South Map", southLocation, "2"));
         }
     }
 
