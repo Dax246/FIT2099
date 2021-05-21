@@ -273,7 +273,7 @@ public abstract class Dinosaur extends Actor{
      * @return boolean that's true if dinosaur is an adult
      */
     public boolean isAdult() {
-        if (this instanceof Stegosaur) {
+        if (this instanceof Stegosaur || this instanceof Pterodactyl) {
             if (age >= 30) {
                 return true;
             }
@@ -281,7 +281,7 @@ public abstract class Dinosaur extends Actor{
                 return false;
             }
         }
-        else if (this instanceof Allosaur || this instanceof Brachiosaur || this instanceof Pterodactyl) {
+        else if (this instanceof Allosaur || this instanceof Brachiosaur) {
             if (this.age >= 50) {
                 return true;
             }
