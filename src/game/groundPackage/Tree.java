@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.*;
 import edu.monash.fit2099.interfaces.GroundInterface;
 import game.EcoPoints;
 import game.Fruit;
-import game.behaviour_action.HarvestFruitAction;
 import java.util.Random;
 
 /**

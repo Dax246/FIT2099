@@ -2,8 +2,6 @@ package game.groundPackage;
 
 import edu.monash.fit2099.engine.*;
 import edu.monash.fit2099.interfaces.GroundInterface;
-import game.Fruit;
-import game.behaviour_action.HarvestFruitAction;
 import game.dinosaurs.Brachiosaur;
 import java.util.Random;
 

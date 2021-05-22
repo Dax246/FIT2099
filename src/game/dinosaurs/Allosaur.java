@@ -1,8 +1,6 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-
-
 import java.util.HashMap;
 import java.util.HashSet;
 

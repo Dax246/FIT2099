@@ -5,7 +5,6 @@ import game.Fruit;
 import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Stegosaur;
 import game.groundPackage.Bush;
-import game.groundPackage.Flora;
 import game.groundPackage.Tree;
 
 /**

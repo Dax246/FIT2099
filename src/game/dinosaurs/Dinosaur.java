@@ -1,11 +1,8 @@
 package game.dinosaurs;
 
 import edu.monash.fit2099.engine.*;
-import game.Util;
 import game.behaviour_action.*;
 import game.Player;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
