@@ -40,11 +40,11 @@ public interface Flora {
         return foundFruit;
     }
 
-//    default Actions interfaceAllowableActions(Actor actor, Location location){
-//        Actions actions = new Actions();
-//        if (getNumberOfFruit() > 0 && location.getActor() == actor){
-//            actions.add(new HarvestFruitAction(location));
-//        }
-//        return actions;
-//    }
+    default Actions interfaceAllowableActions(Location location){
+        Actions actions = new Actions();
+        if (getNumberOfFruit() > 0){
+            actions.add(new HarvestFruitAction(location));
+        }
+        return actions;
+    }
 }

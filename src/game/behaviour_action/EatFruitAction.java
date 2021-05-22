@@ -37,6 +37,7 @@ public class EatFruitAction extends Action {
                     if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'G') {
                         actor.heal(10);
                         actorLocation.removeItem(item);
+                        ((Tree) actorLocation.getGround()).decrementNumberOfFruit();
                         validEatFruitAction = true;
                         break;
                     }

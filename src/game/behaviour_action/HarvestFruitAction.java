@@ -38,9 +38,10 @@ public class HarvestFruitAction extends Action {
                 if (!fruitToPick) {
                     fruitToPick = ((Flora)target.getGround()).harvestFruit(target, 'T');
                 }
-                assert fruitToPick;
-                actor.addItemToInventory(new Fruit('H'));
-                return "Player has harvested a fruit at: (" + target.x() + ", " + target.y() + ")";
+                if (fruitToPick) {
+                    actor.addItemToInventory(new Fruit('H'));
+                    return "Player has harvested a fruit at: (" + target.x() + ", " + target.y() + ")";
+                }
             } return "Player has searched for fruit but is unable to find any ripe ones at: (" + target.x() + ", " + target.y() + ")";
         }
         return "No Fruit to Harvest at: (" + target.x() + ", " + target.y() + ")";

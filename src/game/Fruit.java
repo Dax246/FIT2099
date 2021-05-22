@@ -3,6 +3,7 @@ package game;
 import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import edu.monash.fit2099.engine.PickUpItemAction;
+import game.groundPackage.Flora;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -39,6 +40,9 @@ public class Fruit extends Item {
         rot_health -= 1;
         if (rot_health == 0){
             currentLocation.removeItem(this);
+            if (currentLocation.getGround() instanceof Flora) {
+                ((Flora) currentLocation.getGround()).decrementNumberOfFruit();
+            }
         }
     }
 
