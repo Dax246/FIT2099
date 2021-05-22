@@ -1,6 +1,7 @@
 package game;
 
 import edu.monash.fit2099.engine.*;
+import game.dinosaurs.Egg;
 import game.groundPackage.Lake;
 import game.groundPackage.Tree;
 
@@ -97,7 +98,10 @@ public class Util {
      */
     public static Item retrieveItem(String itemType, List<Item> locationList) {
         for (Item item: locationList) {
-            if (item.toString() == itemType) {
+            if (itemType == "Egg" && item instanceof Egg) {
+                return item;
+            }
+            else if (item.toString() == itemType) {
                 return item;
             }
         }
