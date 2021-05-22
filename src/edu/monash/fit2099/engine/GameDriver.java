@@ -103,7 +103,12 @@ public class GameDriver {
             rainCounter = 0;
             Random random = new Random();
             int rainChance = random.nextInt(100);
-            System.out.println(rainChance < 20);
+            if (rainChance < 20) {
+                System.out.println("It has rained!");
+            }
+            else {
+                System.out.println("It has not rained!");
+            }
             return rainChance < 20;
         }
         return false;
