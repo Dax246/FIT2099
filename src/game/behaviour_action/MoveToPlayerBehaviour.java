@@ -25,7 +25,6 @@ public class MoveToPlayerBehaviour implements Behaviour {
 				}
 			}
 		}
-		assert false : "Player does not exist in map";
 		return null;
 	}
 
@@ -38,6 +37,9 @@ public class MoveToPlayerBehaviour implements Behaviour {
 	@Override
 	public Action getAction(Actor actor, GameMap map) {
 		Location destination = locatePlayer(map);
+		if (destination == null) {
+			return null;
+		}
 		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
 		return moveToLocation.getAction(actor, map);
 	}
