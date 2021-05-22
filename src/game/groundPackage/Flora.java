@@ -1,8 +1,11 @@
 package game.groundPackage;
 
-import edu.monash.fit2099.engine.Ground;
+import edu.monash.fit2099.engine.Actions;
+import edu.monash.fit2099.engine.Actor;
+import edu.monash.fit2099.engine.Item;
 import edu.monash.fit2099.engine.Location;
 import game.Fruit;
+import game.behaviour_action.HarvestFruitAction;
 
 /**
  * @author Allan Chan and Damien Ambegoda
@@ -10,21 +13,38 @@ import game.Fruit;
  * @see Flora
  * A parent class of grounds that can produce fruit.
  */
-public abstract class Flora extends Ground {
-    /**
-     * Attribute to store number of fruit currently in location
-     */
-    private int numberOfFruit = 0;
+public interface Flora {
+    int getNumberOfFruit();
+    void incrementNumberOfFruit();
+    void decrementNumberOfFruit();
 
     /**
-     * Constructor
-     * @param displayChar Char to represent Flora in output
+     * Aads fruit to location item list
+     * @param location to add fruit
      */
-    public Flora(char displayChar) {
-        super(displayChar);
+    default void addFruit(Location location, Character storedLocation) {
+        location.addItem(new Fruit(storedLocation));
+        incrementNumberOfFruit();
     }
 
-    public int getNumberOfFruit() { return numberOfFruit; }
+    default boolean harvestFruit(Location location, Character storedLocation) {
+        boolean foundFruit = false;
+        for (Item item : location.getItems()){
+            if (item instanceof Fruit && (((Fruit) item).getStoredLocation() == storedLocation)){
+                foundFruit = true;
+                location.removeItem(item);
+                decrementNumberOfFruit();
+                break;
+            }
+        }
+        return foundFruit;
+    }
 
-    public Fruit harvestFruit(Location location) {return null;}
+//    default Actions interfaceAllowableActions(Actor actor, Location location){
+//        Actions actions = new Actions();
+//        if (getNumberOfFruit() > 0 && location.getActor() == actor){
+//            actions.add(new HarvestFruitAction(location));
+//        }
+//        return actions;
+//    }
 }

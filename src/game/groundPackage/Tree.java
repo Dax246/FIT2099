@@ -1,9 +1,6 @@
 package game.groundPackage;
 
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Item;
-import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.*;
 import edu.monash.fit2099.interfaces.GroundInterface;
 import game.EcoPoints;
 import game.Fruit;
@@ -16,7 +13,9 @@ import java.util.Random;
  * @see Flora
  * A class that can produce fruit.
  */
-public class Tree extends Flora implements GroundInterface {
+public class Tree extends Ground implements GroundInterface, Flora {
+	int numberOfFruit = 0;
+
 	/**
 	 * Age
 	 */
@@ -27,6 +26,18 @@ public class Tree extends Flora implements GroundInterface {
 	 */
 	public Tree() {
 		super('+');
+	}
+
+	public int getNumberOfFruit() {
+		return numberOfFruit;
+	}
+
+	public void incrementNumberOfFruit() {
+		numberOfFruit++;
+	}
+
+	public void decrementNumberOfFruit() {
+		numberOfFruit--;
 	}
 
 	/**
@@ -47,28 +58,13 @@ public class Tree extends Flora implements GroundInterface {
 		Random random = new Random();
 		int fruitChance = random.nextInt(100);
 		if (fruitChance <= 50){
-			boolean addedFruitValidly = addFruit(location);
-			assert addedFruitValidly : "Tree can only add fruit to a tree";
+			addFruit(location, 'T');
 			EcoPoints.increaseEcoPoints(1);
 		}
 
 		if (fruitChance <= 5){
 			dropFruit(location);
 		}
-	}
-
-	/**
-	 * Adds fruit to location
-	 * @param location to add fruit
-	 * @return boolean if adding fruit was successful
-	 */
-	private boolean addFruit(Location location){
-		boolean isValid = false;
-		if (location.getGround() instanceof Tree){
-			location.addItem(new Fruit('T'));
-			isValid = true;
-		}
-		return isValid;
 	}
 
 	/**
@@ -84,37 +80,23 @@ public class Tree extends Flora implements GroundInterface {
 		}
 	}
 
-	/**
-	 * Adds ability for players to interact with tree
-	 * @param actor the Actor acting
-	 * @param location the current Location
-	 * @param direction the direction of the Ground from the Actor
-	 * @return Actions that players can interact with tree
-	 */
+//	/**
+//	 * Adds ability for players to interact with tree
+//	 * @param actor the Actor acting
+//	 * @param location the current Location
+//	 * @param direction the direction of the Ground from the Actor
+//	 * @return Actions that players can interact with tree
+//	 */
 	@Override
 	public Actions allowableActions(Actor actor, Location location, String direction){
 		Actions actions = new Actions();
-		if (super.getNumberOfFruit() > 0){
-			actions.add(new HarvestFruitAction());
+		if (getNumberOfFruit() > 0){
+			actions.add(new HarvestFruitAction(location));
 		}
 		return actions;
 	}
-
-	/**
-	 * Method to remove fruit from tree
-	 * @param location to remove fruit from
-	 * @return fruit removed
-	 */
-	@Override
-	public Fruit harvestFruit(Location location){
-		Fruit harvestedFruit = null;
-		for (Item item : location.getItems()){
-			if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'T'){
-				harvestedFruit = (Fruit) item;
-				location.removeItem(item);
-				break;
-			}
-		}
-		return harvestedFruit;
-	}
+//	@Override
+//	public Actions allowableActions(Actor actor, Location location, String direction) {
+//		return interfaceAllowableActions(actor, location);
+//	}
 }

@@ -213,7 +213,9 @@ public class GameDriver {
         for (Item item : here.getItems()) {
             actions.add(item.getAllowableActions());
             // Game rule. If it's on the ground you can pick it up.
-            actions.add(item.getPickUpAction());
+            if (item.getPickUpAction() != null) {
+                actions.add(item.getPickUpAction());
+            }
         }
         actions.add(new DoNothingAction());
 

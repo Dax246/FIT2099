@@ -5,6 +5,7 @@ import game.Fruit;
 import game.dinosaurs.Brachiosaur;
 import game.dinosaurs.Stegosaur;
 import game.groundPackage.Bush;
+import game.groundPackage.Flora;
 import game.groundPackage.Tree;
 
 /**
@@ -26,8 +27,8 @@ public class EatFruitAction extends Action {
         boolean validEatFruitAction = false;
         if (actor instanceof Stegosaur) {
             if (actorLocation.getGround() instanceof Bush) {
-                Fruit fruitToEat = ((Bush) actorLocation.getGround()).harvestFruit(actorLocation);
-                if (fruitToEat != null) {
+                boolean fruitToEat = ((Bush) actorLocation.getGround()).harvestFruit(actorLocation, 'B');
+                if (fruitToEat) {
                     actor.heal(10);
                     validEatFruitAction = true;
                 }
@@ -45,8 +46,8 @@ public class EatFruitAction extends Action {
             if (actorLocation.getGround() instanceof Tree) {
                 boolean fruitStill = true;
                 while (fruitStill) {
-                    Fruit fruitToEat = ((Tree) actorLocation.getGround()).harvestFruit(actorLocation);
-                    if (fruitToEat != null) {
+                    boolean fruitToEat = ((Tree) actorLocation.getGround()).harvestFruit(actorLocation, 'T');
+                    if (fruitToEat) {
                         actor.heal(5);
                         validEatFruitAction = true;
                     }

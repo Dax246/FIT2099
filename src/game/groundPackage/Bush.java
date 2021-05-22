@@ -1,9 +1,6 @@
 package game.groundPackage;
 
-import edu.monash.fit2099.engine.Actions;
-import edu.monash.fit2099.engine.Actor;
-import edu.monash.fit2099.engine.Item;
-import edu.monash.fit2099.engine.Location;
+import edu.monash.fit2099.engine.*;
 import edu.monash.fit2099.interfaces.GroundInterface;
 import game.Fruit;
 import game.behaviour_action.HarvestFruitAction;
@@ -16,12 +13,26 @@ import java.util.Random;
  * @see Flora
  * A class that can produce fruit.
  */
-public class Bush extends Flora implements GroundInterface {
+public class Bush extends Ground implements GroundInterface, Flora {
+    int numberOfFruit = 0;
+
     /**
      * Constructor
      */
     public Bush() {
         super('b');
+    }
+
+    public int getNumberOfFruit() {
+        return numberOfFruit;
+    }
+
+    public void incrementNumberOfFruit() {
+        numberOfFruit++;
+    }
+
+    public void decrementNumberOfFruit() {
+        numberOfFruit--;
     }
 
     /**
@@ -38,57 +49,29 @@ public class Bush extends Flora implements GroundInterface {
             Random random = new Random();
             int fruitChance = random.nextInt(100);
             if (fruitChance <= 10){
-                boolean addedFruitValidly = addFruit(location);
-                assert addedFruitValidly : "Bush can only add fruit to a bush";
+                addFruit(location, 'B');
             }
         }
     }
 
-    /**
-     * Actions that players can use on it
-     * @param actor the Actor acting
-     * @param location the current Location
-     * @param direction the direction of the Ground from the Actor
-     * @return Actions that players can use on it
-     */
+//    /**
+//     * Actions that players can use on it
+//     * @param actor the Actor acting
+//     * @param location the current Location
+//     * @param direction the direction of the Ground from the Actor
+//     * @return Actions that players can use on it
+//     */
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         Actions actions = new Actions();
         if (getNumberOfFruit() > 0){
-            actions.add(new HarvestFruitAction());
+            actions.add(new HarvestFruitAction(location));
         }
         return actions;
     }
+//    @Override
+//    public Actions allowableActions(Actor actor, Location location, String direction) {
+//        return interfaceAllowableActions(actor, location);
+//    }
 
-    /**
-     * Aads fruit to location item list
-     * @param location to add fruit
-     * @return boolean if adding fruit was successful
-     */
-    private boolean addFruit(Location location){
-        boolean isValid = false;
-        if (location.getGround() instanceof Bush){
-            location.addItem(new Fruit('B'));
-            isValid = true;
-        }
-        return isValid;
-    }
-
-    /**
-     * Removes fruit from location list
-     * @param location to remove fruit from
-     * @return boolean if removing fruit was successful
-     */
-    @Override
-    public Fruit harvestFruit(Location location){
-        Fruit harvestedFruit = null;
-        for (Item item : location.getItems()){
-            if (item instanceof Fruit && ((Fruit) item).getStoredLocation() == 'B'){
-                harvestedFruit = (Fruit) item;
-                location.removeItem(item);
-                break;
-            }
-        }
-        return harvestedFruit;
-    }
 }

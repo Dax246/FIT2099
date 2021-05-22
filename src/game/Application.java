@@ -84,14 +84,17 @@ public class Application {
 			GameMap gameMap = new GameMap(groundFactory, map );
 			gameDriver.addGameMap(gameMap);
 			GameMap gameMap2 = new GameMap(groundFactory, secondMap);
-//			GameMap gameMap2 = new GameMap(groundFactory, '.', gameMap.getXRange().max()+1, gameMap.getYRange().max()+1);
 			gameDriver.addGameMap(gameMap2);
 			Util.ConnectMapNorth(gameMap, gameMap2);
 
 			Actor player = new Player("Player", '@', 100);
 			gameDriver.addPlayer(player, gameMap.at(9, 4));
 
-			gameMap.at(28, 12).addActor(new Pterodactyl("Pterodactyl", false));
+//			gameMap.at(28, 12).addActor(new Pterodactyl("Pterodactyl", false));
+			gameMap.at(28, 12).addActor(new Brachiosaur("Brachiosaur", false));
+			gameMap.at(30, 12).addActor(new Brachiosaur("Brachiosaur", false));
+			gameMap.at(32, 12).addActor(new Brachiosaur("Brachiosaur", false));
+			gameMap.at(34, 12).addActor(new Brachiosaur("Brachiosaur", false));
 			quitCheck = gameDriver.run();
 		}
 

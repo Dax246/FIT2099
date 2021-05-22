@@ -2,6 +2,7 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
+import game.Fruit;
 import game.groundPackage.Flora;
 
 import java.util.Random;
@@ -13,6 +14,11 @@ import java.util.Random;
  * Behaviour that determines which eat action or movement to do.
  */
 public class HarvestFruitAction extends Action {
+    Location target;
+
+    public HarvestFruitAction(Location target) {
+        this.target = target;
+    }
 
     /**
      * Removes fruit from bush/tree and adds to player inventory.
@@ -22,17 +28,22 @@ public class HarvestFruitAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map){
-        Location location = map.locationOf(actor);
+//        Location target = map.locationOf(actor);
         Random random = new Random();
         int HarvestChance = random.nextInt(100);
-        if (location.getGround() instanceof Flora){
+        if (target.getGround() instanceof Flora){
             if (HarvestChance <= 60){
                 EcoPoints.increaseEcoPoints(10);
-                actor.addItemToInventory(((Flora)location.getGround()).harvestFruit(location));
-                return "Player has harvested a fruit at: (" + location.x() + ", " + location.y() + ")";
-            } return "Player has searched for fruit but is unable to find any ripe ones at: (" + location.x() + ", " + location.y() + ")";
+                boolean fruitToPick = ((Flora)target.getGround()).harvestFruit(target, 'B');
+                if (!fruitToPick) {
+                    fruitToPick = ((Flora)target.getGround()).harvestFruit(target, 'T');
+                }
+                assert fruitToPick;
+                actor.addItemToInventory(new Fruit('H'));
+                return "Player has harvested a fruit at: (" + target.x() + ", " + target.y() + ")";
+            } return "Player has searched for fruit but is unable to find any ripe ones at: (" + target.x() + ", " + target.y() + ")";
         }
-        return "No Fruit to Harvest at: (" + location.x() + ", " + location.y() + ")";
+        return "No Fruit to Harvest at: (" + target.x() + ", " + target.y() + ")";
     }
 
     @Override

@@ -170,7 +170,6 @@ public class FindFoodBehaviour implements Behaviour {
 			if (destination.getActor() instanceof Stegosaur) {
 				return new AttackAction(map.getActorAt(destination));
 			}
-			return new EatNonFruitAction();
 		}
 
 		Behaviour moveToLocation = new MoveToLocationBehaviour(destination);
