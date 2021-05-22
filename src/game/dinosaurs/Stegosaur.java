@@ -6,7 +6,7 @@ package game.dinosaurs;
  * @see Dinosaur
  * A herbivorous dinosaur.
  */
-public class Stegosaur extends Dinosaur {
+public class Stegosaur extends Dinosaur implements DinoAge {
 	/**
 	 * Constructor.
 	 * All Stegosaurs are represented by an 's' and have up to 100 hit points.
@@ -27,5 +27,9 @@ public class Stegosaur extends Dinosaur {
 			this.setAge(30);
 			this.hitPoints = 50;
 		}
+	}
+
+	public boolean isAdult() {
+		return getAge() >= 30;
 	}
 }

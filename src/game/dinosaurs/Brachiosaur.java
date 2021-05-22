@@ -6,7 +6,7 @@ package game.dinosaurs;
  * @see Dinosaur
  * A herbivorous dinosaur.
  */
-public class Brachiosaur extends Dinosaur {
+public class Brachiosaur extends Dinosaur implements DinoAge {
 	/**
 	 * Constructor.
 	 * All Brachiosaur are represented by a 'd' and have up to 160 hit points.
@@ -27,5 +27,9 @@ public class Brachiosaur extends Dinosaur {
 			this.setAge(50);
 			this.hitPoints = 100;
 		}
+	}
+
+	public boolean isAdult() {
+		return getAge() >= 50;
 	}
 }

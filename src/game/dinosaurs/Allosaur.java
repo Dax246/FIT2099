@@ -12,7 +12,7 @@ import java.util.HashSet;
  * @see Dinosaur
  * A carnivorous dinosaur.
  */
-public class Allosaur extends Dinosaur {
+public class Allosaur extends Dinosaur implements DinoAge {
 	/**
 	 * Hashmap to keep track of Stegosaurs this Allosaur cannot attack and how long until they can.
 	 */
@@ -38,6 +38,10 @@ public class Allosaur extends Dinosaur {
 			this.setAge(50);
 			this.hitPoints = 50;
 		}
+	}
+
+	public boolean isAdult() {
+		return getAge() >= 50;
 	}
 
 	/**

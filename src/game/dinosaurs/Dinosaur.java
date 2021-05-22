@@ -268,32 +268,6 @@ public abstract class Dinosaur extends Actor{
         return sex;
     }
 
-    /**
-     * Determines if dinosaur is adult based on age
-     * @return boolean that's true if dinosaur is an adult
-     */
-    public boolean isAdult() {
-        if (this instanceof Stegosaur || this instanceof Pterodactyl) {
-            if (age >= 30) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else if (this instanceof Allosaur || this instanceof Brachiosaur) {
-            if (this.age >= 50) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            throw new AssertionError("Unexpected Dinosaur");
-        }
-    };
-
     public int quenchAmount() {
         if (this instanceof Brachiosaur) {
             return 80;
@@ -302,10 +276,7 @@ public abstract class Dinosaur extends Actor{
     }
 
     public boolean isUnconsciousDueToThirst() {
-        if (waterLevel == 0) {
-            return true;
-        }
-        return false;
+        return waterLevel == 0;
     }
 
     public Location getCurrentLocation() {

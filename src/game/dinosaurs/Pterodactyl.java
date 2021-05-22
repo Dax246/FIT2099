@@ -9,7 +9,7 @@ import game.groundPackage.Tree;
  * @see Dinosaur
  * A flying carnivorous dinosaur.
  */
-public class Pterodactyl extends Dinosaur {
+public class Pterodactyl extends Dinosaur implements DinoAge {
 	private int flightTime = 0;
 
 	/**
@@ -33,6 +33,10 @@ public class Pterodactyl extends Dinosaur {
 			this.setAge(30);
 			this.hitPoints = 50;
 		}
+	}
+
+	public boolean isAdult() {
+		return getAge() >= 30;
 	}
 
 	public boolean isFlying() {

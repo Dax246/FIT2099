@@ -3,6 +3,7 @@ package game.behaviour_action;
 import edu.monash.fit2099.engine.*;
 import game.Behaviour;
 import game.Util;
+import game.dinosaurs.DinoAge;
 import game.dinosaurs.Dinosaur;
 import game.dinosaurs.Pterodactyl;
 import game.groundPackage.Tree;
@@ -30,8 +31,8 @@ public class BreedBehaviour implements Behaviour {
 			Dinosaur mate = (Dinosaur) actorLocation.getActor();
 			if (currentActor.getDisplayChar() == mate.getDisplayChar()
 					&& currentActor.getSex() != mate.getSex()
-					&& currentActor.isAdult()
-					&& mate.isAdult()
+					&& ((DinoAge) currentActor).isAdult()
+					&& ((DinoAge) currentActor).isAdult()
 					&& mate.isConscious()
 					&& currentActor.getLayEggCounter() == 0
 					&& mate.getLayEggCounter() == 0
