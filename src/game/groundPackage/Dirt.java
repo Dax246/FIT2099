@@ -14,7 +14,7 @@ import java.util.Random;
  * @see Ground
  * A class that represents bare dirt.
  */
-public class Dirt extends Ground implements GroundInterface {
+public class Dirt extends Ground {
 	/**
 	 * Constructor
 	 */

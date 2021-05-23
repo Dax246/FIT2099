@@ -12,7 +12,7 @@ import java.util.Random;
  * @see Flora
  * A class that can produce fruit.
  */
-public class Tree extends Ground implements GroundInterface, Flora {
+public class Tree extends Ground implements Flora {
 	int numberOfFruit = 0;
 
 	/**
