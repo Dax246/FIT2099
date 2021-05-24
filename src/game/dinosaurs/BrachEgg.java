@@ -33,7 +33,7 @@ public class BrachEgg extends Egg{
             } else {
                 currentLocation.addActor(new Brachiosaur("Brachiosaur", true));
                 currentLocation.removeItem(this);
-                EcoPoints.increaseEcoPoints(1000);
+                EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Brachiosaur hatches"));
                 System.out.println("Brach egg hatched at (" + currentLocation.x() + ", " + currentLocation.y() + ")");
             }
         }

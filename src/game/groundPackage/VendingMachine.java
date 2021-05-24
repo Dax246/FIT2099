@@ -17,8 +17,17 @@ public class VendingMachine extends Ground {
     /**
      * Hashmap to store prices
      */
-    private HashMap<String, Integer>  goodsPrice = new HashMap<String, Integer>();
+    private HashMap<String, Integer> goodsPrice = new HashMap<String, Integer>(){{
+        put("Fruit", 30);
+        put("Vegetarian Meal Kit", 100);
+        put("Carnivore Meal Kit", 500);
+        put("Stegosaur Egg", 200);
+        put("Peterodactyl Egg", 200);
+        put("Brachiosaur Egg", 500);
+        put("Allosaur Egg", 1000);
+        put("Laser Gun", 500);
 
+    }};
     /**
      * Getter of goodsPrice
      * @return goodsPrice
@@ -27,27 +36,12 @@ public class VendingMachine extends Ground {
         return goodsPrice;
     }
 
-    /**
-     * Initialises the price of each item
-     */
-    private void setupVendingMachine(){
-        goodsPrice = getGoodsPrice();
-        goodsPrice.put("Fruit", 30);
-        goodsPrice.put("Vegetarian meal kit", 100);
-        goodsPrice.put("Carnivore meal kit", 500);
-        goodsPrice.put("Stegosaur egg", 200);
-        goodsPrice.put("Pterodactyl egg", 200);
-        goodsPrice.put("Brachiosaur egg", 500);
-        goodsPrice.put("Allosaur egg", 1000);
-        goodsPrice.put("Laser gun", 500);
-    }
 
     /**
      * Constructor
      */
     public VendingMachine() {
         super('v');
-        setupVendingMachine();
     }
 
     /**

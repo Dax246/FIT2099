@@ -58,7 +58,7 @@ public class Tree extends Ground implements Flora {
 		int fruitChance = random.nextInt(100);
 		if (fruitChance <= 50){
 			addFruit(location, 'T');
-			EcoPoints.increaseEcoPoints(1);
+			EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Fruit produced by a tree"));
 		}
 
 		if (fruitChance <= 5){

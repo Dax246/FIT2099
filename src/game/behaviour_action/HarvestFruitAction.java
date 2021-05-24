@@ -28,12 +28,11 @@ public class HarvestFruitAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map){
-//        Location target = map.locationOf(actor);
         Random random = new Random();
         int HarvestChance = random.nextInt(100);
         if (target.getGround() instanceof Flora){
             if (HarvestChance <= 60){
-                EcoPoints.increaseEcoPoints(10);
+                EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Fruit harvested"));
                 boolean fruitToPick = ((Flora)target.getGround()).harvestFruit(target, 'B');
                 if (!fruitToPick) {
                     fruitToPick = ((Flora)target.getGround()).harvestFruit(target, 'T');

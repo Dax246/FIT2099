@@ -32,7 +32,7 @@ public class PteroEgg extends Egg{
             } else {
                 currentLocation.addActor(new Pterodactyl("Pterodactyl", true));
                 currentLocation.removeItem(this);
-                EcoPoints.increaseEcoPoints(100);
+                EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Pterodactyl hatches"));
                 System.out.println("Ptero egg hatched at (" + currentLocation.x() + ", " + currentLocation.y() + ")");
             }
         }

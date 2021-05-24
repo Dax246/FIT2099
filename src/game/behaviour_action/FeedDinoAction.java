@@ -37,9 +37,6 @@ public class FeedDinoAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Location actorLocation = map.locationOf(actor);
-        List<Exit> exits = actorLocation.getExits();
-
 
         // Finds which foods the player holds in their inventory
         boolean fruitCheck = false;
@@ -80,7 +77,7 @@ public class FeedDinoAction extends Action {
                     if (fruitCheck){
                         actor.removeItemFromInventory(fruit);
                         recipient.heal(20);
-                        EcoPoints.increaseEcoPoints(10);
+                        EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Fruit fed to dinosaur"));
                         return "Player fed Fruit to Stegosaur";
                     }
                     return "Player does not have Fruit";
@@ -88,7 +85,7 @@ public class FeedDinoAction extends Action {
                     if (vegetarianMealKitCheck){
                         actor.removeItemFromInventory(vegetarianMealKit);
                         // Ensures healed to full
-                        recipient.heal(((Stegosaur) recipient).getMaxHitPoints());
+                        recipient.heal(recipient.getMaxHitPoints());
 
                         return "Player fed Vegetarian Meal Kit to Stegosaur";
                     } return "Player does not have Fruit";
@@ -107,7 +104,7 @@ public class FeedDinoAction extends Action {
                     if (fruitCheck){
                         actor.removeItemFromInventory(fruit);
                         recipient.heal(20);
-                        EcoPoints.increaseEcoPoints(10);
+                        EcoPoints.increaseEcoPoints(EcoPoints.getGainEcoPoints().get("Fruit fed to dinosaur"));
                         return "Player fed Fruit to Brachiosaur";
                     }
                     return "Player does not have Fruit";
@@ -115,7 +112,7 @@ public class FeedDinoAction extends Action {
                     if (vegetarianMealKitCheck){
                         actor.removeItemFromInventory(vegetarianMealKit);
                         // Ensures healed to full
-                        recipient.heal(((Brachiosaur) recipient).getMaxHitPoints());
+                        recipient.heal(recipient.getMaxHitPoints());
                         return "Player fed Vegetarian Meal Kit to Brachiosaur";
                     } return "Player does not have a Vegetarian Meal Kit";
                 default:
@@ -140,7 +137,7 @@ public class FeedDinoAction extends Action {
                     if (carnivoreMealKitCheck){
                         actor.removeItemFromInventory(carnivoreMealKit);
                         // Ensures healed to full
-                        recipient.heal(((Allosaur) recipient).getMaxHitPoints());
+                        recipient.heal(recipient.getMaxHitPoints());
                         return "Player fed Carnivore Meal Kit to Allosaur";
                     } return "Player does not have a Carnivore Meal Kit";
                 default:
