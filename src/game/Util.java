@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see GameMap
  * Class representing Utility functions that are commonly used through the program.
  */
@@ -79,6 +79,12 @@ public class Util {
         return locations;
     }
 
+    /**
+     * Checks if location is reachable
+     *
+     * @param location target location
+     * @return boolean if reachable or not
+     */
     private static boolean walkable(Location location) {
         GameMap map = location.map();
         NumberRange xRange = map.getXRange();
@@ -87,7 +93,7 @@ public class Util {
                 && yRange.contains(location.y())) {
             return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -108,11 +114,14 @@ public class Util {
         return null;
     }
 
+    /**
+     * Connects the first and second map together using exits
+     * @param southMap Map placed below the other map
+     * @param northMap Map placed above the other map
+     */
     public static void ConnectMapNorth(GameMap southMap, GameMap northMap){
         NumberRange width = southMap.getXRange();
-//        assert width == northMap.getXRange();
         NumberRange height = southMap.getYRange();
-//        assert height == northMap.getYRange();
         for (int x : width){
             Location southLocation = southMap.at(x, 0);
             Location northLocation = northMap.at(x, height.max());

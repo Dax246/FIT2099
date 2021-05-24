@@ -5,7 +5,7 @@ import game.EcoPoints;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Egg
  * A class that hatches to an Allosaur.
  */

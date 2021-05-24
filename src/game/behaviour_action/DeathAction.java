@@ -5,7 +5,7 @@ import game.dinosaurs.*;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Action when a dinosaur is not conscious for long enough.
  */
@@ -43,6 +43,11 @@ public class DeathAction extends Action {
         return actor.toString() + " has died at (" + deathLocation.x() + ", " + deathLocation.y() + ")";
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor.toString() + " has died";

@@ -10,7 +10,7 @@ import game.behaviour_action.HarvestFruitAction;
  * @author Allan Chan and Damien Ambegoda
  * @version 1.0.0
  * @see Flora
- * A parent class of grounds that can produce fruit.
+ * An interface of grounds that can produce fruit.
  */
 public interface Flora {
     int getNumberOfFruit();

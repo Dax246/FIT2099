@@ -28,6 +28,9 @@ public class Lake extends Ground {
         return capacity;
     }
 
+    /**
+     * Reduces capacity of water if taking a sip
+     */
     public void sip() {
         capacity -= 1;
     }
@@ -65,7 +68,11 @@ public class Lake extends Ground {
         super.tick(location);
     }
 
-
+    /**
+     * Whether the actor can enter the lake or not
+     * @param actor the Actor to check
+     * @return boolean if actor can enter
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return (actor instanceof Pterodactyl && ((Pterodactyl) actor).isFlying());

@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see game.Player
  * A class that figures out a MoveAction that will move the actor one step
  * closer to the player.
@@ -118,6 +118,11 @@ public class PurchaseAction extends Action {
         }
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Purchase from Vending Machine";

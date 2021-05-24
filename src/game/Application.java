@@ -9,8 +9,8 @@ import game.groundPackage.*;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
- * @see World
+ * @version 2.0.0
+ * @see GameDriver
  * The main class for the Jurassic World game.
  */
 public class Application {

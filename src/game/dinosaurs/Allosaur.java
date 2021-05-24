@@ -38,6 +38,11 @@ public class Allosaur extends Dinosaur implements DinoAge {
 		}
 	}
 
+	/**
+	 * Uses age to determine if allosaur is an adult or not
+	 *
+	 * @return boolean if adult
+	 */
 	public boolean isAdult() {
 		return getAge() >= 50;
 	}

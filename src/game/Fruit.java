@@ -7,7 +7,7 @@ import game.groundPackage.Flora;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Item
  * The class for item that flora produce
  */
@@ -46,6 +46,10 @@ public class Fruit extends Item {
         }
     }
 
+    /**
+     * Determimes whether the fruit can be picked up
+     * @return PickUpItemAction is fruit can be picked up
+     */
     @Override
     public PickUpItemAction getPickUpAction() {
         if (storedLocation == 'G' || storedLocation == 'H') {

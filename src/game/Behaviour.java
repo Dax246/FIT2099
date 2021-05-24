@@ -29,6 +29,12 @@ public interface Behaviour {
 	 */
 	Action getAction(Actor actor, GameMap map);
 
+	/**
+	 * Distance between a and b
+	 * @param a first location
+	 * @param b second location
+	 * @return distance
+	 */
 	default int distance(Location a, Location b) {
 		int xdist = Math.abs(a.x() - b.x());
 		int ydist = Math.abs(a.y() - b.y());

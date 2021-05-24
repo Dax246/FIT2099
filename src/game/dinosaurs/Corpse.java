@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.Location;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Corpse of dead dinosaur
  */
@@ -34,6 +34,11 @@ public class Corpse extends Item {
         }
     }
 
+    /**
+     * Used to initialise the correct corpse based on what dinosaur died
+     *
+     * @param corpseInt integer representing the dino that died
+     */
     private void initialiseCorpse(int corpseInt) {
         switch (corpseInt) {
             case 1 -> {
@@ -56,14 +61,28 @@ public class Corpse extends Item {
         }
     }
 
+    /**
+     * How much health to gain from eating the corpse
+     *
+     * @return integer value of health gained from eating corpse
+     */
     public int getCorpseHeal() {
         return corpseHeal;
     }
 
+    /**
+     * Name of Dinosaur that will be hatched
+     *
+     * @return string name of dinosaur
+     */
     public String getCorpseDinoName() {
         return corpseDinoName;
     }
 
+    /**
+     * Adjusts the remaining HP of corpse and how much is healed from eating corpse when Pterodactyl nibbles
+     *
+     */
     public void pteroNibble() {
         corpseHeal -= 10;
     }

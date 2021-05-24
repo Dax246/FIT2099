@@ -2,16 +2,14 @@ package game.behaviour_action;
 
 import edu.monash.fit2099.engine.*;
 import game.EcoPoints;
-import game.dinosaurs.Allosaur;
-import game.dinosaurs.Brachiosaur;
-import game.dinosaurs.Dinosaur;
-import game.dinosaurs.Stegosaur;
+import game.dinosaurs.*;
+
 import java.util.List;
 import java.util.Scanner;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Action for player to feed dinosaurs.
  */
@@ -144,10 +142,38 @@ public class FeedDinoAction extends Action {
                     return "Invalid Choice Selected";
             }
         }
-        //TODO: Pterodactyl feeding
-        return null;
+        else {
+            assert recipient instanceof Pterodactyl;
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("1: Feed Pterodactyl Egg");
+            System.out.println("2: Feed Pterodactyl Carnivore Meal Kit");
+            String selection = scanner.nextLine();
+            switch (selection){
+                case "1":
+                    if (eggCheck){
+                        actor.removeItemFromInventory(egg);
+                        recipient.heal(10);
+                        return "Player fed Egg to Pterodactyl";
+                    }
+                    return "Player does not have a Egg";
+                case "2":
+                    if (carnivoreMealKitCheck){
+                        actor.removeItemFromInventory(carnivoreMealKit);
+                        // Ensures healed to full
+                        recipient.heal(recipient.getMaxHitPoints());
+                        return "Player fed Carnivore Meal Kit to Pterodactyl";
+                    } return "Player does not have a Carnivore Meal Kit";
+                default:
+                    return "Invalid Choice Selected";
+            }
+        }
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Player Feeds Dinosaur";

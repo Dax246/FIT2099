@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see game.Player
  * Behaviour that determines which eat action or movement to do.
  */
@@ -46,6 +46,11 @@ public class HarvestFruitAction extends Action {
         return "No Fruit to Harvest at: (" + target.x() + ", " + target.y() + ")";
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor){
         return "Player harvests Fruit";

@@ -36,6 +36,11 @@ public class SipWaterAction extends Action {
         return actor.toString() + " sipped water from (" + sipLocation.x() + ", " + sipLocation.y() + ")";
     }
 
+    /**
+     * Returns string to print on menu
+     * @param actor The actor performing the action.
+     * @return String to print on menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor.toString() + " is sipping water";

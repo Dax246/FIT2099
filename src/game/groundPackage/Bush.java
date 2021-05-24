@@ -12,7 +12,10 @@ import java.util.Random;
  * A class that can produce fruit.
  */
 public class Bush extends Ground implements Flora {
-    int numberOfFruit = 0;
+    /**
+     * Number of fruit in bush
+     */
+    private int numberOfFruit = 0;
 
     /**
      * Constructor
@@ -52,28 +55,16 @@ public class Bush extends Ground implements Flora {
         }
     }
 
-//    /**
-//     * Actions that players can use on it
-//     * @param actor the Actor acting
-//     * @param location the current Location
-//     * @param direction the direction of the Ground from the Actor
-//     * @return Actions that players can use on it
-//     */
+    /**
+     * Allowable actions on bush
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return allowable actions on this ground
+     */
     @Override
     public Actions allowableActions(Actor actor, Location location, String direction){
         return interfaceAllowableActions(location);
     }
-//    @Override
-//    public Actions allowableActions(Actor actor, Location location, String direction){
-//        Actions actions = new Actions();
-//        if (getNumberOfFruit() > 0){
-//            actions.add(new HarvestFruitAction(location));
-//        }
-//        return actions;
-//    }
-//    @Override
-//    public Actions allowableActions(Actor actor, Location location, String direction) {
-//        return interfaceAllowableActions(actor, location);
-//    }
 
 }

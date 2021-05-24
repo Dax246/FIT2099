@@ -9,13 +9,13 @@ import game.dinosaurs.Pterodactyl;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Action to remove item that an allosaur eats.
  */
 public class EatNonFruitAction extends Action {
     /**
-     * Removes item that allosaur eats.
+     * Removes item that allosaur or Pterodactyle eats.
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
      * @return String result that will be printed in menu
@@ -71,6 +71,11 @@ public class EatNonFruitAction extends Action {
         return actor.toString() + verb + foodEaten + " at (" + actorLocation.x() + ", " + actorLocation.y() + ")";
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return actor.toString() + " is eating non fruit";

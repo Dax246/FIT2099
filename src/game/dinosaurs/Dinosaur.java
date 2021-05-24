@@ -7,7 +7,7 @@ import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Actor
  * A class that contains the shared methods/attributes for all dinosaurs.
  */
@@ -32,6 +32,9 @@ public abstract class Dinosaur extends Actor{
      * Number of turns a dinosaur has been unconscious
      */
     private int unconsciousTurnsCounter = 0;
+    /**
+     * Number of turns a dinosaur has been unconscious due to dehydration
+     */
     private int unconsciousTurnsCounterThirst = 0;
     /**
      * Level of hitpoints that it becomes hungry
@@ -42,14 +45,29 @@ public abstract class Dinosaur extends Actor{
      */
     private int breedThreshold;
 
+    /**
+     * How much water the dinosaur has drank.
+     */
     private int waterLevel = 60;
 
+    /**
+     * Max amount of water the dinosaur can drink
+     */
     private int maxWaterLevel;
 
+    /**
+     * Turns until death due to dehydration
+     */
     private final int maxUnconsciousTurnsDueToThirst = 15;
 
+    /**
+     * Less than this amount of water makes the dinosaur thirsty
+     */
     private final int thirstThreshold = 40;
 
+    /**
+     * Location of Dinosaur on map
+     */
     private Location currentLocation;
     /**
      * Constructor
@@ -115,6 +133,7 @@ public abstract class Dinosaur extends Actor{
         this.sex = sex;
     }
 
+
     public void decrementWaterLevel() {
         waterLevel -= 1;
         if (waterLevel == thirstThreshold - 1) {
@@ -129,6 +148,10 @@ public abstract class Dinosaur extends Actor{
         }
     }
 
+    /**
+     * Increases water level when dinosaur has drank water
+     * @param quenchedAmount how much water was drunk
+     */
     public void quench(int quenchedAmount) {
         waterLevel += quenchedAmount;
         waterLevel = Math.min(waterLevel, maxWaterLevel);
@@ -265,6 +288,11 @@ public abstract class Dinosaur extends Actor{
         return sex;
     }
 
+    /**
+     * How much water the dinosaur can drink in one turn
+     *
+     * @return int for how much water can be drunk
+     */
     public int quenchAmount() {
         if (this instanceof Brachiosaur) {
             return 80;
@@ -272,6 +300,10 @@ public abstract class Dinosaur extends Actor{
         return 30;
     }
 
+    /**
+     * Asks if dinosaur should be unconscious due to being thirsty
+     * @return boolean whether water level is 0
+     */
     public boolean isUnconsciousDueToThirst() {
         return waterLevel == 0;
     }

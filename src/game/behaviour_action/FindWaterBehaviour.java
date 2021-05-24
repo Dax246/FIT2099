@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Behaviour that determines whether to sip water or move towards it.
  */

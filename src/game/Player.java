@@ -10,7 +10,7 @@ import game.behaviour_action.QuitAction;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Actor
  * Class representing the Player.
  */

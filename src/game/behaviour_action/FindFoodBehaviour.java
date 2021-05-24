@@ -14,7 +14,7 @@ import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Dinosaur
  * Behaviour that determines which eat action or movement to do.
  */

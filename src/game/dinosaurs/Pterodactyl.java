@@ -35,10 +35,20 @@ public class Pterodactyl extends Dinosaur implements DinoAge {
 		}
 	}
 
+	/**
+	 * Checks age to determine if adult dinosaur or not
+	 *
+	 * @return boolean if adult
+	 */
 	public boolean isAdult() {
 		return getAge() >= 30;
 	}
 
+	/**
+	 * Checks if flying by looking at how many turns the pterodactyl has been flying for
+	 *
+	 * @return boolean if flying
+	 */
 	public boolean isFlying() {
 		return flightTime < 30;
 	}

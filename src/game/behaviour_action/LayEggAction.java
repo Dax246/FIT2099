@@ -8,7 +8,7 @@ import game.dinosaurs.*;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Egg
  * Action to lay an egg
  */
@@ -43,6 +43,11 @@ public class LayEggAction extends Action {
         }
     }
 
+    /**
+     * Returns a descriptive string
+     * @param actor The actor performing the action.
+     * @return the text we put on the menu
+     */
     @Override
     public String menuDescription(Actor actor) {
         return "Dinosaur laying egg";

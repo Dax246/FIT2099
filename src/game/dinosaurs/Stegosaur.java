@@ -2,7 +2,7 @@ package game.dinosaurs;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 1.1.0
  * @see Dinosaur
  * A herbivorous dinosaur.
  */
@@ -29,6 +29,11 @@ public class Stegosaur extends Dinosaur implements DinoAge {
 		}
 	}
 
+	/**
+	 * Checks age to determine if adult dinosaur or not
+	 *
+	 * @return boolean if adult
+	 */
 	public boolean isAdult() {
 		return getAge() >= 30;
 	}

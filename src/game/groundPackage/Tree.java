@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * @author Allan Chan and Damien Ambegoda
- * @version 1.0.0
+ * @version 2.0.0
  * @see Flora
  * A class that can produce fruit.
  */
@@ -26,6 +26,7 @@ public class Tree extends Ground implements Flora {
 	public Tree() {
 		super('+');
 	}
+
 
 	public int getNumberOfFruit() {
 		return numberOfFruit;
@@ -79,19 +80,16 @@ public class Tree extends Ground implements Flora {
 		}
 	}
 
-//	/**
-//	 * Adds ability for players to interact with tree
-//	 * @param actor the Actor acting
-//	 * @param location the current Location
-//	 * @param direction the direction of the Ground from the Actor
-//	 * @return Actions that players can interact with tree
-//	 */
+	/**
+	 * Allowable actions on tree
+	 * @param actor the Actor acting
+	 * @param location the current Location
+	 * @param direction the direction of the Ground from the Actor
+	 * @return allowable actions on this ground
+	 */
 	@Override
 	public Actions allowableActions(Actor actor, Location location, String direction){
 		return interfaceAllowableActions(location);
 	}
-//	@Override
-//	public Actions allowableActions(Actor actor, Location location, String direction) {
-//		return interfaceAllowableActions(actor, location);
-//	}
+
 }

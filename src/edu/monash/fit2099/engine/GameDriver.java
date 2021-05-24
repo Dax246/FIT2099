@@ -7,6 +7,13 @@ import game.behaviour_action.QuitAction;
 
 import java.util.*;
 
+/**
+ * @author Allan Chan and Damien Ambegoda
+ * @version 1.0.0
+ * Replacement for World class. Class represents the entire world including the location of everything and runs the
+ * game
+ */
+
 
 public class GameDriver {
     // 1 if challenge mode, 2 if sandbox mode, 3 if exiting
@@ -21,6 +28,11 @@ public class GameDriver {
     protected Actor player; // We only draw the particular map this actor is on.
     protected Map<Actor, Action> lastActionMap = new HashMap<Actor, Action>();
 
+    /**
+     * Constructor. Constructor contains the code for the user to select which game mode to play
+     *
+     * @param display
+     */
     public GameDriver(Display display) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Welcome to Rogue Dino!!");
@@ -97,6 +109,11 @@ public class GameDriver {
         actorLocations.setPlayer(player);
     }
 
+    /**
+     * Based on the number of turns, decides whether it should rain this turn or not
+     *
+     * @return boolean for whether it is raining or not
+     */
     public boolean isRaining() {
         rainCounter++;
         if (rainCounter == 10) {
@@ -245,15 +262,13 @@ public class GameDriver {
         }
     }
 
-    /**
-     * Return a string that can be displayed when the game ends.
-     *
-     * @return the string "Game Over"
-     */
-    protected String endGameMessage() {
-        return "Game Over";
-    }
 
+    /**
+     * Run when the game is ended. Decides if the user has won or not and asks the user if they want to quit the game
+     * entirely or play again
+     *
+     * @return boolean value if user wants to quit the game entirely
+     */
     protected boolean endGame(){
         if (gameMode == 1){
             if (ecoPointsNumber > EcoPoints.getEcoPoints()){
