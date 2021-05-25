@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"edu.monash.fit2099.engine"},{"l":"edu.monash.fit2099.interfaces"},{"l":"game"},{"l":"game.behaviour_action"},{"l":"game.dinosaurs"},{"l":"game.groundPackage"}];updateSearchResults();
