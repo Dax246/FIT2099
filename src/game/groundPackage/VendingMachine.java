@@ -19,13 +19,13 @@ public class VendingMachine extends Ground {
      */
     private HashMap<String, Integer> goodsPrice = new HashMap<String, Integer>(){{
         put("Fruit", 30);
-        put("Vegetarian Meal Kit", 100);
-        put("Carnivore Meal Kit", 500);
-        put("Stegosaur Egg", 200);
-        put("Peterodactyl Egg", 200);
-        put("Brachiosaur Egg", 500);
-        put("Allosaur Egg", 1000);
-        put("Laser Gun", 500);
+        put("Vegetarian meal kit", 100);
+        put("Carnivore meal kit", 500);
+        put("Stegosaur egg", 200);
+        put("Pterodactyl egg", 200);
+        put("Brachiosaur egg", 500);
+        put("Allosaur egg", 1000);
+        put("Laser gun", 500);
 
     }};
     /**
