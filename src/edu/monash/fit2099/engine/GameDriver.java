@@ -56,7 +56,7 @@ public class GameDriver {
                     System.out.println("Please enter number of eco points");
                     String ecoPointsNumberSelection = scanner.nextLine();
                     try {
-                        ecoPointsNumber = Integer.parseInt(moveNumberSelection);
+                        ecoPointsNumber = Integer.parseInt(ecoPointsNumberSelection);
                         validStart = true;
                     } catch (Exception e) {
                         System.out.println("Enter a valid number of eco points");
@@ -156,14 +156,15 @@ public class GameDriver {
         // This loop is basically the whole game
         while (!exitCheck) {
             currentTurn ++;
+            GameMap playersMap = actorLocations.locationOf(player).map();
+            playersMap.draw(display);
+
             if (gameMode == 1){
-                if (currentTurn > maxGameTurns){
+                if (currentTurn >= maxGameTurns){
                     return endGame();
                 }
             }
 
-            GameMap playersMap = actorLocations.locationOf(player).map();
-            playersMap.draw(display);
             System.out.println("Current Turn: " + currentTurn);
 
             if (isRaining()) {
